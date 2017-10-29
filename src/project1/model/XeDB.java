@@ -13,7 +13,7 @@ import javax.swing.JOptionPane;
 
 
 public class XeDB implements XeDAO{
-	private final String dbURL = "jdbc:mysql://localhost:3306/library";
+	private final String dbURL = "jdbc:mysql://localhost:3306/quanlythuexe";
 	private String user = "root";
 	private String password = "1234";
 	private Connection connection;

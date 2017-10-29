@@ -22,7 +22,7 @@ public class PanelQuanLyXeView extends JPanel{
 	
 	private JPanel createTitlePanel() {
 		JPanel panel = new JPanel();
-		JLabel label = new JLabel("Quản Lý Xe");
+		JLabel label = new JLabel("Quản lí xe");
 		label.setFont(new Font("Caribli", Font.BOLD, 18));
 		label.setForeground(Color.BLUE);;
 		panel.add(label);
@@ -45,5 +45,15 @@ public class PanelQuanLyXeView extends JPanel{
 		panel.add(btnXe = new ButtonXeView(), BorderLayout.EAST);
 		
 		return panel;
+	}
+
+	public InputXeView getInputXe() {
+		return inputXe;
+	}
+	public ButtonXeView getBtnXe() {
+		return btnXe;
+	}
+	public TableXeView getTableXe() {
+		return tableXe;
 	}
 }
