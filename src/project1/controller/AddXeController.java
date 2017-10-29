@@ -242,7 +242,9 @@ public class AddXeController {
 					String tenXe       = dataOfRow.get(2);
 					String loaiXe      = dataOfRow.get(3);
 					String hangSanXuat = dataOfRow.get(4);
-					String namSanXuat  = dataOfRow.get(5);
+					double namSanXuat  = Double.parseDouble(dataOfRow.get(5));
+					int    namSXInt    = (int) namSanXuat;
+					String namSXStr    = Integer.toString(namSXInt);
 					String ngayBaoTri  = dataOfRow.get(6);
 					String nhienLieu   = dataOfRow.get(7);
 					double ttDouble    = Double.parseDouble(dataOfRow.get(8));
@@ -250,7 +252,7 @@ public class AddXeController {
 					double gtDouble    = Double.parseDouble(dataOfRow.get(9));
 					int giaThue        = (int) gtDouble;
 					
-					Xe xe = new Xe(idXe, bienXe, tenXe, loaiXe, hangSanXuat, namSanXuat, ngayBaoTri, nhienLieu, trangThai, giaThue);
+					Xe xe = new Xe(idXe, bienXe, tenXe, loaiXe, hangSanXuat, namSXStr, ngayBaoTri, nhienLieu, trangThai, giaThue);
 					xeDB.insertXe(xe);
 					tableXeView.updateTable(xeDB.getAllXe());
 	

@@ -140,7 +140,7 @@ public class XeDB implements XeDAO{
 		PreparedStatement preStatement = null;
 		try {
 			String sql = "UPDATE xe SET idXe=?, bienXe=?, tenXe=?, loaiXe=?, hangSanXuat=?, "
-					+ "					namSanXuat=?, ngayBaoTri=?, nhienLieu=?, trangThai=?, GiaThue=? WHERE Masach=?";
+					+ "namSanXuat=?, ngayBaoTri=?, nhienLieu=?, trangThai=?, GiaThue=? WHERE idXe=?";
 			preStatement = connection.prepareStatement(sql);
 			preStatement.setString(1, idXeMoi);
 			preStatement.setString(2, bienXeMoi);
@@ -249,7 +249,7 @@ public class XeDB implements XeDAO{
 			connection.close();
 		}
 		catch (SQLException e) {
-			e.printStackTrace();
+			e.printStackTrace();	
 			JOptionPane.showMessageDialog(new JDialog(), "Can't connect to database... \n Check your internet...");
 		}
 		finally {
