@@ -32,11 +32,11 @@ public class InputXeView extends JPanel{
 		JPanel panel = new JPanel(new BorderLayout());
 		
 		JPanel panelLab = new JPanel(new GridLayout(5, 1, 15, 5));
-		panelLab.add(lbIdXe = new JLabel("Mã xe"));
-		panelLab.add(lbBienXe = new JLabel("Biển xe"));
-		panelLab.add(lbTenXe = new JLabel("Tên xe"));
-		panelLab.add(lbLoaiXe = new JLabel("Loại xe"));
-		panelLab.add(lbHangSanXuat = new JLabel("Hãng sản xuất"));
+		panelLab.add(lbIdXe = new JLabel("Mã xe "));
+		panelLab.add(lbBienXe = new JLabel("Biển xe "));
+		panelLab.add(lbTenXe = new JLabel("Tên xe "));
+		panelLab.add(lbLoaiXe = new JLabel("Loại xe "));
+		panelLab.add(lbHangSanXuat = new JLabel("Hãng sản xuất "));
 		
 		JPanel panelTF = new JPanel(new GridLayout(5, 1, 15, 5));
 		panelTF.add(tfIdXe = new JTextField());
@@ -54,11 +54,11 @@ public class InputXeView extends JPanel{
 		JPanel panel = new JPanel(new BorderLayout());
 		
 		JPanel panelLab = new JPanel(new GridLayout(5, 1, 5, 5));
-		panelLab.add(lbNamSanXuat = new JLabel("Năm sản xuất"));
-		panelLab.add(lbNgayBaoTri = new JLabel("Ngày sản xuất"));
-		panelLab.add(lbNhienLieu = new JLabel("Nhiên liệu"));
-		panelLab.add(lbTrangThai = new JLabel("Trạng thái"));
-		panelLab.add(lbGiaThue = new JLabel("Giá thuê"));
+		panelLab.add(lbNamSanXuat = new JLabel("Năm sản xuất "));
+		panelLab.add(lbNgayBaoTri = new JLabel("Ngày bảo trì "));
+		panelLab.add(lbNhienLieu = new JLabel("Nhiên liệu "));
+		panelLab.add(lbTrangThai = new JLabel("Trạng thái "));
+		panelLab.add(lbGiaThue = new JLabel("Giá thuê "));
 		
 		JPanel panelTF = new JPanel(new GridLayout(5, 1, 5, 5));
 		panelTF.add(tfNamSanXuat = new JTextField());
