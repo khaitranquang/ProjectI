@@ -24,11 +24,14 @@ public class EditXeController {
 	private Xe xe;
 	private XeDB xeDB;
 	private String oldID = "";
+	private int indexOfRow = -1;
 	
 	private	PanelQuanLyXeView panelQuanLyXeView;
 	private ButtonXeView buttonXeView;
 	private InputXeView inputXeView;
 	private TableXeView tableXeView;
+	
+	JButton btnSua;
 	
 	public EditXeController(MainUI mainUI) {
 		this.mainUI = mainUI;
@@ -38,7 +41,7 @@ public class EditXeController {
 		buttonXeView      = panelQuanLyXeView.getBtnXe();
 		inputXeView       = panelQuanLyXeView.getInputXe();
 		tableXeView       = panelQuanLyXeView.getTableXe();
-		
+		btnSua            = buttonXeView.getBtnSua();
 		setActions();
 	}
 	
@@ -46,34 +49,19 @@ public class EditXeController {
 	 * Set Actions for button(
 	 */
 	private void setActions() {
-		JTable table = tableXeView.getTable();
-		table.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
-			
-			@Override
-			public void valueChanged(ListSelectionEvent e) {
-				// TODO Auto-generated method stub
-				int index = findIndexOfData();
-				oldID = getID(index, 0);
-				loadInfor(oldID);
-//				if (index >= 0) {
-//					oldID = getID(index, 0);
-//					loadInfor(oldID);
-////					suaXe();
-//				}
-			}
-		});
-		
-		JButton btnSua = buttonXeView.getBtnSua();
 		btnSua.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				int index = findIndexOfData();
 				if (index >= 0) {
-					
-					suaXe();
+					oldID = getID(index, 0);
+					loadInfor(oldID);
+					updateXe();
+					return;
 				}
 				else {
-					JOptionPane.showMessageDialog(mainUI, "Chọn một xe để sửa");
+					JOptionPane.showMessageDialog(mainUI, "Chọn 1 xe để sửa");
+					return;
 				}
 			}
 		});
@@ -107,8 +95,21 @@ public class EditXeController {
 	}
 	
 	/*----Action Update Xe -----*/
+	private void updateXe() {
+		JButton btnUpdate = inputXeView.getBtnUpdate();
+		btnUpdate.setVisible(true);
+		btnUpdate.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				suaXe();
+				return;
+			}
+		});
+	}
+
 	private void suaXe() {
-		if (checkInfor(inputXeView)) {
+		boolean check = checkInfor(inputXeView);
+		if (check) {
 			String maXeMoi        = inputXeView.getTfIdXe().getText().toString();
 			String bienXeMoi      = inputXeView.getTfBienXe().getText().toString();
 			String tenXeMoi       = inputXeView.getTfTenXe().getText().toString();
@@ -121,12 +122,17 @@ public class EditXeController {
 			int giaThueMoi        = Integer.parseInt(inputXeView.getTfGiaThue().getText().toString());
 		
 			xeDB.updateXe(this.xe, maXeMoi, bienXeMoi, tenXeMoi, loaiXeMoi, hangSanXuatMoi, namSanXuatMoi, ngayBaoTriMoi, nhienLieuMoi, trangThaiMoi, giaThueMoi);
-			JOptionPane.showMessageDialog(new JDialog(), "Cập nhật thông tin xe thành công");
-//			tableXeView.getTable().clearSelection();
+//			JOptionPane.showMessageDialog(new JDialog(), "Cập nhật thông tin xe thành công");
+//			tableXeView.getTable().getSelectionModel().clearSelection();
+			//tableXeView.getTable().getSelectionModel().isSelectionEmpty();
 			tableXeView.updateTable(xeDB.getAllXe());
+			//clearInput();
+			inputXeView.getBtnUpdate().setVisible(false);
+			return;
 		}
 		else {
 			System.out.println("Edit fail !!!");
+			return;
 		}
 	}
 	
@@ -183,6 +189,20 @@ public class EditXeController {
 			if (id.equals(idXeFromDB) && (id.equals(oldID) == false)) return false;
 		}
 		return true;
+	}
+	
+	/* Clear input */
+	private void clearInput() {
+		inputXeView.getTfIdXe().setText("");
+		inputXeView.getTfNamSanXuat().setText("");
+		inputXeView.getTfBienXe().setText("");
+		inputXeView.getTfTenXe().setText("");
+		inputXeView.getTfLoaiXe().setText("");
+		inputXeView.getTfHangSanXuat().setText("");
+		inputXeView.getTfNhienLieu().setText("");
+		inputXeView.getTfNgayBaoTri().setText("");
+		inputXeView.getTfTrangThai().setText("");
+		inputXeView.getTfGiaThue().setText("");
 	}
 }
 
