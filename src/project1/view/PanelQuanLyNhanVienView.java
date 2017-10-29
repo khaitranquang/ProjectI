@@ -22,7 +22,7 @@ public class PanelQuanLyNhanVienView extends JPanel{
 	
 	private JPanel createTitlePanel() {
 		JPanel panel = new JPanel();
-		JLabel label = new JLabel("Quản Lý Nhân Viên");
+		JLabel label = new JLabel("Quản lí nhân viên");
 		label.setFont(new Font("Caribli", Font.BOLD, 18));
 		label.setForeground(Color.BLUE);;
 		panel.add(label);
@@ -46,4 +46,17 @@ public class PanelQuanLyNhanVienView extends JPanel{
 		
 		return panel;
 	}
+
+	public InputNhanVienView getInputNV() {
+		return inputNV;
+	}
+
+	public TableNhanVienView getTableNV() {
+		return tableNV;
+	}
+
+	public ButtonNhanVienView getBtnNV() {
+		return btnNV;
+	}
+
 }

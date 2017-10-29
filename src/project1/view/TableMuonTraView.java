@@ -10,7 +10,7 @@ import javax.swing.table.DefaultTableModel;
 
 public class TableMuonTraView extends JPanel{
 	private JTable table;
-	private String titleCols[] = {"Mã Mượn Trả", "Mã Khách Hàng", "Mã Nhân Viên", "Ngày Mượn", "Ngày Hẹn Trả", "Tiền Cọc"};
+	private String titleCols[] = {"Mã mượn trả", "Mã khách hàng", "Mã nhân viên", "Ngày mượn", "Ngày hẹn trả", "Tiền cọc"};
 	
 	public JTable getTable() {
 		return table;

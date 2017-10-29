@@ -10,8 +10,8 @@ import javax.swing.table.DefaultTableModel;
 
 public class TableNhanVienView extends JPanel{
 	private JTable table;
-	private String titleCols[] = {"Mã Nhân Viên", "Tên Nhân Viên", "Số CMND", "Ngày Sinh", "Địa Chỉ", 
-			"Giới Tính", "Số ĐT"};
+	private String titleCols[] = {"Mã nhân viên", "Tên nhân viên", "Số CMND", "Ngày sinh", "Địa chỉ", 
+			"Giới tính", "Số ĐT"};
 	
 	public JTable getTable() {
 		return table;

@@ -17,7 +17,7 @@ public class PanelQuanLyMT_CTMTView extends JPanel{
 	
 	public PanelQuanLyMT_CTMTView() {
 		setLayout(new BorderLayout());
-		add(createTitlePanel("Quản Lý Mượn Trả"), BorderLayout.PAGE_START);
+		add(createTitlePanel("Quản lí mượn trả"), BorderLayout.PAGE_START);
 		add(createMainPanel(), BorderLayout.CENTER);
 	}
 	
@@ -59,10 +59,26 @@ public class PanelQuanLyMT_CTMTView extends JPanel{
 	
 	private JPanel createCTMTPanel() {
 		JPanel panel = new JPanel(new BorderLayout());
-		panel.add(createTitlePanel("Chi Tiết Mượn Trả"), BorderLayout.PAGE_START);
+		panel.add(createTitlePanel("Chi tiết mượn trả"), BorderLayout.PAGE_START);
 		panel.add(tableCTMT = new TableChiTietMuonTraView(), BorderLayout.CENTER);
 		
 		return panel;
+	}
+
+	public InputMT_CTMTView getInput() {
+		return input;
+	}
+
+	public ButtonMT_CTMTView getBtn() {
+		return btn;
+	}
+
+	public TableMuonTraView getTableMT() {
+		return tableMT;
+	}
+
+	public TableChiTietMuonTraView getTableCTMT() {
+		return tableCTMT;
 	}
 	
 	

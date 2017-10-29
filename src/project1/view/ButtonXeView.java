@@ -2,6 +2,7 @@ package project1.view;
 
 import java.awt.GridLayout;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
@@ -29,8 +30,10 @@ public class ButtonXeView extends JPanel{
 		JPanel panel = new JPanel(new GridLayout(1, 2, 5, 5));
 		JPanel panelL = new JPanel(new GridLayout(2,  2, 5, 15));
 		panelL.add(btnTimKiem = new JButton("Tìm kiếm"));
+		btnTimKiem.setIcon(new ImageIcon(this.getClass().getResource("/search.png")));
 		panelL.add(timKiemCB = new JComboBox<>(timKiemVal));
 		panelL.add(btnThongKe = new JButton("Thống kê"));
+		btnThongKe.setIcon(new ImageIcon(this.getClass().getResource("/tk.png")));
 		panelL.add(thongKeCB = new JComboBox<>(thongKeVal));
 		
 		JPanel panelR = new JPanel(new GridLayout(1, 1));
@@ -46,11 +49,17 @@ public class ButtonXeView extends JPanel{
 	private JPanel createButOther() {
 		JPanel panel = new JPanel(new GridLayout(2, 3, 10, 10));
 		panel.add(btnThem = createButton("Thêm"));
+		btnThem.setIcon(new ImageIcon(this.getClass().getResource("/addC.png")));
 		panel.add(btnSua = createButton("Sửa"));
+		btnSua.setIcon(new ImageIcon(this.getClass().getResource("/updateC.png")));
 		panel.add(btnXoa = createButton("Xóa"));
+		btnXoa.setIcon(new ImageIcon(this.getClass().getResource("/deleteC.png")));
 		panel.add(btnHuy = createButton("Hủy"));
+		btnHuy.setIcon(new ImageIcon(this.getClass().getResource("/cancel.png")));
 		panel.add(btnNhapFile = createButton("Nhập File"));
+		btnNhapFile.setIcon(new ImageIcon(this.getClass().getResource("/importF.png")));
 		panel.add(btnXuatFile = createButton("Xuất File"));
+		btnXuatFile.setIcon(new ImageIcon(this.getClass().getResource("/save.png")));
 		
 		return panel;
 	}

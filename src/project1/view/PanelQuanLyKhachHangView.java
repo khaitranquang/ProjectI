@@ -23,7 +23,7 @@ public class PanelQuanLyKhachHangView extends JPanel{
 	
 	private JPanel createTitlePanel() {
 		JPanel panel = new JPanel();
-		JLabel label = new JLabel("Quản Lý Khách Hàng");
+		JLabel label = new JLabel("Quản lí khách hàng");
 		label.setFont(new Font("Caribli", Font.BOLD, 18));
 		label.setForeground(Color.BLUE);;
 		panel.add(label);
@@ -47,6 +47,22 @@ public class PanelQuanLyKhachHangView extends JPanel{
 		
 		return panel;
 	}
+
+
+	public InputKhachHangView getInputKH() {
+		return inputKH;
+	}
+
+
+	public ButtonKhachHangView getBtnKH() {
+		return btnKH;
+	}
+
+
+	public TableKhachHangView getTableKH() {
+		return tableKH;
+	}
+	
 	
 	
 }

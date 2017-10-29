@@ -3,6 +3,7 @@ package project1.view;
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
@@ -14,9 +15,9 @@ public class ButtonNhanVienView extends JPanel{
 	private JButton btnThem, btnSua, btnXoa, btnTimKiem, btnThongKe, btnHuy, btnNhapFile, btnXuatFile;
 	private JTextField tfTimKiem;
 	private JComboBox<String> timKiemCB, thongKeCB;
-	private String[] timKiemVal = {"All", "Mã Nhân Viên", "Tên Nhân Viên", "Ngày Sinh", "Địa Chỉ", 
-			"Số ĐT", "Giới Tính"};
-	private String[] thongKeVal = {"Tên Nhân Viên", "Ngày Sinh", "Địa Chỉ", "Giới Tính"};
+	private String[] timKiemVal = {"All", "Mã nhân viên", "Tên nhân viên", "Ngày sinh", "Địa chỉ", 
+			"Số ĐT", "Giới tính"};
+	private String[] thongKeVal = {"Tên nhân viên", "Ngày Sinh", "Địa chỉ", "Giới tính"};
 	
 	public ButtonNhanVienView() {
 		setLayout(new GridLayout(2, 1, 10, 15));
@@ -28,12 +29,14 @@ public class ButtonNhanVienView extends JPanel{
 	private JPanel createButTkThongKe() {
 		JPanel panel = new JPanel(new GridLayout(1, 2, 5, 5));
 		JPanel panelL = new JPanel(new GridLayout(2, 2, 5, 15));
-		panelL.add(btnTimKiem = createButton("Tìm Kiếm"));
+		panelL.add(btnTimKiem = createButton("Tìm kiếm"));
+		btnTimKiem.setIcon(new ImageIcon(this.getClass().getResource("/search.png")));
 		panelL.add(timKiemCB = new JComboBox<>(timKiemVal));
-		panelL.add(btnThongKe = createButton("Thống Kê"));
+		panelL.add(btnThongKe = createButton("Thống kê"));
+		btnThongKe.setIcon(new ImageIcon(this.getClass().getResource("/tk.png")));
 		panelL.add(thongKeCB = new JComboBox<>(thongKeVal));
-		btnTimKiem.setToolTipText("Tìm Kiếm");
-		btnThongKe.setToolTipText("Thống Kê");
+		btnTimKiem.setToolTipText("Tìm kiếm");
+		btnThongKe.setToolTipText("Thống kê");
 		
 		JPanel panelR = new JPanel(new GridLayout(1, 1));
 		panelR.add(tfTimKiem = new JTextField());
@@ -47,11 +50,17 @@ public class ButtonNhanVienView extends JPanel{
 	private JPanel createButOther() {
 		JPanel panel = new JPanel(new GridLayout(2, 3, 10, 10));
 		panel.add(btnThem = createButton("Thêm"));
+		btnThem.setIcon(new ImageIcon(this.getClass().getResource("/addp.png")));
 		panel.add(btnSua = createButton("Sửa"));
+		btnSua.setIcon(new ImageIcon(this.getClass().getResource("/updatep.png")));
 		panel.add(btnXoa = createButton("Xóa"));
+		btnXoa.setIcon(new ImageIcon(this.getClass().getResource("/deletep.png")));
 		panel.add(btnHuy = createButton("Hủy"));
-		panel.add(btnNhapFile = createButton("Nhập File"));
-		panel.add(btnXuatFile = createButton("Xuất File"));
+		btnHuy.setIcon(new ImageIcon(this.getClass().getResource("/cancel.png")));
+		panel.add(btnNhapFile = createButton("Nhập file"));
+		btnNhapFile.setIcon(new ImageIcon(this.getClass().getResource("/importF.png")));
+		panel.add(btnXuatFile = createButton("Xuất file"));
+		btnXuatFile.setIcon(new ImageIcon(this.getClass().getResource("/save.png")));
 		
 		return panel;
 	}
@@ -61,92 +70,51 @@ public class ButtonNhanVienView extends JPanel{
 		return btn;
 	}
 
+	
 	public JButton getBtnThem() {
 		return btnThem;
-	}
-
-	public void setBtnThem(JButton btnThem) {
-		this.btnThem = btnThem;
 	}
 
 	public JButton getBtnSua() {
 		return btnSua;
 	}
 
-	public void setBtnSua(JButton btnSua) {
-		this.btnSua = btnSua;
-	}
-
 	public JButton getBtnXoa() {
 		return btnXoa;
-	}
-
-	public void setBtnXoa(JButton btnXoa) {
-		this.btnXoa = btnXoa;
 	}
 
 	public JButton getBtnTimKiem() {
 		return btnTimKiem;
 	}
 
-	public void setBtnTimKiem(JButton btnTimKiem) {
-		this.btnTimKiem = btnTimKiem;
-	}
-
 	public JButton getBtnThongKe() {
 		return btnThongKe;
-	}
-
-	public void setBtnThongKe(JButton btnThongKe) {
-		this.btnThongKe = btnThongKe;
 	}
 
 	public JButton getBtnHuy() {
 		return btnHuy;
 	}
 
-	public void setBtnHuy(JButton btnHuy) {
-		this.btnHuy = btnHuy;
-	}
-
 	public JButton getBtnNhapFile() {
 		return btnNhapFile;
-	}
-
-	public void setBtnNhapFile(JButton btnNhapFile) {
-		this.btnNhapFile = btnNhapFile;
 	}
 
 	public JButton getBtnXuatFile() {
 		return btnXuatFile;
 	}
 
-	public void setBtnXuatFile(JButton btnXuatFile) {
-		this.btnXuatFile = btnXuatFile;
-	}
-
 	public JTextField getTfTimKiem() {
 		return tfTimKiem;
 	}
 
-	public void setTfTimKiem(JTextField tfTimKiem) {
-		this.tfTimKiem = tfTimKiem;
-	}
 
 	public JComboBox<String> getTimKiemCB() {
 		return timKiemCB;
 	}
 
-	public void setTimKiemCB(JComboBox<String> timKiemCB) {
-		this.timKiemCB = timKiemCB;
-	}
 
 	public JComboBox<String> getThongKeCB() {
 		return thongKeCB;
-	}
-
-	public void setThongKeCB(JComboBox<String> thongKeCB) {
-		this.thongKeCB = thongKeCB;
 	}
 	
 }

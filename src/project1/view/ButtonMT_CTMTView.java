@@ -2,6 +2,7 @@ package project1.view;
 
 import java.awt.GridLayout;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
@@ -13,13 +14,13 @@ public class ButtonMT_CTMTView extends JPanel{
 	private JButton btnThem, btnSua, btnXoa, btnTimKiem, btnThongKe, btnHuy, btnInPhieu, btnXuatFile;
 	private JTextField tfTimKiem;
 	private JComboBox<String> timKiemCB, thongKeCB, tableCB;
-	private String[] timKiemVal = {"All", "Mã Khách Hàng", "Mã Nhân Viên", "Mã Mượn Trả", "Ngày Mượn", "Ngày Trả"};
-	private String[] thongKeVal = {"Ngày Mượn", "Mã Khách Hàng", "Mã Nhân Viên", "Ngày Trả"};
-	private String tableVal[] = {"Mượn Trả", "Chỉ Tiết Mượn Trả"};
+	private String[] timKiemVal = {"All", "Mã khách hàng", "Mã nhân viên", "Mã mượn trả", "Ngày mượn", "Ngày trả"};
+	private String[] thongKeVal = {"Ngày mượn", "Mã khách hàng", "Mã nhân viên", "Ngày trả"};
+	private String tableVal[] = {"Mượn trả", "Chi tiết mượn trả"};
 	
 	public ButtonMT_CTMTView() {
 		setLayout(new GridLayout(2, 1, 10, 15));
-		setBorder(new EmptyBorder(0, 0, 90, 0));
+		setBorder(new EmptyBorder(35, 0, 90, 0));
 		add(createButTkThongKe());
 		add(createButOther());
 	}
@@ -27,12 +28,14 @@ public class ButtonMT_CTMTView extends JPanel{
 	private JPanel createButTkThongKe() {
 		JPanel panel = new JPanel(new GridLayout(1, 2, 10, 5));
 		JPanel panelL = new JPanel(new GridLayout(2, 2, 5, 15));
-		panelL.add(btnTimKiem = createButton("Tìm Kiếm"));
+		panelL.add(btnTimKiem = createButton("Tìm kiếm"));
+		btnTimKiem.setIcon(new ImageIcon(this.getClass().getResource("/search.png")));
 		panelL.add(timKiemCB = new JComboBox<>(timKiemVal));
-		panelL.add(btnThongKe = createButton("Thống Kê"));
+		panelL.add(btnThongKe = createButton("Thống kê"));
+		btnThongKe.setIcon(new ImageIcon(this.getClass().getResource("/tk.png")));
 		panelL.add(thongKeCB = new JComboBox<>(thongKeVal));
-		btnTimKiem.setToolTipText("Tìm Kiếm");
-		btnThongKe.setToolTipText("Thống Kê");
+		btnTimKiem.setToolTipText("Tìm kiếm");
+		btnThongKe.setToolTipText("Thống kê");
 		
 		JPanel panelR = new JPanel(new GridLayout(2, 2, 5, 15));
 		panelR.add(tfTimKiem = new JTextField());
@@ -46,11 +49,17 @@ public class ButtonMT_CTMTView extends JPanel{
 	private JPanel createButOther() {
 		JPanel panel = new JPanel(new GridLayout(2, 3, 10, 10));
 		panel.add(btnThem = createButton("Thêm"));
+		btnThem.setIcon(new ImageIcon(this.getClass().getResource("/addMT.png")));
 		panel.add(btnSua = createButton("Sửa"));
+		btnSua.setIcon(new ImageIcon(this.getClass().getResource("/updateMT.png")));
 		panel.add(btnXoa = createButton("Xóa"));
+		btnXoa.setIcon(new ImageIcon(this.getClass().getResource("/deleteMT.png")));
 		panel.add(btnHuy = createButton("Hủy"));
-		panel.add(btnInPhieu = createButton("In Phiếu"));
-		panel.add(btnXuatFile = createButton("Xuất File"));
+		btnHuy.setIcon(new ImageIcon(this.getClass().getResource("/cancel.png")));
+		panel.add(btnInPhieu = createButton("In phiếu"));
+		btnInPhieu.setIcon(new ImageIcon(this.getClass().getResource("/inP.png")));
+		panel.add(btnXuatFile = createButton("Xuất file"));
+		btnXuatFile.setIcon(new ImageIcon(this.getClass().getResource("/save.png")));
 		
 		return panel;
 	}
@@ -60,100 +69,43 @@ public class ButtonMT_CTMTView extends JPanel{
 		return btn;
 	}
 
+	
 	public JButton getBtnThem() {
 		return btnThem;
 	}
-
-	public void setBtnThem(JButton btnThem) {
-		this.btnThem = btnThem;
-	}
-
 	public JButton getBtnSua() {
 		return btnSua;
 	}
-
-	public void setBtnSua(JButton btnSua) {
-		this.btnSua = btnSua;
-	}
-
 	public JButton getBtnXoa() {
 		return btnXoa;
 	}
-
-	public void setBtnXoa(JButton btnXoa) {
-		this.btnXoa = btnXoa;
-	}
-
 	public JButton getBtnTimKiem() {
 		return btnTimKiem;
 	}
-
-	public void setBtnTimKiem(JButton btnTimKiem) {
-		this.btnTimKiem = btnTimKiem;
-	}
-
 	public JButton getBtnThongKe() {
 		return btnThongKe;
 	}
-
-	public void setBtnThongKe(JButton btnThongKe) {
-		this.btnThongKe = btnThongKe;
-	}
-
 	public JButton getBtnHuy() {
 		return btnHuy;
 	}
-
-	public void setBtnHuy(JButton btnHuy) {
-		this.btnHuy = btnHuy;
-	}
-
 	public JButton getBtnInPhieu() {
 		return btnInPhieu;
 	}
-
-	public void setBtnInPhieu(JButton btnInPhieu) {
-		this.btnInPhieu = btnInPhieu;
-	}
-
 	public JButton getBtnXuatFile() {
 		return btnXuatFile;
 	}
-
-	public void setBtnXuatFile(JButton btnXuatFile) {
-		this.btnXuatFile = btnXuatFile;
-	}
-
 	public JTextField getTfTimKiem() {
 		return tfTimKiem;
 	}
-
-	public void setTfTimKiem(JTextField tfTimKiem) {
-		this.tfTimKiem = tfTimKiem;
-	}
-
 	public JComboBox<String> getTimKiemCB() {
 		return timKiemCB;
 	}
-
-	public void setTimKiemCB(JComboBox<String> timKiemCB) {
-		this.timKiemCB = timKiemCB;
-	}
-
 	public JComboBox<String> getThongKeCB() {
 		return thongKeCB;
 	}
-
-	public void setThongKeCB(JComboBox<String> thongKeCB) {
-		this.thongKeCB = thongKeCB;
-	}
-
 	public JComboBox<String> getTableCB() {
 		return tableCB;
 	}
 
-	public void setTableCB(JComboBox<String> tableCB) {
-		this.tableCB = tableCB;
-	}
 	
 }
