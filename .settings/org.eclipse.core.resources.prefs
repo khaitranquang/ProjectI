@@ -1,8 +1,13 @@
 eclipse.preferences.version=1
 encoding//src/project1/controller/AddXeController.java=UTF-8
+<<<<<<< HEAD
 encoding//src/project1/view/ButtonKhachHangView.java=UTF-8
 encoding//src/project1/view/ButtonMT_CTMTView.java=UTF-8
 encoding//src/project1/view/ButtonNhanVienView.java=UTF-8
+=======
+encoding//src/project1/controller/DeleteXeController.java=UTF-8
+encoding//src/project1/controller/EditXeController.java=UTF-8
+>>>>>>> quanlixe
 encoding//src/project1/view/ButtonXeView.java=UTF-8
 encoding//src/project1/view/InputKhachHangView.java=UTF-8
 encoding//src/project1/view/InputMT_CTMTView.java=UTF-8

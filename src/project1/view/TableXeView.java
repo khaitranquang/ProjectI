@@ -50,7 +50,6 @@ public class TableXeView extends JPanel{
 		JTable table = new JTable();
 		table.setCellSelectionEnabled(false);
 		table.setRowSelectionAllowed(true);
-		table.setAutoCreateRowSorter(true);
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		return table;
 	}
