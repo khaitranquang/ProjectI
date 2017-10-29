@@ -13,4 +13,3 @@ public class DemoMain {
 		new DeleteXeController(mainUI);
 	}
 }
-	
