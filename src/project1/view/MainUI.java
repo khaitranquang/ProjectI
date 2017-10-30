@@ -9,6 +9,7 @@ public class MainUI extends JFrame{
 	private PanelQuanLyKhachHangView qlKH;
 	private PanelQuanLyNhanVienView qlNV;
 	private PanelQuanLyMT_CTMTView qlMT;
+	private PanelAboutUSView aboutUS;
 	
 	public MainUI() {
 		createGUI();
@@ -36,6 +37,8 @@ public class MainUI extends JFrame{
 		tabbedPane.addTab("Quản lí nhân viên", null, qlNV, "Quản lí nhân viên");
 		qlMT = new PanelQuanLyMT_CTMTView();
 		tabbedPane.addTab("Quản lí mượn trả",  null, qlMT, "Quản lí mượn trả");
+		aboutUS = new PanelAboutUSView();
+		tabbedPane.addTab("About us", null, aboutUS, "Thông tin chi tiết");
 		
 		return tabbedPane;
 	}
