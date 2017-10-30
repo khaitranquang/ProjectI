@@ -8,64 +8,56 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
 
 import project1.model.Xe;
 import project1.model.XeDB;
-import project1.view.ButtonXeView;
-import project1.view.InputXeView;
+import project1.view.EditXeView;
 import project1.view.MainUI;
-import project1.view.PanelQuanLyXeView;
 import project1.view.TableXeView;
+import project1.view.XeInformation;
 
 public class EditXeController {
 	private MainUI mainUI;
 	private Xe xe;
 	private XeDB xeDB;
 	private String oldID = "";
-	private int indexOfRow = -1;
 	
-	private	PanelQuanLyXeView panelQuanLyXeView;
-	private ButtonXeView buttonXeView;
-	private InputXeView inputXeView;
+	private EditXeView editXeView;
+	private JButton btnEdit;
+	
+	private XeInformation xeInformation;
 	private TableXeView tableXeView;
-	
-	JButton btnSua;
 	
 	public EditXeController(MainUI mainUI) {
 		this.mainUI = mainUI;
 		xeDB = new XeDB();
-		
-		panelQuanLyXeView = mainUI.getQlXe();
-		buttonXeView      = panelQuanLyXeView.getBtnXe();
-		inputXeView       = panelQuanLyXeView.getInputXe();
-		tableXeView       = panelQuanLyXeView.getTableXe();
-		btnSua            = buttonXeView.getBtnSua();
-		setActions();
+		btnEdit = mainUI.getQlXe().getBtnXe().getBtnSua();
+		tableXeView = mainUI.getQlXe().getTableXe();
+		tableXeView.updateTable(xeDB.getAllXe());
+		btnEditEvent();
 	}
 	
-	/*
-	 * Set Actions for button(
-	 */
-	private void setActions() {
-		btnSua.addActionListener(new ActionListener() {
+	/* Event - Action */
+	private void btnEditEvent() {
+		btnEdit.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				editXeView = new EditXeView(mainUI);
+				xeInformation = editXeView.getXeInformation();
+				
 				int index = findIndexOfData();
 				if (index >= 0) {
+					editXeView.setVisible(true);
 					oldID = getID(index, 0);
 					loadInfor(oldID);
-					updateXe();
-					return;
+					
+					setActions();
 				}
 				else {
 					JOptionPane.showMessageDialog(mainUI, "Chọn 1 xe để sửa");
-					return;
 				}
 			}
 		});
-		
 	}
 	
 	// Find index
@@ -82,75 +74,52 @@ public class EditXeController {
 	
 	private void loadInfor(String id) {
 		xe = xeDB.getXe(id);
-		inputXeView.getTfIdXe().setText(id);
-		inputXeView.getTfBienXe().setText(xe.getBienXe());
-		inputXeView.getTfTenXe().setText(xe.getTenXe());
-		inputXeView.getTfLoaiXe().setText(xe.getLoaiXe());
-		inputXeView.getTfHangSanXuat().setText(xe.getHangSanXuat());
-		inputXeView.getTfNamSanXuat().setText(xe.getNamSanXuat());
-		inputXeView.getTfTrangThai().setText(xe.getTrangThai()+"");
-		inputXeView.getTfNhienLieu().setText(xe.getNhienLieu());;
-		inputXeView.getTfGiaThue().setText(xe.getGiaThue() + "");
-		inputXeView.getTfNgayBaoTri().setText(xe.getNgayBaoTri());
+		xeInformation.getTfIdXe().setText(id);
+		xeInformation.getTfBienXe().setText(xe.getBienXe());
+		xeInformation.getTfTenXe().setText(xe.getTenXe());
+		xeInformation.getTfLoaiXe().setText(xe.getLoaiXe());
+		xeInformation.getTfHangSanXuat().setText(xe.getHangSanXuat());
+		xeInformation.getTfNamSanXuat().setText(xe.getNamSanXuat());
+		xeInformation.getTfNgayBaoTri().setText(xe.getNgayBaoTri());
+		xeInformation.getTfNhienLieu().setText(xe.getNhienLieu());
+		xeInformation.getTfTrangThai().setText(xe.getTrangThai() + "");
+		xeInformation.getTfGiaThue().setText(xe.getGiaThue() + "");
 	}
 	
-	/*----Action Update Xe -----*/
-	private void updateXe() {
-		JButton btnUpdate = inputXeView.getBtnUpdate();
-		btnUpdate.setVisible(true);
-		btnUpdate.addActionListener(new ActionListener() {
+	private void setActions() {
+		JButton btnEdit = editXeView.getBtnEdit();
+		JButton btnCancel = editXeView.getBtnCancel();
+		
+		btnEdit.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				suaXe();
-				return;
 			}
 		});
-	}
-
-	private void suaXe() {
-		boolean check = checkInfor(inputXeView);
-		if (check) {
-			String maXeMoi        = inputXeView.getTfIdXe().getText().toString();
-			String bienXeMoi      = inputXeView.getTfBienXe().getText().toString();
-			String tenXeMoi       = inputXeView.getTfTenXe().getText().toString();
-			String loaiXeMoi      = inputXeView.getTfLoaiXe().getText().toString();
-			String hangSanXuatMoi = inputXeView.getTfHangSanXuat().getText().toString();
-			String namSanXuatMoi  = inputXeView.getTfNamSanXuat().getText().toString();
-			String ngayBaoTriMoi  = inputXeView.getTfNgayBaoTri().getText().toString();
-			String nhienLieuMoi   = inputXeView.getTfNhienLieu().getText().toString();
-			int trangThaiMoi      = Integer.parseInt(inputXeView.getTfTrangThai().getText().toString());
-			int giaThueMoi        = Integer.parseInt(inputXeView.getTfGiaThue().getText().toString());
 		
-			xeDB.updateXe(this.xe, maXeMoi, bienXeMoi, tenXeMoi, loaiXeMoi, hangSanXuatMoi, namSanXuatMoi, ngayBaoTriMoi, nhienLieuMoi, trangThaiMoi, giaThueMoi);
-//			JOptionPane.showMessageDialog(new JDialog(), "Cập nhật thông tin xe thành công");
-//			tableXeView.getTable().getSelectionModel().clearSelection();
-			//tableXeView.getTable().getSelectionModel().isSelectionEmpty();
-			tableXeView.updateTable(xeDB.getAllXe());
-			//clearInput();
-			inputXeView.getBtnUpdate().setVisible(false);
-			return;
-		}
-		else {
-			System.out.println("Edit fail !!!");
-			return;
-		}
+		btnCancel.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				huy();
+			}
+		});
 	}
 	
 	/*
 	 * Check information of input
 	 */
-	private boolean checkInfor( InputXeView inputXeView) {
+	private boolean checkInfor(XeInformation xeInformation) {
 		// Are text fields empty?
-		if (inputXeView.getTfIdXe().getText().toString().trim().equals("")        ||
-			inputXeView.getTfBienXe().getText().toString().trim().equals("")      ||
-			inputXeView.getTfTenXe().getText().toString().trim().equals("")       ||
-			inputXeView.getTfLoaiXe().getText().toString().trim().equals("")      ||
-			inputXeView.getTfHangSanXuat().getText().toString().trim().equals("") ||
-			inputXeView.getTfNamSanXuat().getText().toString().trim().equals("")  ||
-			inputXeView.getTfNhienLieu().getText().toString().trim().equals("")   ||
-			inputXeView.getTfNgayBaoTri().getText().toString().trim().equals("")  ||
-			inputXeView.getTfTrangThai().getText().toString().trim().equals("")   ||
-			inputXeView.getTfGiaThue().getText().toString().trim().equals(""))  {
+		if (xeInformation.getTfIdXe().getText().toString().trim().equals("")        ||
+			xeInformation.getTfBienXe().getText().toString().trim().equals("")      ||
+			xeInformation.getTfTenXe().getText().toString().trim().equals("")       ||
+			xeInformation.getTfLoaiXe().getText().toString().trim().equals("")      ||
+			xeInformation.getTfHangSanXuat().getText().toString().trim().equals("") ||
+			xeInformation.getTfNamSanXuat().getText().toString().trim().equals("")  ||
+			xeInformation.getTfNhienLieu().getText().toString().trim().equals("")   ||
+			xeInformation.getTfNgayBaoTri().getText().toString().trim().equals("")  ||
+			xeInformation.getTfTrangThai().getText().toString().trim().equals("")   ||
+			xeInformation.getTfGiaThue().getText().toString().trim().equals(""))  {
 			System.out.println("Text Fields are not empty !!!");
 			JOptionPane.showMessageDialog(new JDialog(), "Các trường dữ liệu không được để trống");
 			return false;
@@ -158,9 +127,9 @@ public class EditXeController {
 		
 		// Check integer?
 		try {
-			int namsanXuat = Integer.parseInt(inputXeView.getTfNamSanXuat().getText().toString().trim());
-			int trangThai  = Integer.parseInt(inputXeView.getTfTrangThai().getText().toString().trim());
-			int giaThue    = Integer.parseInt(inputXeView.getTfGiaThue().getText().toString().trim());
+			int namsanXuat = Integer.parseInt(xeInformation.getTfNamSanXuat().getText().toString().trim());
+			int trangThai  = Integer.parseInt(xeInformation.getTfTrangThai().getText().toString().trim());
+			int giaThue    = Integer.parseInt(xeInformation.getTfGiaThue().getText().toString().trim());
 			// Test < 0 ????
 			if(namsanXuat < 0 || trangThai <0 || giaThue < 0 || namsanXuat > 9999 || namsanXuat < 1000) {
 				JOptionPane.showMessageDialog(new JDialog(), "Nhập lại đúng định dạng các trường số !!!");
@@ -174,7 +143,7 @@ public class EditXeController {
 		}
 		
 		/* Check if maSach is exist*/
-		if (!checkID(inputXeView.getTfIdXe().getText().toString().trim())) {
+		if (!checkID(xeInformation.getTfIdXe().getText().toString().trim())) {
 			JOptionPane.showMessageDialog(new JDialog(), "Mã xe đã tồn tại - Hãy nhập lại");
 			return false;
 		}
@@ -191,19 +160,33 @@ public class EditXeController {
 		return true;
 	}
 	
-	/* Clear input */
-	private void clearInput() {
-		inputXeView.getTfIdXe().setText("");
-		inputXeView.getTfNamSanXuat().setText("");
-		inputXeView.getTfBienXe().setText("");
-		inputXeView.getTfTenXe().setText("");
-		inputXeView.getTfLoaiXe().setText("");
-		inputXeView.getTfHangSanXuat().setText("");
-		inputXeView.getTfNhienLieu().setText("");
-		inputXeView.getTfNgayBaoTri().setText("");
-		inputXeView.getTfTrangThai().setText("");
-		inputXeView.getTfGiaThue().setText("");
+	private void suaXe() {
+		if (checkInfor(xeInformation)) {
+			String maXeMoi        = xeInformation.getTfIdXe().getText().toString();
+			String bienXeMoi      = xeInformation.getTfBienXe().getText().toString();
+			String tenXeMoi       = xeInformation.getTfTenXe().getText().toString();
+			String loaiXeMoi      = xeInformation.getTfLoaiXe().getText().toString();
+			String hangSanXuatMoi = xeInformation.getTfHangSanXuat().getText().toString();
+			String namSanXuatMoi  = xeInformation.getTfNamSanXuat().getText().toString();
+			String ngayBaoTriMoi  = xeInformation.getTfNgayBaoTri().getText().toString();
+			String nhienLieuMoi   = xeInformation.getTfNhienLieu().getText().toString();
+			int trangThaiMoi      = Integer.parseInt(xeInformation.getTfTrangThai().getText().toString());
+			int giaThueMoi        = Integer.parseInt(xeInformation.getTfGiaThue().getText().toString());
+			
+			xeDB.updateXe(this.xe, maXeMoi, bienXeMoi, tenXeMoi, loaiXeMoi, hangSanXuatMoi, namSanXuatMoi, ngayBaoTriMoi, nhienLieuMoi, trangThaiMoi, giaThueMoi);
+			tableXeView.updateTable(xeDB.getAllXe());
+			
+			this.editXeView.setVisible(false);
+		}
+		else {
+			System.out.println("Edit fail !!!");
+		}
 	}
+	
+	private void huy() {
+		this.editXeView.setVisible(false);
+	}
+	
 }
 
 
