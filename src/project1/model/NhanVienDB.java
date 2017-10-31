@@ -177,7 +177,7 @@ public class NhanVienDB implements NhanVienDAO{
 		try {
 			String sql = "INSERT INTO nhanvien (idNhanVien, tenNhanVien, soCMND, ngaySinh"
 					+ "diaChi, gioiTinh, SDT)"
-					+ "VALUE (?,?,?,?,?,?,?";
+					+ "VALUE (?,?,?,?,?,?,?)";
 			preStatement = connection.prepareStatement(sql);
 			preStatement.setString(1, idNhanVien);
 			preStatement.setString(2, tenNhanVien);
