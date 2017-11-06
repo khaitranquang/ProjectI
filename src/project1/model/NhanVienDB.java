@@ -53,11 +53,11 @@ public class NhanVienDB implements NhanVienDAO{
 				String ngaySinh 	= result.getString("ngaySinh");
 				String diaChi 		= result.getString("diaChi");
 				String gioiTinh 	= result.getString("gioiTinh");
-				String SDT 			= result.getString("sDT");
+				String SDT 			= result.getString("SDT");
 				
-				NhanVien nhanhvien= new NhanVien(idNhanVien, tenNhanVien, soCMND, ngaySinh,
+				NhanVien nhanvien= new NhanVien(idNhanVien, tenNhanVien, soCMND, ngaySinh,
 													diaChi, gioiTinh, SDT);
-				listNhanVien.add(nhanhvien);
+				listNhanVien.add(nhanvien);
 			}
 			// Close connection
 			result.close();
@@ -97,7 +97,7 @@ public class NhanVienDB implements NhanVienDAO{
 				String diaChi 		= result.getString("diaChi");
 				String ngaySinh 	= result.getString("ngaySinh");
 				String gioiTinh 	= result.getString("gioiTinh");
-				String SDT 			= result.getString("sDT");
+				String SDT 			= result.getString("SDT");
 				
 				nhanvien= new NhanVien(idNhanVien, tenNhanVien, soCMND, ngaySinh,
 										diaChi, gioiTinh, SDT);
@@ -114,12 +114,12 @@ public class NhanVienDB implements NhanVienDAO{
 			try {
 				if(preStatement != null) preStatement.close();
 				if(connection != null) connection.close();
-			} catch (SQLException e) {
+			} 
+			catch (SQLException e) {
 				e.printStackTrace();
 			}
-			
-			return nhanvien;
 		}
+		return nhanvien;
 	}
 	
 	@Override
@@ -130,7 +130,7 @@ public class NhanVienDB implements NhanVienDAO{
 		PreparedStatement preStatement = null;
 		try {
 			String sql = "UPDATE nhanvien SET idNhanVien=?, tenNhanVien=?, soCMND=?, ngaySinh=?, "
-					+ "							diaChi=?, gioiTinh=?, SDT=? WHERE idNhanVien=?";
+					+ "diaChi=?, gioiTinh=?, SDT=? WHERE idNhanVien=?";
 			preStatement = connection.prepareStatement(sql);
 			preStatement.setString(1, idNhanVienMoi);
 			preStatement.setString(2, tenNhanVienMoi);
@@ -175,7 +175,7 @@ public class NhanVienDB implements NhanVienDAO{
 		PreparedStatement preStatement = null;
 		
 		try {
-			String sql = "INSERT INTO nhanvien (idNhanVien, tenNhanVien, soCMND, ngaySinh"
+			String sql = "INSERT INTO nhanvien (idNhanVien, tenNhanVien, soCMND, ngaySinh, "
 					+ "diaChi, gioiTinh, SDT)"
 					+ "VALUE (?,?,?,?,?,?,?)";
 			preStatement = connection.prepareStatement(sql);
@@ -188,7 +188,7 @@ public class NhanVienDB implements NhanVienDAO{
 			preStatement.setString(7, SDT);
 			
 			int rows = preStatement.executeUpdate();
-			if (rows > 0) System.out.println("This nhanvien has been inserted");
+			if (rows > 0) System.out.println("This employee has been inserted");
 			
 			// Close connections
 			preStatement.close();

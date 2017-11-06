@@ -17,6 +17,7 @@ public class MainUI extends JFrame{
 	}
 	
 	private void setDisplay() {
+		setTitle("Quản lí thuê xe - Nhóm 14");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(1200, 720);
 		setLocationRelativeTo(null);
