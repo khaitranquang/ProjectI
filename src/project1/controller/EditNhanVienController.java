@@ -12,8 +12,9 @@ import javax.swing.JTable;
 
 import project1.model.NhanVien;
 import project1.model.NhanVienDB;
-import project1.view.InputNhanVienView;
+import project1.view.EditNhanVienView;
 import project1.view.MainUI;
+import project1.view.NhanVienInformation;
 import project1.view.TableNhanVienView;
 
 public class EditNhanVienController {
