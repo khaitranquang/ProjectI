@@ -15,10 +15,13 @@ import project1.controller.EditKhachHangController;
 import project1.controller.EditNhanVienController;
 import project1.controller.EditXeController;
 import project1.controller.PrintSearchKHController;
+import project1.controller.PrintSearchNVController;
 import project1.controller.PrintSearchXeController;
 import project1.controller.SearchKHController;
+import project1.controller.SearchNVController;
 import project1.controller.SearchXeController;
 import project1.controller.TKKHController;
+import project1.controller.TKNVController;
 import project1.controller.TKXeController;
 import project1.view.MainUI;
 
@@ -48,6 +51,9 @@ public class DemoMain {
 						new SearchKHController(mainUI);
 						new PrintSearchKHController(mainUI);
 						new TKKHController(mainUI);
+						new SearchNVController(mainUI);
+						new PrintSearchNVController(mainUI);
+						new TKNVController(mainUI);
 				 } 
 				 catch (ClassNotFoundException | InstantiationException | 
 						IllegalAccessException | UnsupportedLookAndFeelException ex) {

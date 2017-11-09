@@ -18,4 +18,7 @@ public interface NhanVienDAO {
 	
 	/* Delete one nhanvien */
 	public void deleteNhanVien(NhanVien nhanvien);
+	
+	/* Thong ke nhanVien */
+	public ArrayList<ArrayList<String>> thongKeNV(String colName);
 }

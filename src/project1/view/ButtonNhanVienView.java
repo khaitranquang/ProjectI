@@ -15,9 +15,9 @@ public class ButtonNhanVienView extends JPanel{
 	private JButton btnThem, btnSua, btnXoa, btnTimKiem, btnThongKe, btnHuy, btnNhapFile, btnXuatFile;
 	private JTextField tfTimKiem;
 	private JComboBox<String> timKiemCB, thongKeCB;
-	private String[] timKiemVal = {"All", "Mã nhân viên", "Tên nhân viên", "Ngày sinh", "Địa chỉ", 
-			"Số ĐT", "Giới tính"};
-	private String[] thongKeVal = {"Tên nhân viên", "Ngày Sinh", "Địa chỉ", "Giới tính"};
+	private String[] timKiemVal = {"Tên nhân viên", "Mã nhân viên", "Số CMND", "Ngày sinh", 
+			                       "Địa chỉ", "Giới tính", "Số điện thoại"};
+	private String[] thongKeVal = {"-- Chọn 1 kiểu thống kê --", "Ngày Sinh", "Địa chỉ", "Giới tính"};
 	
 	public ButtonNhanVienView() {
 		setLayout(new GridLayout(2, 1, 10, 15));
