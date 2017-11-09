@@ -16,8 +16,7 @@ public class ButtonXeView extends JPanel{
 	private JComboBox<String> timKiemCB, thongKeCB;
 	private String[] timKiemVal = {"Tên xe", "Mã xe",  "Biển xe", "Loại xe", 
 			"Hãng sản xuất", "Năm sản xuất", "Ngày bảo trì", "Nhiên liệu", "Trạng thái", "Giá thuê"};
-	private String[] thongKeVal = {"Tên xe", "Mã xe",  "Biển xe", "Loại xe", 
-			"Hãng sản xuất", "Năm sản xuất", "Ngày bảo trì", "Nhiên liệu", "Trạng thái", "Giá thuê"};
+	private String[] thongKeVal = {"-- Chọn 1 kiểu thống kê --", "Loại xe", "Hãng sản xuất", "Năm sản xuất", "Ngày bảo trì", "Nhiên liệu", "Trạng thái"};
 	
 	public ButtonXeView() {
 		setLayout(new GridLayout(2, 1, 10, 15));

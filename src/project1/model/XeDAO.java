@@ -19,4 +19,7 @@ public interface XeDAO {
 	
 	/* Delete one xe */
 	public void deleteXe(Xe xe);
+	
+	/* Thong Ke Xe */
+	public ArrayList<ArrayList<String>> thongKeXe(String colName);
 }

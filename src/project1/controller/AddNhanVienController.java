@@ -205,9 +205,10 @@ public class AddNhanVienController {
 			else {
 				openFilePath = path + ".xlsx";
 			}
+			System.out.println(openFilePath);
+			addNVFromExcelFile(openFilePath);
 		}
-		System.out.println(openFilePath);
-		addNVFromExcelFile(openFilePath);
+		
 	}
 	
 	/* Add data from excel */
