@@ -222,9 +222,10 @@ public class AddKhachHangController {
 			else {
 				openFilePath = path + ".xlsx";
 			}
+			System.out.println(openFilePath);
+			addKHFromExcelFile(openFilePath);
 		}
-		System.out.println(openFilePath);
-		addKHFromExcelFile(openFilePath);
+		
 	}
 	
 	/* Add data from excel */

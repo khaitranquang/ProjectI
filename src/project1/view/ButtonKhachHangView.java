@@ -15,9 +15,9 @@ public class ButtonKhachHangView extends JPanel{
 	private JButton btnThem, btnSua, btnXoa, btnTimKiem, btnThongKe, btnHuy, btnNhapFile, btnXuatFile;
 	private JTextField tfTimKiem;
 	private JComboBox<String> timKiemCB, thongKeCB;
-	private String[] timKiemVal = {"All", "Mã khách hàng", "Tên khách hàng", "Ngày sinh", "Địa chỉ", 
-			"Số ĐT", "Số CMND"};
-	private String[] thongKeVal = {"Tên khách hàng", "Ngày sinh", "Địa chỉ", "Giới tính"};
+	private String[] timKiemVal = {"Mã khách hàng", "Tên khách hàng", "Số CMND", "Ngày sinh", "Địa chỉ", "Giới tính",
+								   "Số ĐT", "Email"};
+	private String[] thongKeVal = {"-- Chọn 1 kiểu thống kê --", "Ngày sinh", "Địa chỉ", "Giới tính"};
 	
 	public ButtonKhachHangView() {
 		setLayout(new GridLayout(2, 1, 10, 15));

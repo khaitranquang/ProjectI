@@ -18,4 +18,8 @@ public interface KhachHangDAO {
 		
 	/* Delete one KhachHang */
 	public void deleteKhachHang(KhachHang khachHang);
+	
+	/* Thong ke Khach Hang */
+	public ArrayList<ArrayList<String>> thongKeKH (String colName);
+	
 }
