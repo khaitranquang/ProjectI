@@ -306,4 +306,39 @@ public class XeDB implements XeDAO{
 		
 		return arrResult;
 	}
+
+	@Override
+	public void updateXe(Xe xe, int trangThaiMoi) {
+		String maXe = xe.getIdXe();
+		connection = getConnection();
+		PreparedStatement preStatement = null;
+		try {
+			String sql = "UPDATE xe SET trangThai=? WHERE idXe=?";
+			preStatement = connection.prepareStatement(sql);
+			preStatement.setInt(1, trangThaiMoi);
+			preStatement.setString(2, maXe);
+			
+			
+			int rows = preStatement.executeUpdate();
+			if (rows > 0) System.out.println("Xe vua duoc cap nhat trang thai");
+			
+			// Close connection
+			preStatement.close();
+			connection.close();
+		} 
+		catch (SQLException e) {
+			e.printStackTrace();
+			JOptionPane.showMessageDialog(new JDialog(), "Can't connect to database...");
+		}
+		finally {
+			try {
+				if(preStatement != null) preStatement.close();
+				if(connection != null) connection.close();	
+			} 
+			catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
 }

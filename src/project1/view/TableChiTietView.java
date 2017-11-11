@@ -2,7 +2,6 @@ package project1.view;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
-import java.util.ArrayList;
 
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -11,48 +10,44 @@ import javax.swing.ListSelectionModel;
 import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
 
-import project1.model.MuonXe;
-
-public class TableMuonTraView extends JPanel{
+public class TableChiTietView extends JPanel{
 	private JTable table;
-	public static final int TABLE_RENT_WIDTH = 1095;
-	public static final int TABLE_RENT_HEIGHT = 300;
-	private String titleItem[] = {"Mã mượn trả", "Mã khách hàng", "Mã nhân viên", "Ngày mượn", "Ngày hẹn trả", "Tiền cọc"};
+	public static final int TABLE_DETAIL_WIDTH = 500;
+	public static final int TABLE_DETAIL_HEIGHT = 200;
+	private String[] titleItem = {"Mã sách", "Tên sách", "Tiền thuê một ngày"};
 	
 	public JTable getTable() {
 		return table;
 	}
-
 	public void setTable(JTable table) {
 		this.table = table;
 	}
-
 	
-	
-	public TableMuonTraView() {
+	public TableChiTietView() {
 		setLayout(new BorderLayout());
-		add(createTableXePanel(), BorderLayout.CENTER);
+		add(createDetailPanel(), BorderLayout.CENTER);
 	}
 	
-	private JPanel createTableXePanel() {
+	private JPanel createDetailPanel() {
 		JPanel panel = new JPanel();
 		panel.add(createTablePanel());
-		
 		return panel;
-		
 	}
+	
+	// Create Table Panel
 	private JPanel createTablePanel() {
 		JPanel panel = new JPanel(new BorderLayout());
 		table = createTable();
 		//Load data...?????????????
 		loadData(table);
 		JScrollPane scroll = new JScrollPane(table);
-		scroll.setPreferredSize(new Dimension(TABLE_RENT_WIDTH, TABLE_RENT_HEIGHT));
+		scroll.setPreferredSize(new Dimension(TABLE_DETAIL_WIDTH, TABLE_DETAIL_HEIGHT));
 		panel.add(scroll, BorderLayout.CENTER);
 		
 		return panel;
 	}
 	
+	// Create table
 	private JTable createTable() {
 		JTable table = new JTable();
 		table.setCellSelectionEnabled(false);
@@ -62,7 +57,7 @@ public class TableMuonTraView extends JPanel{
 		return table;
 	}
 	
-	// Load data
+	// Load Data
 	private void loadData(JTable table) {
 		SwingUtilities.invokeLater(new Runnable(){public void run(){
 			String data[][] = null;
@@ -79,10 +74,10 @@ public class TableMuonTraView extends JPanel{
 	}
 	
 	// Update Model of Table
-	public void updateTable(ArrayList<MuonXe> list) {
+	public void updateTable(String[][] listXe) {
 		SwingUtilities.invokeLater(new Runnable(){public void run(){
 		    //Update the model here
-			String data[][] = convertData(list);
+			String data[][] = listXe;
 			DefaultTableModel tableModel = new DefaultTableModel(data, titleItem) {
 				@Override
 				public boolean isCellEditable(int row, int column) {
@@ -92,21 +87,5 @@ public class TableMuonTraView extends JPanel{
 			};
 			table.setModel(tableModel);	
 		}});
-	}
-	
-	// Convert list of Book => Array 2D
-	private String[][] convertData(ArrayList<MuonXe> list) {
-		int size = list.size();
-		String data[][] = new String[size][titleItem.length];
-		for (int i = 0; i < size; i++) {
-			MuonXe muonXe = list.get(i);
-			data[i][0] = muonXe.getMaMT();
-			data[i][1] = muonXe.getMaKH();
-			data[i][2] = muonXe.getMaNV();
-			data[i][3] = muonXe.getNgayMuon();
-			data[i][4] = muonXe.getNgayHenTra();
-			data[i][5] = muonXe.getTienCoc() + "";
-		}
-		return data;
 	}
 }

@@ -13,6 +13,9 @@ public interface XeDAO {
 	public void updateXe (Xe xe, String idXeMoi, String bienXeMoi, String tenXeMoi, String loaiXeMoi,
 						 String hangSanXuatMoi, String namSanXuatMoi, String ngayBaoTriMoi,
 						 String nhienLieuMoi, int trangThaiMoi, int giaThueMoi);
+	/* Update status of xe */
+	public void updateXe (Xe xe, int trangThaiMoi);
+	
 	
 	/* Insert one xe into database */
 	public void insertXe(Xe xe);

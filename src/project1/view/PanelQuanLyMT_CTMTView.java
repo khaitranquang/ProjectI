@@ -42,28 +42,28 @@ public class PanelQuanLyMT_CTMTView extends JPanel{
 	private JPanel createBottomPanel() {
 		JPanel panel = new JPanel(new BorderLayout());
 		panel.setBorder(new EmptyBorder(5, 40, 0, 40));
-		panel.add(createCTMTInputPanel(), BorderLayout.CENTER);
-		panel.add(btn = new ButtonMT_CTMTView(), BorderLayout.EAST);
+//		panel.add(createCTMTInputPanel(), BorderLayout.CENTER);
+		panel.add(btn = new ButtonMT_CTMTView(), BorderLayout.CENTER);
 		
 		return panel;
 	}
 	
-	private JPanel createCTMTInputPanel() {
-		JPanel panel = new JPanel(new GridLayout(2, 1));
-		panel.setBorder(new EmptyBorder(0, 0, 0, 40));
-		panel.add(createCTMTPanel());
-		panel.add(input = new InputMT_CTMTView());
-		
-		return panel;
-	}
+//	private JPanel createCTMTInputPanel() {
+//		JPanel panel = new JPanel(new GridLayout(2, 1));
+//		panel.setBorder(new EmptyBorder(0, 0, 0, 40));
+//		panel.add(createCTMTPanel());
+//		panel.add(input = new InputMT_CTMTView());
+//		
+//		return panel;
+//	}
 	
-	private JPanel createCTMTPanel() {
-		JPanel panel = new JPanel(new BorderLayout());
-		panel.add(createTitlePanel("Chi tiết mượn trả"), BorderLayout.PAGE_START);
-		panel.add(tableCTMT = new TableChiTietMuonTraView(), BorderLayout.CENTER);
-		
-		return panel;
-	}
+//	private JPanel createCTMTPanel() {
+//		JPanel panel = new JPanel(new BorderLayout());
+//		panel.add(createTitlePanel("Chi tiết mượn trả"), BorderLayout.PAGE_START);
+//		panel.add(tableCTMT = new TableChiTietMuonTraView(), BorderLayout.CENTER);
+//		
+//		return panel;
+//	}
 
 	public InputMT_CTMTView getInput() {
 		return input;
