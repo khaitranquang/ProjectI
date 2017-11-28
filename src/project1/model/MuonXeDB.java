@@ -428,5 +428,37 @@ public class MuonXeDB implements MuonXeDAO{
 		
 		return arrResult;
 	}
+	
+	public void deleteRentXe(String maMT) {
+		connection = getConnection();
+		PreparedStatement preStatement = null;
+		
+		try {
+			String sql = "DELETE FROM muontra WHERE idMuonTra = ?";
+			preStatement = (PreparedStatement) connection.prepareStatement(sql);
+			preStatement.setString(1, maMT);
+			
+			int rows = preStatement.executeUpdate();
+			if(rows > 0) System.out.println("This LoanBook has been deleted");
+			
+			//Close connection
+			preStatement.close();
+			connection.close();
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+			JOptionPane.showMessageDialog(new JDialog(), "Can't connect to database... \n Check your internet...");
+		}
+		finally {
+			try {
+				if(preStatement != null) preStatement.close();
+				if(connection != null) connection.close();	
+			} 
+			catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
 
 }

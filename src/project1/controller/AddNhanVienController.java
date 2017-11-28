@@ -23,6 +23,7 @@ import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
+import project1.model.AccountDB;
 import project1.model.NhanVien;
 import project1.model.NhanVienDB;
 import project1.model.Xe;
@@ -168,6 +169,7 @@ public class AddNhanVienController {
 			nhanVienDB.insertNhanVien(nhanVien);
 			
 			tableNhanVienView.updateTable(nhanVienDB.getAllNhanVien());
+			new AccountDB().insertAccEmpl(idNV);
 			clearInput();
 		}
 		else {
@@ -262,6 +264,8 @@ public class AddNhanVienController {
 					
 					NhanVien nv = new NhanVien(idNV, tenNV, soCMNDStr, ngaySinh, diaChi, gioiTinh, sdt);
 					nhanVienDB.insertNhanVien(nv);
+					new AccountDB().insertAccEmpl(idNV);
+					
 					tableNhanVienView.updateTable(nhanVienDB.getAllNhanVien());
 	
 					dataOfRow.clear();

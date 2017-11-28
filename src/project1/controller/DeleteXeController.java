@@ -2,11 +2,14 @@ package project1.controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 
+import project1.model.ChiTietDB;
 import project1.model.Xe;
 import project1.model.XeDB;
 import project1.view.ButtonXeView;
@@ -48,9 +51,17 @@ public class DeleteXeController {
 							 JOptionPane.QUESTION_MESSAGE, null, null, null);
 					if(select == 0) {
 						String id = getId(index, 0);
-						xe = xeDB.getXe(id);
-						xeDB.deleteXe(xe);
-						tableXeView.updateTable(xeDB.getAllXe());
+						
+						if (!checkXe(id)) {
+							JOptionPane.showMessageDialog(new JDialog(), "Xe đã hoặc đang trong quan hệ thuê \n " +
+									  "Hãy xóa các thuê mượn liên quan đến sách này");
+							return;
+						}
+						else {
+							xe = xeDB.getXe(id);
+							xeDB.deleteXe(xe);
+							tableXeView.updateTable(xeDB.getAllXe());
+						}
 					}
 				}
 				else {
@@ -71,5 +82,13 @@ public class DeleteXeController {
 		JTable table = tableXeView.getTable();
 		String id = table.getModel().getValueAt(indexRow, indexCol).toString();
 		return id;
+	}
+	
+	private boolean checkXe (String id) {
+		ArrayList<String> listIdXeIsLoan = new ChiTietDB().getListXeIsLoan();
+		for (int i = 0; i < listIdXeIsLoan.size(); i++) {
+			if (listIdXeIsLoan.get(i).equals(id)) return false;
+		}
+		return true;
 	}
 }

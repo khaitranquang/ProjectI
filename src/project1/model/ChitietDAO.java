@@ -9,5 +9,11 @@ public interface ChitietDAO {
 	
 	public void insertChiTiet(ChiTiet chiTiet);
 	
-	public void updateChiTiet(ChiTiet chiTiet, String ngayTraMoi, int tienPhatMoi);
+	public void updateChiTiet(ChiTiet chiTiet, String ngayTraMoi, int tienPhatMoi, int khuyenMaiMoi);
+	
+	public void deleteChiTiet(String maMT);
+	
+	public double tinhTongPhat(String maMT);
+	
+	public double tinhTongKhuyenMai(String maMT);
 }

@@ -72,7 +72,7 @@ public class AddThueXeController {
 				thueXeInformation.getCbMaNV().addItem("-- Chọn mã nhân viên --");
 				NhanVienDB nhanVienDB = new NhanVienDB();
 				ArrayList<NhanVien> listNV = nhanVienDB.getAllNhanVien();
-				for (int i = 0; i < listKH.size(); i++) {
+				for (int i = 0; i < listNV.size(); i++) {
 					thueXeInformation.getCbMaNV().addItem(listNV.get(i).getIdNhanVien());;
 				}
 				

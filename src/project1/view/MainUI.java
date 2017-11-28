@@ -10,6 +10,8 @@ public class MainUI extends JFrame{
 	private PanelQuanLyNhanVienView qlNV;
 	private PanelQuanLyMT_CTMTView qlMT;
 	private PanelAboutUSView aboutUS;
+	private AccountView accountView;
+	private JTabbedPane tabbedPane;
 	
 	public MainUI() {
 		createGUI();
@@ -21,7 +23,7 @@ public class MainUI extends JFrame{
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(1200, 720);
 		setLocationRelativeTo(null);
-		setVisible(true);
+		setVisible(false);
 	}
 	
 	private void createGUI() {
@@ -29,7 +31,7 @@ public class MainUI extends JFrame{
 	}
 	
 	private JTabbedPane createTabbedPane() {
-		JTabbedPane tabbedPane = new JTabbedPane();
+		tabbedPane = new JTabbedPane();
 		qlXe = new PanelQuanLyXeView();
 		tabbedPane.addTab("Quản lí xe", null, qlXe, "Quản lí xe");
 		qlKH = new PanelQuanLyKhachHangView();
@@ -38,6 +40,8 @@ public class MainUI extends JFrame{
 		tabbedPane.addTab("Quản lí nhân viên", null, qlNV, "Quản lí nhân viên");
 		qlMT = new PanelQuanLyMT_CTMTView();
 		tabbedPane.addTab("Quản lí mượn trả",  null, qlMT, "Quản lí mượn trả");
+		accountView = new AccountView();
+		tabbedPane.addTab("Quản lí tài khoản", null, accountView, "Quản lí tài khoản");
 		aboutUS = new PanelAboutUSView();
 		tabbedPane.addTab("About us", null, aboutUS, "Thông tin chi tiết");
 		
@@ -57,10 +61,18 @@ public class MainUI extends JFrame{
 	public PanelQuanLyMT_CTMTView getQlMT() {
 		return qlMT;
 	}
-	
-	public static void main(String[] args) {
-		MainUI main = new MainUI();
+	public AccountView getAccountView() {
+		return accountView;
 	}
+
+	public JTabbedPane getTabbedPane() {
+		return tabbedPane;
+	}
+	
+
+//	public static void main(String[] args) {
+//		MainUI main = new MainUI();
+//	}
 
 	
 }

@@ -2,11 +2,16 @@ package project1.controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 
+import project1.model.AccountDB;
+import project1.model.MuonXe;
+import project1.model.MuonXeDB;
 import project1.model.NhanVien;
 import project1.model.NhanVienDB;
 import project1.view.ButtonNhanVienView;
@@ -60,16 +65,35 @@ public class DeleteNhanVienController {
 							 JOptionPane.QUESTION_MESSAGE, null, null, null);
 					if(select == 0) {
 						String id = getId(index, 0);
-						nhanVien = nhanVienDB.getNhanVien(id);
-						nhanVienDB.deleteNhanVien(nhanVien);
-						tableNhanVienView.updateTable(nhanVienDB.getAllNhanVien());
+						
+						if (!checkEmpl(id)) {
+							JOptionPane.showMessageDialog(new JDialog(), "Nhân viên đã hoặc đang trong quan hệ thuê trả \n " +
+																		  "Hãy xóa các thuê trả liên quan đến nhân viên này");
+							return;
+						}
+						else {
+							nhanVien = nhanVienDB.getNhanVien(id);
+							new AccountDB().deleteAccEmpl(id);
+							nhanVienDB.deleteNhanVien(nhanVien);
+							tableNhanVienView.updateTable(nhanVienDB.getAllNhanVien());
+						}
+						
 					}
 				}
 				else {
-					JOptionPane.showMessageDialog(mainUI, "Hãy chọn 1 xe để xóa");
+					JOptionPane.showMessageDialog(mainUI, "Hãy chọn 1 nhân viên để xóa");
 				}
 			}
 		});
+	}
+	
+	/* Kiem tra xem nhan vien co dang cho trong quan he muon tra nao khong */
+	private boolean checkEmpl (String id) {
+		ArrayList<MuonXe> listLoanXe = new MuonXeDB().getAllMuonXe();
+		for (int i = 0; i < listLoanXe.size(); i++) {
+			if (listLoanXe.get(i).getMaNV().equals(id)) return false;
+		}
+		return true;
 	}
 	
 }

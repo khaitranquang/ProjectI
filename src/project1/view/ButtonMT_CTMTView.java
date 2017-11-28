@@ -26,6 +26,7 @@ public class ButtonMT_CTMTView extends JPanel{
 	private JButton btnThem      = new JButton("THÊM THUÊ XE");
 	private JButton btnSua       = new JButton("SỬA THUÊ");
 	private JButton btnChiTiet   = new JButton("XEM CHI TIẾT");
+	private JButton btnXoa       = new JButton("XOÁ");
 	private JButton btnThongKe   = new JButton("THỐNG KÊ");
 	private JButton btnXuatFile  = new JButton("IN TÌM KIẾM");
 	private JTextField tfTimKiem = new JTextField();
@@ -72,13 +73,15 @@ public class ButtonMT_CTMTView extends JPanel{
 	}
 	
 	private JPanel createActionPanel() {
-		JPanel panel = new JPanel (new GridLayout(1, 3, 5, 5));
+		JPanel panel = new JPanel (new GridLayout(1, 4, 5, 5));
 		btnThem.setIcon(new ImageIcon(this.getClass().getResource("/addMT.png")));
 		btnSua.setIcon(new ImageIcon(this.getClass().getResource("/updateMT.png")));
 		btnChiTiet.setIcon(new ImageIcon(this.getClass().getResource("/inP.png")));
+
 		panel.add(btnThem);
 		panel.add(btnSua);
 		panel.add(btnChiTiet);
+		panel.add(btnXoa);
 		return panel;
 	}
 
@@ -100,6 +103,10 @@ public class ButtonMT_CTMTView extends JPanel{
 
 	public JButton getBtnXuatFile() {
 		return btnXuatFile;
+	}
+
+	public JButton getBtnXoa() {
+		return btnXoa;
 	}
 
 	public JTextField getTfTimKiem() {

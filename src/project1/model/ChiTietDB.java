@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 import javax.swing.JDialog;
@@ -311,6 +312,43 @@ public class ChiTietDB implements ChitietDAO{
 		}
 		
 		return tongKhuyenMai;
+	}
+	
+	public ArrayList<String> getListXeIsLoan() {
+		connection = getConnection();
+		Statement statement = null;
+		ArrayList<String> listXe = new ArrayList<String>();
+		
+		try {
+			String sql = "select distinct idXe from chitietmuontra";
+			statement = connection.createStatement();
+			ResultSet result = statement.executeQuery(sql);
+			
+			while (result.next()) {
+				String maSach  = result.getString("idXe");
+				listXe.add(maSach);
+			}
+			// Close connection
+			result.close();
+			statement.close();
+			connection.close();
+		} 
+		catch (SQLException e) {
+			e.printStackTrace();
+			JOptionPane.showMessageDialog(new JDialog(), "Can't connect to database...");
+			
+		}
+		finally {
+			try {
+				if(statement  != null) statement.close();
+				if(connection != null) connection.close();	
+			} 
+			catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return listXe;
 	}
 
 }
