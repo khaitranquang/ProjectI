@@ -224,6 +224,7 @@ public class AddKhachHangController {
 			}
 			System.out.println(openFilePath);
 			addKHFromExcelFile(openFilePath);
+			JOptionPane.showMessageDialog(this.mainUI, "Đã thêm từ Excel");
 		}
 		
 	}

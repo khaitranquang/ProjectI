@@ -21,8 +21,10 @@ public class ChiTietInformation extends JPanel{
 	private JLabel lbNgayTra;
 	private JLabel lbSoTienPhat;
 	private JLabel lbSoTienCoc;
+	private JLabel lbSoKhuyenMai;
 	private JLabel lbTongTienPhat;
 	private JLabel lbTongTienThue;
+	private JLabel lbTongKhuyenMai;
 	
 	public JLabel getLbMaMT() {
 		return lbMaMT;
@@ -66,6 +68,12 @@ public class ChiTietInformation extends JPanel{
 	public JLabel getLbTongTienThue() {
 		return lbTongTienThue;
 	}
+	public JLabel getLbTongKhuyenMai() {
+		return lbTongKhuyenMai;
+	}
+	public JLabel getLbSoKhuyenMai() {
+		return lbSoKhuyenMai;
+	}
 	
 	public ChiTietInformation() {
 		setLayout(new BorderLayout());
@@ -98,15 +106,17 @@ public class ChiTietInformation extends JPanel{
 	}
 	
 	private JPanel createFooterPanel() {
-		JPanel footer = new JPanel(new GridLayout(8, 2, 10, 10));
+		JPanel footer = new JPanel(new GridLayout(10, 2, 10, 10));
 		footer.add(new JLabel("Ngày mượn: "));				footer.add(lbNgayMuon = new JLabel());
 		footer.add(new JLabel("Ngày hẹn trả:"));			footer.add(lbNgayHenTra = new JLabel());
 		footer.add(new JLabel("Trạng thái:"));				footer.add(lbTrangThai = new JLabel());
 		footer.add(new JLabel("Ngày trả: "));				footer.add(lbNgayTra = new JLabel());
 		footer.add(new JLabel("Tiền cọc: "));				footer.add(lbSoTienCoc = new JLabel());
 		footer.add(new JLabel("Số tiền phạt: "));			footer.add(lbSoTienPhat = new JLabel());
+		footer.add(new JLabel("Tiền khuyến mại: "));		footer.add(lbSoKhuyenMai = new JLabel());
 		footer.add(new JLabel("Tổng tiền phạt: "));   		footer.add(lbTongTienPhat = new JLabel("0"));
 		footer.add(new JLabel("Tổng tiền thuê: "));   		footer.add(lbTongTienThue = new JLabel("0"));
+		footer.add(new JLabel("Tổng tiền khuyến mại: "));	footer.add(lbTongKhuyenMai = new JLabel("0"));
 		return footer;
 	}
 }

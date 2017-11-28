@@ -10,5 +10,14 @@ public interface MuonXeDAO {
 	
 	public void editMuonXe(MuonXe muonXe, String maKHMoi, String maNVMoi, String ngayHenTraMoi, int tienCocMoi);
 	
+	// Thong ke thue xe
 	public ArrayList<ArrayList<String>> thongKeMuonTra(String colName);
+	
+	public ArrayList<ArrayList<String>> thongKeViPhamKH();
+	
+	public ArrayList<ArrayList<String>> thongKeTongTienPhat();
+	
+	public ArrayList<ArrayList<String>> thongKeTongTienKM();
+	
+	public ArrayList<ArrayList<String>> thongKeXeChuaTra();
 }

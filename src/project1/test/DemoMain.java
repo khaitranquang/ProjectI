@@ -25,6 +25,7 @@ import project1.controller.SearchXeController;
 import project1.controller.ShowDetailInformation;
 import project1.controller.TKKHController;
 import project1.controller.TKNVController;
+import project1.controller.TKRentController;
 import project1.controller.TKXeController;
 import project1.view.MainUI;
 
@@ -60,6 +61,7 @@ public class DemoMain {
 						new AddThueXeController(mainUI);
 						new EditRentController(mainUI);
 						new ShowDetailInformation(mainUI);
+						new TKRentController(mainUI);
 				 } 
 				 catch (ClassNotFoundException | InstantiationException | 
 						IllegalAccessException | UnsupportedLookAndFeelException ex) {

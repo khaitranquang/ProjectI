@@ -207,6 +207,7 @@ public class AddNhanVienController {
 			}
 			System.out.println(openFilePath);
 			addNVFromExcelFile(openFilePath);
+			JOptionPane.showMessageDialog(this.mainUI, "Đã thêm từ Excel");
 		}
 		
 	}

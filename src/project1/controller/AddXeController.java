@@ -195,9 +195,11 @@ public class AddXeController {
 			else {
 				openFilePath = path + ".xlsx";
 			}
+			System.out.println(openFilePath);
+			addXeFromExcelFile(openFilePath);
+			JOptionPane.showMessageDialog(this.mainUI, "Đã thêm từ Excel");
 		}
-		System.out.println(openFilePath);
-		addXeFromExcelFile(openFilePath);
+		
 	}
 	
 	private void addXeFromExcelFile(String path) {

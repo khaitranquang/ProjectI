@@ -32,7 +32,7 @@ import project1.view.ThueXeInformation;
 import project1.view.XeDuocMuonView;
 
 public class AddThueXeController {
-	private static final double PERCENT_KM = 0.02;
+	private static final double PERCENT_KM = 0.5;
 	
 	private MainUI mainUI;
 	private MuonXe muonXe;
@@ -351,7 +351,8 @@ public class AddThueXeController {
 				String maXe  = arrXeDuocThueView.get(i).getLbMaXe().getText().trim().toString();
 				String tenXe = arrXeDuocThueView.get(i).getLbTenXe().getText().trim().toString();
 				int tienThue   = Integer.parseInt(arrXeDuocThueView.get(i).getLbTienThue().getText().trim().toString());
-				int tienKhuyenMai = (int) (tienThue * PERCENT_KM);
+//				int tienKhuyenMai = (int) (tienThue * PERCENT_KM);
+				int tienKhuyenMai = 0;
 			
 				ChiTiet chiTiet = new ChiTiet(maMT, maXe, tienThue, "", 0, tienKhuyenMai);
 				ChiTietDB chiTietDB = new ChiTietDB();

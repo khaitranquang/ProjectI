@@ -2,14 +2,13 @@ package project1.model;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
-
-import com.mysql.cj.jdbc.PreparedStatement;
 
 public class ChiTietDB implements ChitietDAO{
 	private final String dbURL = "jdbc:mysql://localhost:3306/quanlythuexe";
@@ -43,7 +42,7 @@ public class ChiTietDB implements ChitietDAO{
 		
 		
 		try {
-			preStatement = (PreparedStatement) connection.prepareStatement(sql);
+			preStatement = connection.prepareStatement(sql);
 			preStatement.setString(1, maMT);
 			ResultSet result = preStatement.executeQuery();
 			
@@ -131,11 +130,11 @@ public class ChiTietDB implements ChitietDAO{
 		int tienKhuyenMai = chiTiet.getTienKhuyenMai();
 		
 		connection = getConnection();
-		PreparedStatement preStatement = null;
+		java.sql.PreparedStatement preStatement = null;
 		try {
 			String sql = "INSERT INTO chitietmuontra (idMuonTra, idXe, ngayTra, tienThue, tienPhat, tienKhuyenMai)"
                     + "VALUE (?, ?, ?, ?, ?, ?)";
-			preStatement = (PreparedStatement) connection.prepareStatement(sql);
+			preStatement = connection.prepareStatement(sql);
 			preStatement.setString(1, maMT);
 			preStatement.setString(2, maXe);
 			preStatement.setString(3, ngayTra);
@@ -167,18 +166,19 @@ public class ChiTietDB implements ChitietDAO{
 	}
 
 	@Override
-	public void updateChiTiet(ChiTiet chiTiet, String ngayTraMoi, int tienPhatMoi) {
+	public void updateChiTiet(ChiTiet chiTiet, String ngayTraMoi, int tienPhatMoi, int khuyenMaiMoi) {
 		String maMT = chiTiet.getMaMT();
 		String maXe = chiTiet.getMaXe();
 		connection = getConnection();
 		PreparedStatement preStatement = null;
 		try {
-			String sql = "UPDATE chitietmuontra SET ngayTra=?, tienPhat=? WHERE (idMuonTra=? AND idXe=?)";
+			String sql = "UPDATE chitietmuontra SET ngayTra=?, tienPhat=?, tienKhuyenMai=? WHERE (idMuonTra=? AND idXe=?)";
 			preStatement = (PreparedStatement) connection.prepareStatement(sql);
 			preStatement.setString(1, ngayTraMoi);
 			preStatement.setDouble(2, tienPhatMoi);
-			preStatement.setString(3, maMT);
-			preStatement.setString(4, maXe);
+			preStatement.setInt(3, khuyenMaiMoi);
+			preStatement.setString(4, maMT);
+			preStatement.setString(5, maXe);
 			
 			
 			int rows = preStatement.executeUpdate();
@@ -202,6 +202,115 @@ public class ChiTietDB implements ChitietDAO{
 				e.printStackTrace();
 			}
 		}
+	}
+
+	@Override
+	public double tinhTongPhat(String maMT) {
+		double tongTienPhat = 0.0;
+		connection = getConnection();
+		PreparedStatement preStatement = null;
+		String sql = "SELECT sum(tienPhat) FROM chitietmuontra WHERE idMuonTra=?";
+		try {
+			preStatement = (PreparedStatement) connection.prepareStatement(sql);
+			preStatement.setString(1, maMT);
+			
+			ResultSet result = preStatement.executeQuery();
+			
+			while (result.next()) {
+				
+				tongTienPhat = result.getDouble("sum(tienPhat)");
+			}
+			// Close connection
+			result.close();
+			preStatement.close();
+			connection.close();			
+		} 
+		catch (SQLException e) {
+			e.printStackTrace();
+			JOptionPane.showMessageDialog(new JDialog(), "Can't connect to database...");
+		}
+		finally {
+			try {
+				if(preStatement != null) preStatement.close();
+				if(connection != null) connection.close();	
+			} 
+			catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return tongTienPhat;
+	}
+
+	@Override
+	public void deleteChiTiet(String maMT) {
+		connection = getConnection();
+		PreparedStatement preStatement = null;
+		
+		try {
+			String sql = "DELETE FROM chitietmuontra WHERE idMuonTra = ?";
+			preStatement = (PreparedStatement) connection.prepareStatement(sql);
+			preStatement.setString(1, maMT);
+			
+			int rows = preStatement.executeUpdate();
+			if(rows > 0) System.out.println("This detail has been deleted");
+			
+			//Close connection
+			preStatement.close();
+			connection.close();
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+			JOptionPane.showMessageDialog(new JDialog(), "Can't connect to database... \n Check your internet...");
+		}
+		finally {
+			try {
+				if(preStatement != null) preStatement.close();
+				if(connection != null) connection.close();	
+			} 
+			catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
+
+	@Override
+	public double tinhTongKhuyenMai(String maMT) {
+		double tongKhuyenMai = 0.0;
+		connection = getConnection();
+		PreparedStatement preStatement = null;
+		String sql = "SELECT sum(tienKhuyenMai) FROM chitietmuontra WHERE idMuonTra=?";
+		try {
+			preStatement = (PreparedStatement) connection.prepareStatement(sql);
+			preStatement.setString(1, maMT);
+			
+			ResultSet result = preStatement.executeQuery();
+			
+			while (result.next()) {
+				
+				tongKhuyenMai = result.getDouble("sum(tienKhuyenMai)");
+			}
+			// Close connection
+			result.close();
+			preStatement.close();
+			connection.close();			
+		} 
+		catch (SQLException e) {
+			e.printStackTrace();
+			JOptionPane.showMessageDialog(new JDialog(), "Can't connect to database...");
+		}
+		finally {
+			try {
+				if(preStatement != null) preStatement.close();
+				if(connection != null) connection.close();	
+			} 
+			catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return tongKhuyenMai;
 	}
 
 }

@@ -245,4 +245,188 @@ public class MuonXeDB implements MuonXeDAO{
 		return arrResult;
 	}
 
+	@Override
+	public ArrayList<ArrayList<String>> thongKeViPhamKH() {
+		connection = getConnection();
+		Statement statement = null;
+		ArrayList<ArrayList<String>> arrResult = new ArrayList<ArrayList<String>>();
+		
+		try {
+			String sql = "select idKhachHang, count(ngayHenTra) " + // from muontra MT, chitietmuon CT where MT.MaMT = CT.Mamuon and Ngaytra <> "" and " + 
+						 "from muontra MT, chitietmuontra CT " + 
+						 "where MT.idMuonTra = CT.idMuonTra and (ngayTra <> \"\") and (CT.ngayTra > MT.ngayHenTra) " + 
+						 "group by idKhachHang";
+			statement = connection.createStatement();
+			ResultSet result = statement.executeQuery(sql);
+			
+			while (result.next()) {
+				String maKH  = result.getString("idKhachHang");
+				int soViPham = result.getInt("count(ngayHenTra)");
+				
+				ArrayList<String> record = new ArrayList<String>();
+				record.add(maKH);
+				record.add(Integer.toString(soViPham));
+				arrResult.add(record);
+				//record.clear();
+			}
+			// Close connection
+			result.close();
+			statement.close();
+			connection.close();
+		} 
+		catch (SQLException e) {
+			e.printStackTrace();
+			JOptionPane.showMessageDialog(new JDialog(), "Can't connect to database...");
+		}
+		finally {
+			try {
+				if(statement  != null) statement.close();
+				if(connection != null) connection.close();	
+			} 
+			catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return arrResult;
+	}
+
+	@Override
+	public ArrayList<ArrayList<String>> thongKeTongTienPhat() {
+		connection = getConnection();
+		Statement statement = null;
+		ArrayList<ArrayList<String>> arrResult = new ArrayList<ArrayList<String>>();
+		
+		try {
+			String sql = "select idKhachHang, sum(tienPhat) " + // from muontra MT, chitietmuon CT where MT.MaMT = CT.Mamuon and Ngaytra <> "" and " + 
+						 "from muontra MT, chitietmuontra CT " + 
+						 "where MT.idMuonTra = CT.idMuonTra " + 
+						 "group by idKhachHang";
+			statement = connection.createStatement();
+			ResultSet result = statement.executeQuery(sql);
+			
+			while (result.next()) {
+				String maKH  = result.getString("idKhachHang");
+				int soViPham = result.getInt("sum(tienPhat)");
+				
+				ArrayList<String> record = new ArrayList<String>();
+				record.add(maKH);
+				record.add(Integer.toString(soViPham));
+				arrResult.add(record);
+				//record.clear();
+			}
+			// Close connection
+			result.close();
+			statement.close();
+			connection.close();
+		} 
+		catch (SQLException e) {
+			e.printStackTrace();
+			JOptionPane.showMessageDialog(new JDialog(), "Can't connect to database...");
+		}
+		finally {
+			try {
+				if(statement  != null) statement.close();
+				if(connection != null) connection.close();	
+			} 
+			catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return arrResult;
+	}
+
+	@Override
+	public ArrayList<ArrayList<String>> thongKeTongTienKM() {
+		connection = getConnection();
+		Statement statement = null;
+		ArrayList<ArrayList<String>> arrResult = new ArrayList<ArrayList<String>>();
+		
+		try {
+			String sql = "select idKhachHang, sum(tienKhuyenMai) " + // from muontra MT, chitietmuon CT where MT.MaMT = CT.Mamuon and Ngaytra <> "" and " + 
+						 "from muontra MT, chitietmuontra CT " + 
+						 "where MT.idMuonTra = CT.idMuonTra " + 
+						 "group by idKhachHang";
+			statement = connection.createStatement();
+			ResultSet result = statement.executeQuery(sql);
+			
+			while (result.next()) {
+				String maKH  = result.getString("idKhachHang");
+				int tienKhuyenMai = result.getInt("sum(tienKhuyenMai)");
+				
+				ArrayList<String> record = new ArrayList<String>();
+				record.add(maKH);
+				record.add(Integer.toString(tienKhuyenMai));
+				arrResult.add(record);
+				//record.clear();
+			}
+			// Close connection
+			result.close();
+			statement.close();
+			connection.close();
+		} 
+		catch (SQLException e) {
+			e.printStackTrace();
+			JOptionPane.showMessageDialog(new JDialog(), "Can't connect to database...");
+		}
+		finally {
+			try {
+				if(statement  != null) statement.close();
+				if(connection != null) connection.close();	
+			} 
+			catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return arrResult;
+	}
+
+	@Override
+	public ArrayList<ArrayList<String>> thongKeXeChuaTra() {
+		connection = getConnection();
+		Statement statement = null;
+		ArrayList<ArrayList<String>> arrResult = new ArrayList<ArrayList<String>>();
+		
+		try {
+			String sql = "select idKhachHang, count(idXe) " + // from muontra MT, chitietmuon CT where MT.MaMT = CT.Mamuon and Ngaytra <> "" and " + 
+						 "from muontra MT, chitietmuontra CT " + 
+						 "where MT.idMuonTra = CT.idMuonTra and ngayTra = \"\" " + 
+						 "group by idKhachHang";
+			statement = connection.createStatement();
+			ResultSet result = statement.executeQuery(sql);
+			
+			while (result.next()) {
+				String maKH  = result.getString("idKhachHang");
+				int xeChuaTra = result.getInt("count(idXe)");
+				
+				ArrayList<String> record = new ArrayList<String>();
+				record.add(maKH);
+				record.add(Integer.toString(xeChuaTra));
+				arrResult.add(record);
+				//record.clear();
+			}
+			// Close connection
+			result.close();
+			statement.close();
+			connection.close();
+		} 
+		catch (SQLException e) {
+			e.printStackTrace();
+			JOptionPane.showMessageDialog(new JDialog(), "Can't connect to database...");
+		}
+		finally {
+			try {
+				if(statement  != null) statement.close();
+				if(connection != null) connection.close();	
+			} 
+			catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return arrResult;
+	}
+
 }

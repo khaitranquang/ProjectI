@@ -59,6 +59,8 @@ import project1.view.TableMuonTraView;
 
 public class ShowDetailInformation {
 	private static final int PHAT_MOT_NGAY_MUON = 50000;
+	private static final double PHAN_TRAM_KHUYEN_MAI = 0.1;
+	
 	private MainUI mainUI;
 	private ChiTiet chiTiet;
 	private MuonXe muonXe;
@@ -135,6 +137,10 @@ public class ShowDetailInformation {
 		chiTietInformation.getLbTrangThai().setText("");
 		chiTietInformation.getLbSoTienPhat().setText("");
 		
+		chiTietInformation.getLbTongTienPhat().setText(chiTietDB.tinhTongPhat(maMT) + "");
+		chiTietInformation.getLbTongTienThue().setText(tinhTongTienThue(maMT) + "");
+		chiTietInformation.getLbTongKhuyenMai().setText(chiTietDB.tinhTongKhuyenMai(maMT) + "");
+		
 		/* Update table list book is loan */
 		String[][] listXe = new String[listDetail.size()][3];
 		for (int i = 0; i < listDetail.size(); i++) {
@@ -145,7 +151,7 @@ public class ShowDetailInformation {
 		chiTietInformation.getTableChiTietView().updateTable(listXe);
 	}
 	
-/* Set actions for all buttons in DetailInformatio View*/
+	/* Set actions for all buttons in DetailInformatio View*/
 	
 	private void setActions() {
 		JTable tableDetail = chiTietInformation.getTableChiTietView().getTable();
@@ -172,6 +178,7 @@ public class ShowDetailInformation {
 				
 				chiTietInformation.getLbNgayTra().setText(detail.getNgayTra());
 				chiTietInformation.getLbSoTienPhat().setText(detail.getTienPhat() + "");
+				chiTietInformation.getLbSoKhuyenMai().setText(detail.getTienKhuyenMai() + "");
 				
 				if (chiTietInformation.getLbNgayTra().getText().trim().toString().equals("")) {
 					chiTietInformation.getLbTrangThai().setText("Chưa trả");
@@ -198,11 +205,16 @@ public class ShowDetailInformation {
 				String namTraHT       = Integer.toString(localDate.getYear());
 				String ngayTra        = ngayTraHT + "-" + thangTraHT + "-" + namTraHT;
 				
+				ChiTiet detail = chiTietDB.getChiTiet(maMT, maXeMuon);
 				int tienPhat       = tinhTienPhat(ngayTra, chiTietInformation.getLbNgayHenTra().getText().toString());
+				int tienKhuyenMai  = 0;
+				if (tienPhat == 0 && (!ngayTra.equals(chiTietInformation.getLbNgayMuon().getText().toString()))) {
+					tienKhuyenMai = (int) (PHAN_TRAM_KHUYEN_MAI * 
+									tienThue(ngayTra, chiTietInformation.getLbNgayMuon().getText().toString(), detail.getTienThue()));
+				}
 				
 				// Update ngayTra, tienPhat 
-				ChiTiet detail = chiTietDB.getChiTiet(maMT, maXeMuon);
-				chiTietDB.updateChiTiet(detail, ngayTra, tienPhat);
+				chiTietDB.updateChiTiet(detail, ngayTra, tienPhat, tienKhuyenMai);
 				
 				// Update status of xe
 				Xe xeDuocMuon = new XeDB().getXe(maXeMuon);
@@ -213,6 +225,10 @@ public class ShowDetailInformation {
 				chiTietInformation.getLbTrangThai().setText("Đã trả");
 				chiTietInformation.getLbNgayTra().setText(ngayTra);
 				chiTietInformation.getLbSoTienPhat().setText(tienPhat + "");
+				chiTietInformation.getLbSoKhuyenMai().setText(tienKhuyenMai + "");
+				chiTietInformation.getLbTongTienPhat().setText(chiTietDB.tinhTongPhat(maMT) + "");
+				chiTietInformation.getLbTongTienThue().setText(tinhTongTienThue(maMT) + "");
+				chiTietInformation.getLbTongKhuyenMai().setText(chiTietDB.tinhTongKhuyenMai(maMT) + "");
 				
 				// Disable this btnPay of this book
 				btnPay.setEnabled(false);
@@ -241,17 +257,27 @@ public class ShowDetailInformation {
 						String ngayTra        = ngayTraHT + "-" + thangTraHT + "-" + namTraHT;
 						
 						int tienPhat       = tinhTienPhat(ngayTra, chiTietInformation.getLbNgayHenTra().getText().toString());
+						int tienKhuyenMai  = 0;
+						if (tienPhat == 0 && (!ngayTra.equals(chiTietInformation.getLbNgayMuon().getText().toString()))) {
+							tienKhuyenMai = (int) (PHAN_TRAM_KHUYEN_MAI * 
+											tienThue(ngayTra, chiTietInformation.getLbNgayMuon().getText().toString(), 
+											aDetail.getTienThue()));
+						}
 						
-						chiTietDB.updateChiTiet(aDetail, ngayTra, tienPhat);
 						
-						// Update number of book
+						chiTietDB.updateChiTiet(aDetail, ngayTra, tienPhat, tienKhuyenMai);
+						
+						// Update status of xe
 						Xe XeDuocThue = new XeDB().getXe(maXeMuon);
 						new XeDB().updateXe(XeDuocThue, 1);
 						mainUI.getQlXe().getTableXe().updateTable(new XeDB().getAllXe());
 					}
 				}
-				JOptionPane.showMessageDialog(new JDialog(), "Tất cả xe còn lại đã được trả");
 				
+				chiTietInformation.getLbTongTienPhat().setText(chiTietDB.tinhTongPhat(maMT) + "");
+				chiTietInformation.getLbTongTienThue().setText(tinhTongTienThue(maMT) + "");
+				chiTietInformation.getLbTongKhuyenMai().setText(chiTietDB.tinhTongKhuyenMai(maMT) + "");
+				JOptionPane.showMessageDialog(new JDialog(), "Tất cả xe còn lại đã được trả");
 				btnPayAll.setEnabled(false);
 			}
 		});
@@ -301,6 +327,51 @@ public class ShowDetailInformation {
 		}
 		return tienPhat;
 	}
+	
+	/* Calculating rent free */
+	private double tienThue (String ngayTra, String ngayMuon, int tienThueMotNgay) {
+		double tongTienThue = 0.0;
+		SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
+		try{
+			Date dateStart = format.parse(ngayMuon);
+			Date dateEnd   = format.parse(ngayTra);
+			long diffDay = (dateEnd.getTime() - dateStart.getTime()) / (24 * 60 * 60 * 1000);
+			System.out.println("So ngay thue: " + diffDay);
+			if (diffDay > 0) {
+				tongTienThue = (double) (diffDay * tienThueMotNgay);
+			}
+//			else if (diffDay == 0){
+//				tongTienThue = (double) (tienThueMotNgay * 0.5);
+//			}
+			else {
+				tongTienThue = 0.0;
+			}
+		}
+		catch (Exception e){
+			e.printStackTrace();
+			System.out.println("Loi dinh dang ngay");
+		}
+		
+		return tongTienThue;
+	}
+	
+	private double tinhTongTienThue (String maMT) {
+		ArrayList<ChiTiet> listChiTiet = chiTietDB.getAllChiTietWithID(maMT);
+		MuonXe muonXe = muonXeDB.getMuonXe(maMT);
+		String ngayMuon = muonXe.getNgayMuon();
+		double tongTienThue = 0.0;
+		
+		for (int i = 0; i < listChiTiet.size(); i++) {
+			if (listChiTiet.get(i).getNgayTra().equals("")) continue;
+			else {
+				String ngayTra = listChiTiet.get(i).getNgayTra();
+				int tienThueMotNgay = listChiTiet.get(i).getTienThue();
+				tongTienThue += tienThue(ngayTra, ngayMuon, tienThueMotNgay);
+			}
+		}
+		return tongTienThue;
+	}
+	
 	
 	/* Print bill with data */
 	private void printBill(String[][] data) {
