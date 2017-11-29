@@ -306,7 +306,7 @@ public class ShowDetailInformation {
 	
 	/* Calculating the different day(s) between ngayTra and ngayHenTra */
 	/* Then calculating forfeit */
-	private int tinhTienPhat (String ngayTra, String ngayHenTra) {
+	public int tinhTienPhat (String ngayTra, String ngayHenTra) {
 		int tienPhat = 0;
 		SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
 		try{
@@ -329,8 +329,8 @@ public class ShowDetailInformation {
 	}
 	
 	/* Calculating rent free */
-	private double tienThue (String ngayTra, String ngayMuon, int tienThueMotNgay) {
-		double tongTienThue = 0.0;
+	public int tienThue (String ngayTra, String ngayMuon, int tienThueMotNgay) {
+		int tongTienThue = 0;
 		SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
 		try{
 			Date dateStart = format.parse(ngayMuon);
@@ -338,13 +338,13 @@ public class ShowDetailInformation {
 			long diffDay = (dateEnd.getTime() - dateStart.getTime()) / (24 * 60 * 60 * 1000);
 			System.out.println("So ngay thue: " + diffDay);
 			if (diffDay > 0) {
-				tongTienThue = (double) (diffDay * tienThueMotNgay);
+				tongTienThue = (int) (diffDay * tienThueMotNgay);
 			}
 //			else if (diffDay == 0){
 //				tongTienThue = (double) (tienThueMotNgay * 0.5);
 //			}
 			else {
-				tongTienThue = 0.0;
+				tongTienThue = 0;
 			}
 		}
 		catch (Exception e){
@@ -355,12 +355,11 @@ public class ShowDetailInformation {
 		return tongTienThue;
 	}
 	
-	private double tinhTongTienThue (String maMT) {
+	public int tinhTongTienThue (String maMT) {
 		ArrayList<ChiTiet> listChiTiet = chiTietDB.getAllChiTietWithID(maMT);
 		MuonXe muonXe = muonXeDB.getMuonXe(maMT);
 		String ngayMuon = muonXe.getNgayMuon();
-		double tongTienThue = 0.0;
-		
+		int tongTienThue = 0;		
 		for (int i = 0; i < listChiTiet.size(); i++) {
 			if (listChiTiet.get(i).getNgayTra().equals("")) continue;
 			else {

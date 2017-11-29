@@ -24,6 +24,8 @@ public class TableTKRentView extends JPanel{
 	private String[] title6 = {"STT", "MÃ KHÁCH HÀNG", "TỔNG TIỀN PHẠT"};
 	private String[] title7 = {"STT", "MÃ KHÁCH HÀNG", "TỔNG SỐ TIỀN KHUYẾN MẠI"};
 	private String[] title8 = {"STT", "MÃ KHÁCH HÀNG", "SỐ XE CHƯA TRẢ"};
+	private String[] title9 = {"STT", "MÃ NHÂN VIÊN", "SỐ XE CHO THUÊ"};
+	private String[] title10 = {"STT", "MÃ KHÁCH HÀNG", "SỐ TIỀN"};
 	
 	public JTable getTable() {
 		return table;
@@ -104,6 +106,8 @@ public class TableTKRentView extends JPanel{
 		else if (mode == 6) return title6;
 		else if (mode == 7) return title7;
 		else if (mode == 8) return title8;
+		else if (mode == 9) return title9;
+		else if (mode == 10) return title10;
 		return null;
 	}
 }

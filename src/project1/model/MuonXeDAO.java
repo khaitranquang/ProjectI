@@ -10,6 +10,8 @@ public interface MuonXeDAO {
 	
 	public void editMuonXe(MuonXe muonXe, String maKHMoi, String maNVMoi, String ngayHenTraMoi, int tienCocMoi);
 	
+	public ArrayList<String> getListIdKhachHang();
+	
 	// Thong ke thue xe
 	public ArrayList<ArrayList<String>> thongKeMuonTra(String colName);
 	
@@ -18,6 +20,8 @@ public interface MuonXeDAO {
 	public ArrayList<ArrayList<String>> thongKeTongTienPhat();
 	
 	public ArrayList<ArrayList<String>> thongKeTongTienKM();
+	
+	public ArrayList<ArrayList<String>> thongKeTongXeNVChoThue();
 	
 	public ArrayList<ArrayList<String>> thongKeXeChuaTra();
 }

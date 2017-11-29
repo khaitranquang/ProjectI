@@ -12,6 +12,7 @@ public class MainUI extends JFrame{
 	private PanelAboutUSView aboutUS;
 	private AccountView accountView;
 	private JTabbedPane tabbedPane;
+	private PanelTKDoanhThu panelTKDoanhThu;
 	
 	public MainUI() {
 		createGUI();
@@ -40,10 +41,12 @@ public class MainUI extends JFrame{
 		tabbedPane.addTab("Quản lí nhân viên", null, qlNV, "Quản lí nhân viên");
 		qlMT = new PanelQuanLyMT_CTMTView();
 		tabbedPane.addTab("Quản lí mượn trả",  null, qlMT, "Quản lí mượn trả");
+		panelTKDoanhThu = new PanelTKDoanhThu();
+		tabbedPane.addTab("Doanh thu - Doanh số",  null, panelTKDoanhThu, "Doanh thu - Doanh số");
 		accountView = new AccountView();
 		tabbedPane.addTab("Quản lí tài khoản", null, accountView, "Quản lí tài khoản");
 		aboutUS = new PanelAboutUSView();
-		tabbedPane.addTab("About us", null, aboutUS, "Thông tin chi tiết");
+		tabbedPane.addTab("About us", null, aboutUS, "Nhà phát triển");
 		
 		return tabbedPane;
 	}
@@ -68,11 +71,10 @@ public class MainUI extends JFrame{
 	public JTabbedPane getTabbedPane() {
 		return tabbedPane;
 	}
+	public PanelTKDoanhThu getPanelTKDoanhThu() {
+		return panelTKDoanhThu;
+	}
 	
-
-//	public static void main(String[] args) {
-//		MainUI main = new MainUI();
-//	}
 
 	
 }

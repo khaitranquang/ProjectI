@@ -118,10 +118,12 @@ public class LoginController {
 //					mainUI.getMainPanel().setVisible(false);
 //					mainUI.getMenuView().setVisible(false);
 					mainUI.setVisible(false);
-					//mainUI = null;
-//					MainUI mainUI2 = new MainUI();
-//					LoginController newLogin = new LoginController(mainUI2);
-					loginView.setVisible(true);
+					mainUI = null;
+					loginView.setVisible(false);
+					loginView = null;
+					MainUI mainUI2 = new MainUI();
+					LoginController newLogin = new LoginController(mainUI2);
+					
 					return;
 					
 				}

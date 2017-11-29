@@ -5,9 +5,11 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -27,6 +29,9 @@ import org.apache.poi.xssf.usermodel.XSSFFont;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
+import project1.model.ChiTiet;
+import project1.model.ChiTietDB;
+import project1.model.MuonXe;
 import project1.model.MuonXeDB;
 import project1.view.MainUI;
 import project1.view.TKRentInformation;
@@ -35,6 +40,7 @@ import project1.view.TKRentView;
 public class TKRentController {
 	private MainUI mainUI;
 	private MuonXeDB muonXeDB;
+	private ChiTietDB chiTietDB;
 	
 	private TKRentView tkRentView;
 	private TKRentInformation tkRentInformation;
@@ -45,6 +51,7 @@ public class TKRentController {
 	public TKRentController(MainUI mainUI) {
 		this.mainUI = mainUI;
 		muonXeDB = new MuonXeDB();
+		chiTietDB = new ChiTietDB();
 		btnTKRent = mainUI.getQlMT().getBtn().getBtnThongKe();
 		cbTKRent = mainUI.getQlMT().getBtn().getCbThongKe();
 		
@@ -113,6 +120,12 @@ public class TKRentController {
 		else if (indexOfCb == 8) {
 			result = muonXeDB.thongKeXeChuaTra();
 		}
+		else if (indexOfCb == 9) {
+			result = muonXeDB.thongKeTongXeNVChoThue();
+		}
+		else if (indexOfCb == 10) {
+			result = tinhTienChiKH();
+		}
 		
 		String[][] data = convertToString(result);
 		return data;
@@ -130,6 +143,80 @@ public class TKRentController {
 		
 		return convertResult;
 	}
+	
+	private ArrayList<ArrayList<String>> tinhTienChiKH() {
+		ArrayList<ArrayList<String>> arrResult = new ArrayList<ArrayList<String>>();
+		ArrayList<MuonXe> listMuonXe = muonXeDB.getAllMuonXe();
+		ArrayList<String> listMaKH = muonXeDB.getListIdKhachHang();
+		
+		for (int i = 0; i < listMaKH.size(); i ++) {
+			ArrayList<String> record = new ArrayList<String>();
+			int tongTienChi = 0;
+			for (int j = 0; j < listMuonXe.size(); j++) {
+				String maKH = listMaKH.get(i);
+				if (listMuonXe.get(j).getMaKH().equals(maKH)) {
+					String maMT = listMuonXe.get(j).getMaMT();
+					int tienChi = tinhTongTienThue(maMT) + (int)chiTietDB.tinhTongPhat(maMT);
+					tongTienChi += tienChi;
+				}
+				else {
+					continue;
+				}
+			}
+			
+			record.add(listMaKH.get(i));
+			record.add(tongTienChi + "");
+			arrResult.add(record);
+		}
+		
+		return arrResult;
+	}
+	
+	
+	/* Calculating rent free */
+	public int tienThue (String ngayTra, String ngayMuon, int tienThueMotNgay) {
+		int tongTienThue = 0;
+		SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
+		try{
+			Date dateStart = format.parse(ngayMuon);
+			Date dateEnd   = format.parse(ngayTra);
+			long diffDay = (dateEnd.getTime() - dateStart.getTime()) / (24 * 60 * 60 * 1000);
+			System.out.println("So ngay thue: " + diffDay);
+			if (diffDay > 0) {
+				tongTienThue = (int) (diffDay * tienThueMotNgay);
+			}
+			else {
+				tongTienThue = 0;
+			}
+		}
+		catch (Exception e){
+			e.printStackTrace();
+			System.out.println("Loi dinh dang ngay");
+		}
+		
+		return tongTienThue;
+	}
+	
+	public int tinhTongTienThue (String maMT) {
+		ArrayList<ChiTiet> listChiTiet = chiTietDB.getAllChiTietWithID(maMT);
+		MuonXe muonXe = muonXeDB.getMuonXe(maMT);
+		String ngayMuon = muonXe.getNgayMuon();
+		int tongTienThue = 0;		
+		for (int i = 0; i < listChiTiet.size(); i++) {
+			if (listChiTiet.get(i).getNgayTra().equals("")) continue;
+			else {
+				String ngayTra = listChiTiet.get(i).getNgayTra();
+				int tienThueMotNgay = listChiTiet.get(i).getTienThue();
+				tongTienThue += tienThue(ngayTra, ngayMuon, tienThueMotNgay);
+			}
+		}
+		return tongTienThue;
+	}
+	
+	
+	
+	
+	
 	
 	/* Set Action for thongKeSachView - Print & Cancel */
 	private void setActionForThongKeMTView(String[][] data) {

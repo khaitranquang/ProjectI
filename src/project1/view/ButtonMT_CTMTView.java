@@ -21,7 +21,8 @@ public class ButtonMT_CTMTView extends JPanel{
 	private String[] timKiemVal = {"Mã mượn trả", "Mã khách hàng", "Mã nhân viên", "Ngày mượn", "Ngày hẹn trả"};
 	private String[] thongKeVal = {"-- Chọn 1 kiểu thống kê --", "Mã khách hàng", "Mã nhân viên", "Ngày mượn", "Ngày hẹn trả",
 								   "Số lần vi phạm của khách hàng", "Tổng số tiền phạt của khách hàng",
-								   "Tổng số tiền khuyến mại khách hàng", "Số xe chưa trả của khách"};
+								   "Tổng số tiền khuyến mại khách hàng", "Số xe chưa trả của khách", "Số xe nhân viên đã cho mượn",
+								   "Tổng sỗ tiền khách chi ra"};
 //	private String tableVal[] = {"Mượn trả", "Chi tiết mượn trả"};
 	private JButton btnThem      = new JButton("THÊM THUÊ XE");
 	private JButton btnSua       = new JButton("SỬA THUÊ");

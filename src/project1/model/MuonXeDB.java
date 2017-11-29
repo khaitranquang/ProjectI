@@ -461,4 +461,84 @@ public class MuonXeDB implements MuonXeDAO{
 		}
 	}
 
+	@Override
+	public ArrayList<ArrayList<String>> thongKeTongXeNVChoThue() {
+		connection = getConnection();
+		Statement statement = null;
+		ArrayList<ArrayList<String>> arrResult = new ArrayList<ArrayList<String>>();
+		
+		try {
+			String sql = "select idNhanVien, count(idXe) " +  
+						 "from muontra MT, chitietmuontra CT " + 
+						 "where MT.idMuonTra = CT.idMuonTra " +
+						 "group by idNhanVien";
+			statement = connection.createStatement();
+			ResultSet result = statement.executeQuery(sql);
+			
+			while (result.next()) {
+				String maNV  = result.getString("idNhanVien");
+				int soXe = result.getInt("count(idXe)");
+				
+				ArrayList<String> record = new ArrayList<String>();
+				record.add(maNV);
+				record.add(Integer.toString(soXe));
+				arrResult.add(record);
+				//record.clear();
+			}
+			// Close connection
+			result.close();
+			statement.close();
+			connection.close();
+		} 
+		catch (SQLException e) {
+			e.printStackTrace();
+			JOptionPane.showMessageDialog(new JDialog(), "Can't connect to database...");
+		}
+		finally {
+			try {
+				if(statement  != null) statement.close();
+				if(connection != null) connection.close();	
+			} 
+			catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return arrResult;
+	}
+
+	@Override
+	public ArrayList<String> getListIdKhachHang() {
+		connection = getConnection();
+		Statement statement = null;
+		ArrayList<String> listKH = new ArrayList<String>();
+		
+		try {
+			String sql = "SELECT distinct idKhachHang FROM muontra";
+			statement = connection.createStatement();
+			ResultSet result = statement.executeQuery(sql);
+			
+			while (result.next()) {
+				String maKH       = result.getString("idKhachHang");
+				listKH.add(maKH);
+			}
+		} 
+		catch (SQLException e) {
+			e.printStackTrace();
+			JOptionPane.showMessageDialog(new JDialog(), "Can't connect to database...");
+			
+		}
+		finally {
+			try {
+				if(statement  != null) statement.close();
+				if(connection != null) connection.close();	
+			} 
+			catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return listKH;
+	}
+
 }
