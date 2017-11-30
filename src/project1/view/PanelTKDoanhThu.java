@@ -37,9 +37,12 @@ public class PanelTKDoanhThu extends JPanel {
 	private JComboBox<String> cbNgayKetThuc = new JComboBox<>(date);
 	private JComboBox<String> cbThangKetThuc = new JComboBox<>(month);
 	private JComboBox<String> cbNamKetThuc = new JComboBox<>(year);
-	private JComboBox<String> cbDoanhThuThang = new JComboBox<>(month);
+	private JComboBox<String> cbDoanhSoThang = new JComboBox<>(month);
+	private JComboBox<String> cbDoanhSoNam = new JComboBox<>(year);	
 	private JComboBox<String> cbTkThang = new JComboBox<>(month);
+	private JComboBox<String> cbTkThangNam = new JComboBox<>(year);
 	private JComboBox<String> cbTkQuy = new JComboBox<>(quy);
+	private JComboBox<String> cbTkQuyNam = new JComboBox<>(year);
 	
 	private JTextField tfThueMatBang = new JTextField("5000000");
 	private JTextField tfSoNV = new JTextField(40);
@@ -58,11 +61,20 @@ public class PanelTKDoanhThu extends JPanel {
 	public JButton getBtnTkNgay() {
 		return btnTkNgay;
 	}
-	public JComboBox<String> getCbDoanhThuThang() {
-		return cbDoanhThuThang;
+	public JComboBox<String> getCbDoanhSoNam() {
+		return cbDoanhSoNam;
+	}
+	public JComboBox<String> getCbDoanhSoThang() {
+		return cbDoanhSoThang;
 	}
 	public JComboBox<String> getCbTkThang() {
 		return cbTkThang;
+	}
+	public JComboBox<String> getCbTkThangNam() {
+		return cbTkThangNam;
+	}
+	public JComboBox<String> getCbTkQuyNam() {
+		return cbTkQuyNam;
 	}
 	public JComboBox<String> getCbTkQuy() {
 		return cbTkQuy;
@@ -215,10 +227,12 @@ public class PanelTKDoanhThu extends JPanel {
 	private JPanel createTheoThang() {
 		JPanel thangPanel = new JPanel(new BorderLayout(5, 5));
 		thangPanel.setBorder(new TitledBorder("Theo tháng"));
-		JPanel titlePanel = new JPanel(new BorderLayout(5, 5));
+		JPanel titlePanel = new JPanel(new GridLayout(1, 4, 5, 5));
 		titlePanel.setBorder(new EmptyBorder(8, 100, 8, 200));
-		titlePanel.add(new JLabel("Tháng" ), BorderLayout.WEST);
-		titlePanel.add(cbTkThang, BorderLayout.CENTER);
+		titlePanel.add(new JLabel("Tháng" ));
+		titlePanel.add(cbTkThang);
+		titlePanel.add(new JLabel("Năm"));
+		titlePanel.add(cbTkThangNam);
 		thangPanel.add(titlePanel, BorderLayout.CENTER);
 		thangPanel.add(createActionPanel(btnTkThang, btnPrintThang, tfResultThang), BorderLayout.EAST);
 		return thangPanel;
@@ -227,10 +241,12 @@ public class PanelTKDoanhThu extends JPanel {
 	private JPanel createTheoQuy() {
 		JPanel quyPanel = new JPanel(new BorderLayout(5, 5));
 		quyPanel.setBorder(new TitledBorder("Theo quý"));
-		JPanel titlePanel = new JPanel(new BorderLayout(5, 5));
+		JPanel titlePanel = new JPanel(new GridLayout(1, 4, 5, 5));
 		titlePanel.setBorder(new EmptyBorder(8, 100, 8, 200));
-		titlePanel.add(new JLabel("Qúy   " ), BorderLayout.WEST);
-		titlePanel.add(cbTkQuy, BorderLayout.CENTER);
+		titlePanel.add(new JLabel("Qúy   " ));
+		titlePanel.add(cbTkQuy);
+		titlePanel.add(new JLabel("Năm"));
+		titlePanel.add(cbTkQuyNam);
 		quyPanel.add(titlePanel, BorderLayout.CENTER);
 		quyPanel.add(createActionPanel(btnTkQuy, btnPrintQuy, tfResultQuy), BorderLayout.EAST);
 		return quyPanel;
@@ -267,7 +283,11 @@ public class PanelTKDoanhThu extends JPanel {
 		showPanel.add(tfTongChi);
 		showPanel.add(tfTongDoanhThu);
 		showPanel.add(tfDoanhSo);
-		showPanel.add(cbDoanhThuThang);
+		JPanel cbDoanhThuPanel = new JPanel(new GridLayout(1, 2));
+		cbDoanhThuPanel.setBorder(new EmptyBorder(0, 0, 0, 300));
+		cbDoanhThuPanel.add(cbDoanhSoThang);
+		cbDoanhThuPanel.add(cbDoanhSoNam);
+		showPanel.add(cbDoanhThuPanel);
 		showPanel.add(new JLabel(""));
 		
 		panel.add(titlePanel, BorderLayout.WEST);

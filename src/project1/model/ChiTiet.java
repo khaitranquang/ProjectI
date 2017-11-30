@@ -41,4 +41,9 @@ public class ChiTiet {
 		this.tienPhat = tienPhat;
 		this.tienKhuyenMai = tienKhuyenMai;
 	}
+	
+	@Override
+	public String toString() {
+		return maMT + "-" + maXe + "-" + ngayTra + "-" + tienThue + "-" + tienPhat + "-" + tienKhuyenMai;
+	}
 }

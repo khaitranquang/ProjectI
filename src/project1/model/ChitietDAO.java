@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 public interface ChitietDAO {
 	public ArrayList<ChiTiet> getAllChiTietWithID(String maMT);
+	public ArrayList<ChiTiet> getAllChiTiet();
 	
 	public ChiTiet getChiTiet(String maMT, String maXeMuon);
 	

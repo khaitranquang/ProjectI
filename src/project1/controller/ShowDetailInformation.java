@@ -415,11 +415,11 @@ public class ShowDetailInformation {
 			FileOutputStream fos = new FileOutputStream(new File(path));
 			XSSFWorkbook workbook = new XSSFWorkbook();
 			XSSFSheet sheet = workbook.createSheet("PheuMuonTra");
-			sheet.setColumnWidth(0, 4300);
-			sheet.setColumnWidth(1, 4300);
-			sheet.setColumnWidth(2, 6000);
-			sheet.setColumnWidth(3, 4300);
-			sheet.setColumnWidth(4, 4300);
+			sheet.setColumnWidth(0, 7000);
+			sheet.setColumnWidth(1, 7000);
+			sheet.setColumnWidth(2, 7000);
+			sheet.setColumnWidth(3, 7000);
+			sheet.setColumnWidth(4, 7000);
 			
 			Row row = sheet.createRow(0);
 			Cell cell = row.createCell(0, CellType.STRING);
@@ -548,25 +548,52 @@ public class ShowDetailInformation {
 				rowNum++;
 			}
 			
+			
+			row = sheet.createRow(rowNum + 1);
+			cell = row.createCell(3, CellType.STRING);
+			cell.setCellValue("Tổng số tiền phạt");
+			cell.setCellStyle(createStyleDefault(workbook));
+			cell = row.createCell(4, CellType.STRING);
+			cell.setCellValue(chiTietInformation.getLbTongTienPhat().getText().toString());
+			cell.setCellStyle(createStyleDefault(workbook));
+			
 			row = sheet.createRow(rowNum + 2);
+			cell = row.createCell(3, CellType.STRING);
+			cell.setCellValue("Tổng số tiền thuê");
+			cell.setCellStyle(createStyleDefault(workbook));
+			cell = row.createCell(4, CellType.STRING);
+			cell.setCellValue(chiTietInformation.getLbTongTienThue().getText().toString());
+			cell.setCellStyle(createStyleDefault(workbook));
+			
+			row = sheet.createRow(rowNum + 3);
+			cell = row.createCell(3, CellType.STRING);
+			cell.setCellValue("Tổng số tiền khuyễn mãi");
+			cell.setCellStyle(createStyleDefault(workbook));
+			cell = row.createCell(4, CellType.STRING);
+			cell.setCellValue(chiTietInformation.getLbTongKhuyenMai().getText().toString());
+			cell.setCellStyle(createStyleDefault(workbook));
+			
+			
+			
+			row = sheet.createRow(rowNum + 5);
 			cell = row.createCell(0, CellType.STRING);
 			cell.setCellValue("Người thuê");
 			cell.setCellStyle(createStyleDefault(workbook));
-			sheet.addMergedRegion(new CellRangeAddress(rowNum + 2, rowNum + 2, 0, 1));
+			sheet.addMergedRegion(new CellRangeAddress(rowNum + 5, rowNum + 5, 0, 1));
 			cell = row.createCell(3, CellType.STRING);
 			cell.setCellValue("Nhân viên cho thuê");
 			cell.setCellStyle(createStyleDefault(workbook));
-			sheet.addMergedRegion(new CellRangeAddress(rowNum + 2, rowNum + 2, 3, 4));
+			sheet.addMergedRegion(new CellRangeAddress(rowNum + 5, rowNum + 5, 3, 4));
 			
-			row = sheet.createRow(rowNum + 3);
+			row = sheet.createRow(rowNum + 6);
 			cell = row.createCell(0, CellType.STRING);
 			cell.setCellValue(chiTietInformation.getLbHoTenKH().getText().toString());
 			cell.setCellStyle(createStyleDefault(workbook));
-			sheet.addMergedRegion(new CellRangeAddress(rowNum + 3, rowNum + 3, 0, 1));
+			sheet.addMergedRegion(new CellRangeAddress(rowNum + 6, rowNum + 6, 0, 1));
 			cell = row.createCell(3, CellType.STRING);
 			cell.setCellValue(chiTietInformation.getLbHoTenNV().getText().toString());
 			cell.setCellStyle(createStyleDefault(workbook));
-			sheet.addMergedRegion(new CellRangeAddress(rowNum + 3, rowNum + 3, 3, 4));
+			sheet.addMergedRegion(new CellRangeAddress(rowNum + 6, rowNum + 6, 3, 4));
 			
 			
 			workbook.write(fos);

@@ -59,6 +59,7 @@ public class LoginController {
 		new DeleteKhachHangController(mainUI);
 		new SearchXeController(mainUI);
 		new TKXeController(mainUI);
+		new DeleteRentController(mainUI);
 		new SearchKHController(mainUI);
 		new TKKHController(mainUI);
 		new SearchNVController(mainUI);
@@ -69,6 +70,7 @@ public class LoginController {
 		new TKRentController(mainUI);
 		new SearchDetailController(mainUI);
 		new PrintSearchController(mainUI);
+		new TKDoanhThuController(mainUI);
 	}
 	
 	private void setActions() {

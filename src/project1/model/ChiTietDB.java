@@ -351,4 +351,49 @@ public class ChiTietDB implements ChitietDAO{
 		return listXe;
 	}
 
+	@Override
+	public ArrayList<ChiTiet> getAllChiTiet() {
+		connection = getConnection();
+		Statement statement = null;
+		ArrayList<ChiTiet> arrResult = new ArrayList<ChiTiet>();
+	
+		try {
+			String sql = "SELECT * FROM chitietmuontra;";
+			statement = connection.createStatement();
+			ResultSet result = statement.executeQuery(sql);
+			
+			while (result.next()) {
+				String idMT = result.getString("idMuonTra");
+				String maXe       = result.getString("idXe");
+				int tienThue      = result.getInt("tienThue");
+				String ngayTra    = result.getString("ngayTra");
+				int soTienPhat    = result.getInt("tienPhat");
+				int tienKhuyenMai = result.getInt("tienKhuyenMai");
+				
+				ChiTiet detail = new ChiTiet(idMT, maXe, tienThue, ngayTra, soTienPhat, tienKhuyenMai);
+				arrResult.add(detail);
+			}
+			// Close connection
+			result.close();
+			statement.close();
+			connection.close();
+		} 
+		catch (SQLException e) {
+			e.printStackTrace();
+			JOptionPane.showMessageDialog(new JDialog(), "Can't connect to database...");
+			
+		}
+		finally {
+			try {
+				if(statement  != null) statement.close();
+				if(connection != null) connection.close();	
+			} 
+			catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return arrResult;
+	}
+
 }

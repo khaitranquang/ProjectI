@@ -439,7 +439,7 @@ public class MuonXeDB implements MuonXeDAO{
 			preStatement.setString(1, maMT);
 			
 			int rows = preStatement.executeUpdate();
-			if(rows > 0) System.out.println("This LoanBook has been deleted");
+			if(rows > 0) System.out.println("This Rent has been deleted");
 			
 			//Close connection
 			preStatement.close();
