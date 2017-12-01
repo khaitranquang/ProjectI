@@ -25,6 +25,7 @@ public class LoginController {
 	private JTextField tfAccount;
 	private JPasswordField tfPass;
 	private JButton btnLogin;
+	private JButton btnCancel;
 	
 	private JButton btnLogout;
 	private JButton btnChangePass;
@@ -40,6 +41,7 @@ public class LoginController {
 		tfAccount = loginView.getTfAccount();
 		tfPass = loginView.getTfPass();
 		btnLogin = loginView.getBtnLogin();
+		btnCancel = loginView.getBtnCancel();
 		
 		btnLogout = mainUI.getAccountView().getBtnLogout();
 		btnChangePass = mainUI.getAccountView().getBtnChangePass();
@@ -104,6 +106,16 @@ public class LoginController {
 				}
 				return;
 				
+			}
+		});
+		
+		btnCancel.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				tfAccount.setText("");
+				tfPass.setText("");
 			}
 		});
 		

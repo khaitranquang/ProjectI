@@ -8,10 +8,11 @@ import java.awt.GridLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
 
 public class PanelAboutUSView extends JPanel{
 	public PanelAboutUSView() {
-		setLayout(new BorderLayout());
+		setLayout(new BorderLayout(20, 20));
 		add(createTitlePanel("Hello chúng tôi là những coder :)))", 1), BorderLayout.PAGE_START);
 		add(createMainPanel(), BorderLayout.CENTER);
 	}
@@ -32,6 +33,7 @@ public class PanelAboutUSView extends JPanel{
 	}
 	private JPanel createMainPanel() {
 		JPanel panel = new JPanel(new GridLayout(2, 1));
+		panel.setBorder(new EmptyBorder(0, 150, 0, 150));
 		panel.add(createPanelInfo());
 		panel.add(new JPanel());
 		
@@ -39,9 +41,9 @@ public class PanelAboutUSView extends JPanel{
 	}
 	private JPanel createPanelInfo() {
 		JPanel panel = new JPanel(new GridLayout(1, 3, 10, 10));
-		panel.add(new JPanel());
-		panel.add(new JPanel());
-		panel.add(createInfoPerson("Nguyễn Tài Tiêu - CNTT2.1 K60", new ImageIcon(this.getClass().getResource("/tld.png"))));
+		panel.add(createInfoPerson("Mai Tiến Dũng", new ImageIcon(this.getClass().getResource("/dung.jpg"))));
+		panel.add(createInfoPerson("Trần Quang Khải", new ImageIcon(this.getClass().getResource("/khai.jpg"))));
+		panel.add(createInfoPerson("Nguyễn Tài Tiêu", new ImageIcon(this.getClass().getResource("/tld.png"))));
 		return panel;
 	}
 	
