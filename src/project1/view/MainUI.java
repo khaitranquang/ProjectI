@@ -42,7 +42,7 @@ public class MainUI extends JFrame{
 		qlMT = new PanelQuanLyMT_CTMTView();
 		tabbedPane.addTab("Quản lí mượn trả",  null, qlMT, "Quản lí mượn trả");
 		panelTKDoanhThu = new PanelTKDoanhThu();
-		tabbedPane.addTab("Doanh thu - Doanh số",  null, panelTKDoanhThu, "Doanh thu - Doanh số");
+		tabbedPane.addTab("Doanh thu - Lợi nhuận",  null, panelTKDoanhThu, "Doanh thu - Lợi nhuận");
 		accountView = new AccountView();
 		tabbedPane.addTab("Quản lí tài khoản", null, accountView, "Quản lí tài khoản");
 		aboutUS = new PanelAboutUSView();

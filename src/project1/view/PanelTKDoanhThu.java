@@ -54,7 +54,7 @@ public class PanelTKDoanhThu extends JPanel {
 	private JTextField tfTongDoanhThu = new JTextField(40);
 	private JTextField tfDoanhSo = new JTextField(40);
 	
-	private JButton btnTinhDoanhSo = new JButton("Tính doanh số tháng");
+	private JButton btnTinhDoanhSo = new JButton("Tính lợi nhuận tháng");
 	private JButton btnInDoanhSo = new JButton("In");
 	private JButton btnEdit = new JButton("Sửa");
 	
@@ -254,7 +254,7 @@ public class PanelTKDoanhThu extends JPanel {
 	
 	private JPanel createDoanhSoPanel() {
 		JPanel panel = new JPanel(new BorderLayout(5, 5));
-		panel.setBorder(new TitledBorder("Doanh số dự trù"));
+		panel.setBorder(new TitledBorder("Lợi nhuận dự trù"));
 		JPanel titlePanel = new JPanel(new GridLayout(11, 1, 5, 5));
 		titlePanel.setBorder(new EmptyBorder(0, 100, 0, 0));
 		titlePanel.add(new JLabel("Chi phí mặt bằng hàng tháng "));
@@ -265,7 +265,7 @@ public class PanelTKDoanhThu extends JPanel {
 		titlePanel.add(new JLabel("Chi phí khác "));
 		titlePanel.add(new JLabel("Tổng chi "));
 		titlePanel.add(new JLabel("Tổng thu "));
-		titlePanel.add(new JLabel("Doanh số "));
+		titlePanel.add(new JLabel("Lợi nhuận "));
 		titlePanel.add(btnTinhDoanhSo);
 		JPanel buttonPanel = new JPanel(new GridLayout(1, 2, 5, 5));
 		buttonPanel.add(btnEdit);
