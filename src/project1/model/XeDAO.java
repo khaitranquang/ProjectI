@@ -16,6 +16,11 @@ public interface XeDAO {
 	/* Update status of xe */
 	public void updateXe (Xe xe, int trangThaiMoi);
 	
+	/* Get avatarUrl */
+	public String getAvatarUrl(String idXe);
+	
+	/* Update avatarUrl */
+	public void update(String idXe, String newUrl);
 	
 	/* Insert one xe into database */
 	public void insertXe(Xe xe);

@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 
@@ -75,6 +76,7 @@ public class EditXeController {
 	private void loadInfor(String id) {
 		xe = xeDB.getXe(id);
 		xeInformation.getTfIdXe().setText(id);
+		xeInformation.getTfIdXe().setEditable(false);
 		xeInformation.getTfBienXe().setText(xe.getBienXe());
 		xeInformation.getTfTenXe().setText(xe.getTenXe());
 		xeInformation.getTfLoaiXe().setText(xe.getLoaiXe());
@@ -84,11 +86,36 @@ public class EditXeController {
 		xeInformation.getTfNhienLieu().setText(xe.getNhienLieu());
 		xeInformation.getTfTrangThai().setText(xe.getTrangThai() + "");
 		xeInformation.getTfGiaThue().setText(xe.getGiaThue() + "");
+		xeInformation.getLbAvatarUrl().setText(xeDB.getAvatarUrl(id));
 	}
 	
 	private void setActions() {
+		JButton btnSelectUrl = xeInformation.getBtnSelectImg();
 		JButton btnEdit = editXeView.getBtnEdit();
 		JButton btnCancel = editXeView.getBtnCancel();
+		
+		btnSelectUrl.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				JFileChooser fileChooser = new JFileChooser();
+				int select = fileChooser.showOpenDialog(null);
+				String openFilePath = "";
+				
+				if (select == JFileChooser.APPROVE_OPTION) {
+					String path = fileChooser.getCurrentDirectory().toString() 
+					       	   + "\\" + fileChooser.getSelectedFile().getName();
+					if(path.indexOf(".jpg") >= 0 || path.indexOf(".JPG")>= 0 ||
+					   path.indexOf(".png") >= 0 || path.indexOf(".PNG") >= 0) {
+						openFilePath = path;
+					}
+					else {
+						openFilePath = path + ".jpg";
+					}
+					xeInformation.getLbAvatarUrl().setText(openFilePath);
+					System.out.println(openFilePath);
+				}
+			}
+		});
 		
 		btnEdit.addActionListener(new ActionListener() {
 			@Override
@@ -161,6 +188,8 @@ public class EditXeController {
 	}
 	
 	private void suaXe() {
+		
+		
 		if (checkInfor(xeInformation)) {
 			String maXeMoi        = xeInformation.getTfIdXe().getText().toString();
 			String bienXeMoi      = xeInformation.getTfBienXe().getText().toString();
@@ -172,8 +201,10 @@ public class EditXeController {
 			String nhienLieuMoi   = xeInformation.getTfNhienLieu().getText().toString();
 			int trangThaiMoi      = Integer.parseInt(xeInformation.getTfTrangThai().getText().toString());
 			int giaThueMoi        = Integer.parseInt(xeInformation.getTfGiaThue().getText().toString());
+			String url 			  = xeInformation.getLbAvatarUrl().getText().toString();
 			
 			xeDB.updateXe(this.xe, maXeMoi, bienXeMoi, tenXeMoi, loaiXeMoi, hangSanXuatMoi, namSanXuatMoi, ngayBaoTriMoi, nhienLieuMoi, trangThaiMoi, giaThueMoi);
+			xeDB.update(maXeMoi, url);
 			tableXeView.updateTable(xeDB.getAllXe());
 			
 			this.editXeView.setVisible(false);

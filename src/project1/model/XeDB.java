@@ -341,4 +341,75 @@ public class XeDB implements XeDAO{
 			}
 		}
 	}
+
+	@Override
+	public void update(String idXe, String newUrl) {
+		connection = getConnection();
+		PreparedStatement preStatement = null;
+		try {
+			String sql = "UPDATE xe SET avatarUrl=? WHERE idXe=?";
+			preStatement = connection.prepareStatement(sql);
+			preStatement.setString(1, newUrl);
+			preStatement.setString(2, idXe);
+			
+			
+			int rows = preStatement.executeUpdate();
+			if (rows > 0) System.out.println("Xe vua duoc cap nhat avatarUrl");
+			
+			// Close connection
+			preStatement.close();
+			connection.close();
+		} 
+		catch (SQLException e) {
+			e.printStackTrace();
+			JOptionPane.showMessageDialog(new JDialog(), "Can't connect to database...");
+		}
+		finally {
+			try {
+				if(preStatement != null) preStatement.close();
+				if(connection != null) connection.close();	
+			} 
+			catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
+
+	@Override
+	public String getAvatarUrl(String idXe) {
+		String avatarUrl = "";
+		connection = getConnection();
+		PreparedStatement preStatement = null;
+		String sql = "SELECT avatarUrl FROM xe WHERE idXe = ?";
+		
+		try {
+			preStatement = connection.prepareStatement(sql);
+			preStatement.setString(1, idXe);
+			ResultSet result = preStatement.executeQuery();
+			
+			while (result.next()) {
+				avatarUrl = result.getString("avatarUrl");
+			}
+			// Close connection
+			result.close();
+			preStatement.close();
+			connection.close();			
+		} 
+		catch (SQLException e) {
+			e.printStackTrace();
+			JOptionPane.showMessageDialog(new JDialog(), "Can't connect to database...");
+		}
+		finally {
+			try {
+				if(preStatement != null) preStatement.close();
+				if(connection != null) connection.close();	
+			} 
+			catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return avatarUrl;
+	}
 }

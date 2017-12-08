@@ -3,6 +3,7 @@ package project1.view;
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
 
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -20,6 +21,9 @@ public class XeInformation extends JPanel{
 	private JTextField tfNhienLieu   = new JTextField(30);
 	private JTextField tfTrangThai   = new JTextField(30);
 	private JTextField tfGiaThue     = new JTextField(30);
+	private JLabel lbAvatarUrl = new JLabel("Empty");
+	private JButton btnSelectImg = new JButton("Chọn...");
+	
 	
 	public XeInformation() {
 		setLayout(new BorderLayout());
@@ -28,6 +32,12 @@ public class XeInformation extends JPanel{
 		add(createPanelTF(), BorderLayout.CENTER);
 	}
 	
+	public JButton getBtnSelectImg() {
+		return btnSelectImg;
+	}
+	public JLabel getLbAvatarUrl() {
+		return lbAvatarUrl;
+	}
 	public JTextField getTfIdXe() {
 		return tfIdXe;
 	}
@@ -61,7 +71,7 @@ public class XeInformation extends JPanel{
 	}
 	
 	private JPanel createPanelLabel() {
-		JPanel panel = new JPanel(new GridLayout(10, 1, 5, 5));
+		JPanel panel = new JPanel(new GridLayout(11, 1, 5, 5));
 		panel.setBorder(new EmptyBorder(10, 10, 10, 10));
 		panel.add(new JLabel("Mã xe"));
 		panel.add(new JLabel("Biển xe"));
@@ -73,12 +83,12 @@ public class XeInformation extends JPanel{
 		panel.add(new JLabel("Nhiên liệu"));
 		panel.add(new JLabel("Trạng Thái"));
 		panel.add(new JLabel("Giá thuê"));
-		
+		panel.add(new JLabel("Avatar"));
 		return panel;
 	}
 	
 	private JPanel createPanelTF() {
-		JPanel panel = new JPanel(new GridLayout(10, 1, 5, 5));
+		JPanel panel = new JPanel(new GridLayout(11, 1, 5, 5));
 		panel.setBorder(new EmptyBorder(10, 10, 10, 10));
 		panel.add(tfIdXe);
 		panel.add(tfBienXe);
@@ -91,6 +101,10 @@ public class XeInformation extends JPanel{
 		panel.add(tfTrangThai);
 		panel.add(tfGiaThue);
 		
+		JPanel panelUrl = new JPanel(new BorderLayout());
+		panelUrl.add(lbAvatarUrl, BorderLayout.CENTER);
+		panelUrl.add(btnSelectImg, BorderLayout.EAST);
+		panel.add(panelUrl);
 		return panel;
 	}
 }

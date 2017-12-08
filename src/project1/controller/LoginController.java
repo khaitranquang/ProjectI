@@ -51,6 +51,7 @@ public class LoginController {
 	
 	private void createController() {
 		new AddXeController(mainUI);
+		new ShowAvatarController(mainUI);
 		new EditXeController(mainUI);
 		new DeleteXeController(mainUI);
 		new AddNhanVienController(mainUI);
