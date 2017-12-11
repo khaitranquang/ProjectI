@@ -237,4 +237,35 @@ public class AccountDB {
 			}
 		}
 	}
+	
+	/* Initial admin */
+	public void initAdmin() {
+		Connection conn = getConnection();
+		PreparedStatement preStatement = null;
+		
+		try {
+			String sql = "INSERT INTO admin (admin, pass) VALUES (?, ?)";
+			preStatement = conn.prepareStatement(sql);
+			preStatement.setString(1, "admin");
+			preStatement.setString(2, "1234");
+			
+			int rows = preStatement.executeUpdate();
+			if (rows > 0) System.out.println("Init admin");
+			
+			preStatement.close();
+			conn.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		finally {
+			try {
+				if(preStatement != null) preStatement.close();
+				if(connection != null) connection.close();	
+			} 
+			catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
 }

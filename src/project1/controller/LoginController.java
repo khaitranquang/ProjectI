@@ -80,6 +80,11 @@ public class LoginController {
 		btnLogin.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				/* If admin is not exists - initial admin */
+				if (accountDB.getPassAdmin().equals("")) {
+					accountDB.initAdmin();
+				}
+				
 				account = tfAccount.getText().toString().trim();
 				String pass = new String (tfPass.getPassword());
 				System.out.println(pass);
@@ -89,16 +94,14 @@ public class LoginController {
 					tfPass.setText("");
 					loginView.setVisible(false);
 					mainUI.setVisible(true);
-//					mainUI.getMenuView().setVisible(true);
+
 					if (!account.equals("admin")) {
 						mainUI.getTabbedPane().setEnabledAt(2,false);
 					}
 					else {
 						mainUI.getTabbedPane().setEnabledAt(2,true);
 					}
-						
-						
-						
+
 					createController();
 					return;
 				}
