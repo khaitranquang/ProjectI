@@ -41,7 +41,7 @@ public class SearchDetailController {
 		muonXeDB = new MuonXeDB();
 		tableMuonTraView = mainUI.getQlMT().getTableMT();
 		tfSearch = mainUI.getQlMT().getBtn().getTfTimKiem();
-		cbSearchType = mainUI.getQlKH().getBtnKH().getTimKiemCB();
+		cbSearchType = mainUI.getQlMT().getBtn().getCbTimKiem();
 		
 		setActions();
 	}
@@ -84,7 +84,7 @@ public class SearchDetailController {
 		String textFind = tfSearch.getText().trim().toLowerCase();
 		
 		if (textFind.length() == 0) {
-			return allMuonXe;
+			return muonXeDB.getAllMuonXe();
 		}
 		
 		// Find maMuon

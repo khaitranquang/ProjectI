@@ -3,6 +3,7 @@ package project1.controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.regex.Pattern;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -18,6 +19,13 @@ import project1.view.TableXeView;
 import project1.view.XeInformation;
 
 public class EditXeController {
+	private static final Pattern DATE_PATTERN = Pattern.compile(
+			"^(?:(?:31(\\/|-|\\.)(?:0?[13578]|1[02]))\\1|(?:(?:29|30)(\\/|"
+			+ "-|\\.)(?:0?[1,3-9]|1[0-2])\\2))(?:(?:1[6-9]|[2-9]\\d)?\\d{2})$|"
+			+ "^(?:29(\\/|-|\\.)0?2\\3(?:(?:(?:1[6-9]|[2-9]\\d)?(?:0[48]|[2468]"
+			+ "[048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|"
+			+ "^(?:0?[1-9]|1\\d|2[0-8])(\\/|-|\\.)(?:(?:0?[1-9])|(?:1[0-2]))\\4("
+			+ "?:(?:1[6-9]|[2-9]\\d)?\\d{2})$");
 	private MainUI mainUI;
 	private Xe xe;
 	private XeDB xeDB;
@@ -35,6 +43,10 @@ public class EditXeController {
 		btnEdit = mainUI.getQlXe().getBtnXe().getBtnSua();
 		tableXeView = mainUI.getQlXe().getTableXe();
 		tableXeView.updateTable(xeDB.getAllXe());
+		
+		//...................
+		
+		
 		btnEditEvent();
 	}
 	
@@ -43,6 +55,7 @@ public class EditXeController {
 		btnEdit.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				//.........
 				editXeView = new EditXeView(mainUI);
 				xeInformation = editXeView.getXeInformation();
 				
@@ -169,6 +182,12 @@ public class EditXeController {
 			return false;
 		}
 		
+		/* Check ngayBaoTri */
+		if (checkFormatOfDate(xeInformation.getTfNgayBaoTri().getText().toString().trim()) == false) {
+			JOptionPane.showMessageDialog(new JDialog(), "Hã nhập đúng định dạng ngày bảo trì dd/mm/yyyy");
+			return false;
+		}
+		
 		/* Check if maSach is exist*/
 		if (!checkID(xeInformation.getTfIdXe().getText().toString().trim())) {
 			JOptionPane.showMessageDialog(new JDialog(), "Mã xe đã tồn tại - Hãy nhập lại");
@@ -187,9 +206,12 @@ public class EditXeController {
 		return true;
 	}
 	
+	private boolean checkFormatOfDate(String date) {
+		return DATE_PATTERN.matcher(date).matches();
+	}
+	
 	private void suaXe() {
-		
-		
+		String url ="";
 		if (checkInfor(xeInformation)) {
 			String maXeMoi        = xeInformation.getTfIdXe().getText().toString();
 			String bienXeMoi      = xeInformation.getTfBienXe().getText().toString();
@@ -201,10 +223,9 @@ public class EditXeController {
 			String nhienLieuMoi   = xeInformation.getTfNhienLieu().getText().toString();
 			int trangThaiMoi      = Integer.parseInt(xeInformation.getTfTrangThai().getText().toString());
 			int giaThueMoi        = Integer.parseInt(xeInformation.getTfGiaThue().getText().toString());
-			String url 			  = xeInformation.getLbAvatarUrl().getText().toString();
-			
+			url 			      = xeInformation.getLbAvatarUrl().getText().toString();
 			xeDB.updateXe(this.xe, maXeMoi, bienXeMoi, tenXeMoi, loaiXeMoi, hangSanXuatMoi, namSanXuatMoi, ngayBaoTriMoi, nhienLieuMoi, trangThaiMoi, giaThueMoi);
-			xeDB.update(maXeMoi, url);
+			xeDB.updateUrl(maXeMoi, url);
 			tableXeView.updateTable(xeDB.getAllXe());
 			
 			this.editXeView.setVisible(false);

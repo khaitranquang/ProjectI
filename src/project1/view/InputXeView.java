@@ -19,13 +19,15 @@ public class InputXeView extends JPanel{
 	
 	public InputXeView() {
 		setLayout(new BorderLayout());
+		setBorder(new EmptyBorder(5, 0, 40, 60));
 		add(createInputPanel(), BorderLayout.CENTER);
+		add(createNotePanel(), BorderLayout.SOUTH);
 	}
 	
 	private JPanel createInputPanel() {
 		JPanel panel = new JPanel(new GridLayout(1, 2, 15, 5));
 		//panel.setBorder(new EmptyBorder(5, 0, 127, 60));
-		panel.setBorder(new EmptyBorder(5, 0, 90, 60));
+//		panel.setBorder(new EmptyBorder(5, 0, 20, 60));
 		panel.add(createInputPanelL());
 		panel.add(createInputPanelR());
 		
@@ -50,7 +52,7 @@ public class InputXeView extends JPanel{
 		panelTF.add(tfLoaiXe = new JTextField());
 		panelTF.add(tfHangSanXuat = new JTextField());
 		panelTF.add(new JLabel(""));
-		
+
 		panel.add(panelLab, BorderLayout.WEST);
 		panel.add(panelTF, BorderLayout.CENTER);
 		
@@ -71,7 +73,8 @@ public class InputXeView extends JPanel{
 		panelTF.add(tfNamSanXuat = new JTextField());
 		panelTF.add(tfNgayBaoTri = new JTextField());
 		panelTF.add(tfNhienLieu = new JTextField());
-		panelTF.add(tfTrangThai = new JTextField());
+		panelTF.add(tfTrangThai = new JTextField("1"));
+		tfTrangThai.setEditable(false);
 		panelTF.add(tfGiaThue = new JTextField());
 		panelTF.add(btnUpdate);
 		btnUpdate.setVisible(false);
@@ -80,6 +83,17 @@ public class InputXeView extends JPanel{
 		panel.add(panelTF, BorderLayout.CENTER);
 		
 		return panel;
+	}
+	
+	private JPanel createNotePanel() {
+		JPanel notePanel = new JPanel(new GridLayout(3, 1, 4, 4));
+		JLabel lbNote1 = new JLabel("Trạng thái: 1 - Còn hàng");
+		JLabel lbNote2 = new JLabel("                   0 - Hết hàng");
+		JLabel lbNote3 = new JLabel("Nháy đúp chuột vào xe để xem hình ảnh thực tế sản phẩm");
+		notePanel.add(lbNote1);
+		notePanel.add(lbNote2);
+		notePanel.add(lbNote3);
+		return notePanel;
 	}
 	
 	// Getter

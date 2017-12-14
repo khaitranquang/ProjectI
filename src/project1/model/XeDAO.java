@@ -20,7 +20,7 @@ public interface XeDAO {
 	public String getAvatarUrl(String idXe);
 	
 	/* Update avatarUrl */
-	public void update(String idXe, String newUrl);
+	public void updateUrl(String idXe, String newUrl);
 	
 	/* Insert one xe into database */
 	public void insertXe(Xe xe);

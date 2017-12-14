@@ -54,7 +54,7 @@ public class DeleteXeController {
 						
 						if (!checkXe(id)) {
 							JOptionPane.showMessageDialog(new JDialog(), "Xe đã hoặc đang trong quan hệ thuê \n " +
-									  "Hãy xóa các thuê mượn liên quan đến sách này");
+									  "Hãy xóa các thuê mượn liên quan đến xe này");
 							return;
 						}
 						else {

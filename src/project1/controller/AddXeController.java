@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.regex.Pattern;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -32,6 +33,14 @@ import project1.view.PanelQuanLyXeView;
 import project1.view.TableXeView;
 
 public class AddXeController {
+	private static final Pattern DATE_PATTERN = Pattern.compile(
+			"^(?:(?:31(\\/|-|\\.)(?:0?[13578]|1[02]))\\1|(?:(?:29|30)(\\/|"
+			+ "-|\\.)(?:0?[1,3-9]|1[0-2])\\2))(?:(?:1[6-9]|[2-9]\\d)?\\d{2})$|"
+			+ "^(?:29(\\/|-|\\.)0?2\\3(?:(?:(?:1[6-9]|[2-9]\\d)?(?:0[48]|[2468]"
+			+ "[048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|"
+			+ "^(?:0?[1-9]|1\\d|2[0-8])(\\/|-|\\.)(?:(?:0?[1-9])|(?:1[0-2]))\\4("
+			+ "?:(?:1[6-9]|[2-9]\\d)?\\d{2})$");
+	
 	private MainUI mainUI;
 	private Xe xe;
 	private XeDB xeDB;
@@ -91,6 +100,12 @@ public class AddXeController {
 			return false;
 		}
 		
+		/* Check ngaySinh */
+		if (checkFormatOfDate(inputXeView.getTfNgayBaoTri().getText().toString().trim()) == false) {
+			JOptionPane.showMessageDialog(new JDialog(), "Hã nhập đúng định dạng ngày bảo trì dd/mm/yyyy");
+			return false;
+		}
+		
 		/* Check if maSach is exist*/
 		if (!checkID(inputXeView.getTfIdXe().getText().toString().trim())) {
 			JOptionPane.showMessageDialog(new JDialog(), "Mã xe đã tồn tại - Hãy nhập lại");
@@ -107,6 +122,10 @@ public class AddXeController {
 			if (id.equals(idXeFromDB)) return false;
 		}
 		return true;
+	}
+	
+	private boolean checkFormatOfDate(String date) {
+		return DATE_PATTERN.matcher(date).matches();
 	}
 	
 	/*
@@ -154,7 +173,7 @@ public class AddXeController {
 			
 			xe = new Xe(idXe, bienXe, tenXe, loaiXe, hangSanXuat, namSanXuat, ngayBaoTri, nhienLieu, trangThai, giaThue);
 			xeDB.insertXe(xe);
-			
+			xeDB.updateUrl(idXe, "");
 			tableXeView.updateTable(xeDB.getAllXe());
 			clearInput();
 		}
@@ -176,7 +195,6 @@ public class AddXeController {
 		inputXeView.getTfHangSanXuat().setText("");
 		inputXeView.getTfNhienLieu().setText("");
 		inputXeView.getTfNgayBaoTri().setText("");
-		inputXeView.getTfTrangThai().setText("");
 		inputXeView.getTfGiaThue().setText("");
 	}
 	
@@ -256,6 +274,7 @@ public class AddXeController {
 					
 					Xe xe = new Xe(idXe, bienXe, tenXe, loaiXe, hangSanXuat, namSXStr, ngayBaoTri, nhienLieu, trangThai, giaThue);
 					xeDB.insertXe(xe);
+					xeDB.updateUrl(idXe, "");
 					tableXeView.updateTable(xeDB.getAllXe());
 	
 					dataOfRow.clear();

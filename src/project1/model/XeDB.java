@@ -343,7 +343,7 @@ public class XeDB implements XeDAO{
 	}
 
 	@Override
-	public void update(String idXe, String newUrl) {
+	public void updateUrl(String idXe, String newUrl) {
 		connection = getConnection();
 		PreparedStatement preStatement = null;
 		try {
