@@ -73,7 +73,7 @@ public class TKNVController {
 					
 					int indexOfCombo = cbTKNV.getSelectedIndex();
 					String title = cbTKNV.getSelectedItem().toString();
-					tknvInformation.getLbTitle().setText("THỐNG KÊ NHÂN VIÊN THEO " + title);
+					tknvInformation.getLbTitle().setText("THỐNG KÊ NHÂN VIÊN THEO " + title.toUpperCase());
 					
 					
 					//System.out.println("Index cb: " + indexOfCombo);

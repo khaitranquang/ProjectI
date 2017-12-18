@@ -73,7 +73,7 @@ public class TKXeController {
 					
 					int indexOfCombo = cbTKXe.getSelectedIndex();
 					String title = cbTKXe.getSelectedItem().toString();
-					tkXeInformation.getLbTitle().setText("THỐNG KÊ XE THEO " + title);
+					tkXeInformation.getLbTitle().setText("THỐNG KÊ XE THEO " + title.toUpperCase());
 					String data[][] = getDataTKXeFromDB(indexOfCombo);
 					tkXeInformation.getTableTKXeView().updateTable(data, indexOfCombo);
 					

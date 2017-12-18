@@ -252,6 +252,21 @@ public class AddThueXeController {
 			return false;
 		}
 		
+		/* Check ngayHenTra */
+		String ngayHenTra = thueXeInformation.getCbNgayHenTra().getSelectedItem().toString() + "-"
+				   + thueXeInformation.getCbThangHenTra().getSelectedItem().toString() + "-"
+				   + thueXeInformation.getCbNamHenTra().getSelectedItem().toString();
+		String ngayMuon = thueXeInformation.getTfNgayMuon().getText().toString();
+		String[] nm = ngayMuon.split("-");
+		String[] nht = ngayHenTra.split("-");
+		int longnm = 0, longnht = 0; 
+		longnm = Integer.parseInt(nm[2].concat(nm[1].concat(nm[0])));
+		longnht = Integer.parseInt(nht[2].concat(nht[1]).concat(nht[0]));
+		if(longnht < longnm) {
+			JOptionPane.showMessageDialog(this.thueXeInformation, "Ngày hẹn trả sai!!!");
+			return false;
+		}
+		
 		// Check tienCoc is integer?
 		try {
 			int tienCoc = Integer.parseInt(thueXeInformation.getTfTienCoc().getText().toString());

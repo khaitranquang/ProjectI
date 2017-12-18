@@ -201,6 +201,21 @@ public class EditRentController {
 			return false;
 		}
 		
+		/* Check ngayHenTra */
+		String ngayHenTra = editRentView.getCbNgayHenTra().getSelectedItem().toString() + "-"
+				   + editRentView.getCbThangHenTra().getSelectedItem().toString() + "-"
+				   + editRentView.getCbNamHenTra().getSelectedItem().toString();
+		String ngayMuon = editRentView.getTfNgayMuon().getText().toString();
+		String[] nm = ngayMuon.split("-");
+		String[] nht = ngayHenTra.split("-");
+		int longnm = 0, longnht = 0; 
+		longnm = Integer.parseInt(nm[2].concat(nm[1].concat(nm[0])));
+		longnht = Integer.parseInt(nht[2].concat(nht[1]).concat(nht[0]));
+		if(longnht < longnm) {
+			JOptionPane.showMessageDialog(this.editRentView, "Ngày hẹn trả sai!!!");
+			return false;
+		}
+		
 		// Check number field
 		try {
 			String tienCoc = editRentView.getTfTienCoc().getText().trim().toString();

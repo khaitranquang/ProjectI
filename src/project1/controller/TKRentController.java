@@ -81,7 +81,7 @@ public class TKRentController {
 					
 					int indexOfCombo = cbTKRent.getSelectedIndex();
 					String title = cbTKRent.getSelectedItem().toString();
-					tkRentInformation.getLbTitle().setText("THỐNG KÊ THUÊ XE THEO " + title);
+					tkRentInformation.getLbTitle().setText("THỐNG KÊ THUÊ XE THEO " + title.toUpperCase());
 				
 					String data[][] = getDataTKMTFromDB(indexOfCombo);
 

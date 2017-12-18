@@ -75,7 +75,7 @@ public class TKKHController {
 					
 					int indexOfCombo = cbTKKH.getSelectedIndex();
 					String title = cbTKKH.getSelectedItem().toString();
-					tkkhInformation.getLbTitle().setText("THỐNG KÊ KHÁCH HÀNG THEO " + title);
+					tkkhInformation.getLbTitle().setText("THỐNG KÊ KHÁCH HÀNG THEO " + title.toUpperCase());
 					
 					
 					//System.out.println("Index cb: " + indexOfCombo);
