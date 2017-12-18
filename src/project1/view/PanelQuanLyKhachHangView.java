@@ -40,10 +40,10 @@ public class PanelQuanLyKhachHangView extends JPanel{
 	}
 	
 	private JPanel createBottomPanel() {
-		JPanel panel = new JPanel(new BorderLayout());
+		JPanel panel = new JPanel(new GridLayout(1, 2, 5, 5));
 		panel.setBorder(new EmptyBorder(15, 40, 0, 40));
-		panel.add(inputKH = new InputKhachHangView(), BorderLayout.CENTER);
-		panel.add(btnKH = new ButtonKhachHangView(), BorderLayout.EAST);
+		panel.add(inputKH = new InputKhachHangView());
+		panel.add(btnKH = new ButtonKhachHangView());
 		
 		return panel;
 	}

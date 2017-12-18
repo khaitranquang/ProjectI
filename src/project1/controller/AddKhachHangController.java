@@ -77,7 +77,7 @@ public class AddKhachHangController {
 			inputKhachHangView.getTfSoCMND().getText().toString().trim().equals("") ||
 			inputKhachHangView.getTfDiaChi().getText().toString().trim().equals("") ||
 			inputKhachHangView.getTfSoDT().getText().toString().trim().equals("") ||
-			inputKhachHangView.getTfGioiTinh().getText().toString().trim().equals("") ||
+			(!inputKhachHangView.getRadNam().isSelected() && !inputKhachHangView.getRadNu().isSelected()) ||
 			inputKhachHangView.getTfEmail().getText().toString().trim().equals("")) {
 				System.out.println("Text Fields are not empty !!!");
 				JOptionPane.showMessageDialog(new JDialog(), "Các trường dữ liệu không được để trống");
@@ -174,7 +174,7 @@ public class AddKhachHangController {
 			String soCMND   = inputKhachHangView.getTfSoCMND().getText().toString();
 			String ngaySinh = inputKhachHangView.getTfNgaySinh().getText().toString();
 			String diaChi   = inputKhachHangView.getTfDiaChi().getText().toString();
-			String gioiTinh = inputKhachHangView.getTfGioiTinh().getText().toString();
+			String gioiTinh = inputKhachHangView.getRadNam().isSelected()?"Nam":"Nữ";
 			String sdt      = inputKhachHangView.getTfSoDT().getText().toString();
 			String email    = inputKhachHangView.getTfEmail().getText().toString();
 			
@@ -196,7 +196,7 @@ public class AddKhachHangController {
 	private void clearInput() {
 		inputKhachHangView.getTfIdKhachHang().setText("");
 		inputKhachHangView.getTfTenKhachHang().setText("");
-		inputKhachHangView.getTfGioiTinh().setText("");
+		inputKhachHangView.getBg().clearSelection();
 		inputKhachHangView.getTfDiaChi().setText("");
 		inputKhachHangView.getTfSoDT().setText("");
 		inputKhachHangView.getTfNgaySinh().setText("");

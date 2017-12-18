@@ -39,10 +39,10 @@ public class PanelQuanLyNhanVienView extends JPanel{
 	}
 	
 	private JPanel createBottomPanel() {
-		JPanel panel = new JPanel(new BorderLayout());
+		JPanel panel = new JPanel(new GridLayout(1, 2, 5, 5));
 		panel.setBorder(new EmptyBorder(15, 40, 0, 40));
-		panel.add(inputNV = new InputNhanVienView(), BorderLayout.CENTER);
-		panel.add(btnNV = new ButtonNhanVienView(), BorderLayout.EAST);
+		panel.add(inputNV = new InputNhanVienView());
+		panel.add(btnNV = new ButtonNhanVienView());
 		
 		return panel;
 	}

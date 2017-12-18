@@ -88,7 +88,8 @@ public class EditNhanVienController {
 		nhanVienInformation.getTfSoCMND().setText(nhanVien.getSoCMND());
 		nhanVienInformation.getTfNgaySinh().setText(nhanVien.getNgaySinh());
 		nhanVienInformation.getTfDiaChi().setText(nhanVien.getDiaChi());
-		nhanVienInformation.getTfGioiTinh().setText(nhanVien.getGioiTinh());
+		if(nhanVien.getGioiTinh().equals("Nam")) nhanVienInformation.getRadNam().setSelected(true);
+		else nhanVienInformation.getRadNu().setSelected(true);
 		nhanVienInformation.getTfSDT().setText(nhanVien.getSDT());
 	}
 	
@@ -112,7 +113,7 @@ public class EditNhanVienController {
 	}
 	
 	private void huy() {
-		this.editNhanVienView.setVisible(false);
+		this.editNhanVienView.dispose();
 	}
 	
 	/*
@@ -126,7 +127,7 @@ public class EditNhanVienController {
 			nhanVienInformation.getTfSoCMND().getText().toString().trim().equals("") ||
 			nhanVienInformation.getTfDiaChi().getText().toString().trim().equals("") ||
 			nhanVienInformation.getTfSDT().getText().toString().trim().equals("") ||
-			nhanVienInformation.getTfGioiTinh().getText().toString().trim().equals("")) {
+			(!nhanVienInformation.getRadNam().isSelected() && !nhanVienInformation.getRadNu().isSelected())) {
 			System.out.println("Text Fields are not empty !!!");
 			JOptionPane.showMessageDialog(new JDialog(), "Các trường dữ liệu không được để trống");
 			return false;
@@ -182,12 +183,12 @@ public class EditNhanVienController {
 			String soCMND = nhanVienInformation.getTfSoCMND().getText().toString();
 			String ngaySinh = nhanVienInformation.getTfNgaySinh().getText().toString();
 			String diaChi = nhanVienInformation.getTfDiaChi().getText().toString();
-			String gioiTinh = nhanVienInformation.getTfGioiTinh().getText().toString();
+			String gioiTinh = nhanVienInformation.getRadNam().isSelected()?"Nam":"Nữ";
 			String sdt= nhanVienInformation.getTfSDT().getText().toString();
 			
 			nhanVienDB.updateNhanVien(this.nhanVien, idNV, tenNV, soCMND, ngaySinh, diaChi, gioiTinh, sdt);
 			tableNhanVienView.updateTable(nhanVienDB.getAllNhanVien());
-			this.editNhanVienView.setVisible(false);
+			this.editNhanVienView.dispose();
 		}
 		else {
 			System.out.println("Edit fail !!!");

@@ -75,7 +75,7 @@ public class AddNhanVienController {
 			inputNhanVienView.getTfSoCMND().getText().toString().trim().equals("") ||
 			inputNhanVienView.getTfDiaChi().getText().toString().trim().equals("") ||
 			inputNhanVienView.getTfSoDT().getText().toString().trim().equals("") ||
-			inputNhanVienView.getTfGioiTinh().getText().toString().trim().equals("")) {
+			(!inputNhanVienView.getRadNam().isSelected() && !inputNhanVienView.getRadNu().isSelected())) {
 			System.out.println("Text Fields are not empty !!!");
 			JOptionPane.showMessageDialog(new JDialog(), "Các trường dữ liệu không được để trống");
 			return false;
@@ -161,7 +161,7 @@ public class AddNhanVienController {
 			String soCMND   = inputNhanVienView.getTfSoCMND().getText().toString();
 			String ngaySinh = inputNhanVienView.getTfNgaySinh().getText().toString();
 			String diaChi   = inputNhanVienView.getTfDiaChi().getText().toString();
-			String gioiTinh = inputNhanVienView.getTfGioiTinh().getText().toString();
+			String gioiTinh = inputNhanVienView.getRadNam().isSelected()?"Nam":"Nữ";
 			String sdt      = inputNhanVienView.getTfSoDT().getText().toString();
 			
 			nhanVien = new NhanVien(idNV, tenNV, soCMND, ngaySinh, diaChi, gioiTinh, sdt);
@@ -183,7 +183,7 @@ public class AddNhanVienController {
 	private void clearInput() {
 		inputNhanVienView.getTfIdNhanVien().setText("");
 		inputNhanVienView.getTfTenNhanVien().setText("");
-		inputNhanVienView.getTfGioiTinh().setText("");
+		inputNhanVienView.getBg().clearSelection();
 		inputNhanVienView.getTfDiaChi().setText("");
 		inputNhanVienView.getTfSoDT().setText("");
 		inputNhanVienView.getTfNgaySinh().setText("");

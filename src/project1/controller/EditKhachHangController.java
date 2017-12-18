@@ -91,7 +91,8 @@ public class EditKhachHangController {
 		khachHangInformation.getTfSoCMND().setText(khachHang.getSoCMND());
 		khachHangInformation.getTfNgaySinh().setText(khachHang.getNgaySinh());
 		khachHangInformation.getTfDiaChi().setText(khachHang.getDiaChi());
-		khachHangInformation.getTfGioiTinh().setText(khachHang.getGioiTinh());
+		if(khachHang.getGioiTinh().equals("Nam")) khachHangInformation.getRadNam().setSelected(true);
+		else khachHangInformation.getRadNu().setSelected(true);
 		khachHangInformation.getTfSDT().setText(khachHang.getSDT());
 		khachHangInformation.getTfEmail().setText(khachHang.getEmail());
 	}
@@ -116,7 +117,7 @@ public class EditKhachHangController {
 	}
 	
 	private void huy() {
-		this.editKhachHangView.setVisible(false);
+		this.editKhachHangView.dispose();
 	}
 	
 	/*
@@ -130,7 +131,7 @@ public class EditKhachHangController {
 			khachHangInformation.getTfSoCMND().getText().toString().trim().equals("") ||
 			khachHangInformation.getTfDiaChi().getText().toString().trim().equals("") ||
 			khachHangInformation.getTfSDT().getText().toString().trim().equals("") ||
-			khachHangInformation.getTfGioiTinh().getText().toString().trim().equals("") ||
+			(!khachHangInformation.getRadNam().isSelected()&&!khachHangInformation.getRadNu().isSelected())||
 			khachHangInformation.getTfEmail().getText().toString().trim().equals("")) {
 			System.out.println("Text Fields are not empty !!!");
 			JOptionPane.showMessageDialog(new JDialog(), "Các trường dữ liệu không được để trống");
@@ -198,13 +199,13 @@ public class EditKhachHangController {
 			String soCMND = khachHangInformation.getTfSoCMND().getText().toString();
 			String ngaySinh = khachHangInformation.getTfNgaySinh().getText().toString();
 			String diaChi = khachHangInformation.getTfDiaChi().getText().toString();
-			String gioiTinh = khachHangInformation.getTfGioiTinh().getText().toString();
+			String gioiTinh = khachHangInformation.getRadNam().isSelected()?"Nam":"Nữ";
 			String sdt= khachHangInformation.getTfSDT().getText().toString();
 			String email = khachHangInformation.getTfEmail().getText().toString();
 			
 			khachHangDB.updateKhachHang(this.khachHang, idKH, tenKH, soCMND, ngaySinh, diaChi, gioiTinh, sdt, email);
 			tableKhachHangView.updateTable(khachHangDB.getAllKhachHang());
-			this.editKhachHangView.setVisible(false);
+			this.editKhachHangView.dispose();
 		}
 		else {
 			System.out.println("Edit fail !!!");

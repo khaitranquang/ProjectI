@@ -39,7 +39,7 @@ public class PanelQuanLyXeView extends JPanel{
 	}
 	
 	private JPanel createBottomPanel() {
-		JPanel panel = new JPanel(new BorderLayout());
+		JPanel panel = new JPanel(new GridLayout(1, 2, 5, 5));
 		panel.setBorder(new EmptyBorder(15, 40, 0, 40));
 		panel.add(inputXe = new InputXeView(), BorderLayout.CENTER);
 		panel.add(btnXe = new ButtonXeView(), BorderLayout.EAST);

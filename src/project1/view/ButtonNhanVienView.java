@@ -6,13 +6,14 @@ import java.awt.GridLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 public class ButtonNhanVienView extends JPanel{
 	
-	private JButton btnThem, btnSua, btnXoa, btnTimKiem, btnThongKe, btnHuy, btnNhapFile, btnXuatFile;
+	private JButton btnThem, btnSua, btnXoa, btnThongKe, btnHuy, btnNhapFile, btnXuatFile;
 	private JTextField tfTimKiem;
 	private JComboBox<String> timKiemCB, thongKeCB;
 	private String[] timKiemVal = {"Tên nhân viên", "Mã nhân viên", "Số CMND", "Ngày sinh", 
@@ -21,26 +22,23 @@ public class ButtonNhanVienView extends JPanel{
 	
 	public ButtonNhanVienView() {
 		setLayout(new GridLayout(2, 1, 10, 15));
-		setBorder(new EmptyBorder(5, 0, 90, 0));
+		setBorder(new EmptyBorder(5, 15, 120, 0));
 		add(createButTkThongKe());
 		add(createButOther());
 	}
 	
 	private JPanel createButTkThongKe() {
-		JPanel panel = new JPanel(new GridLayout(1, 2, 5, 5));
+		JPanel panel = new JPanel(new GridLayout(1, 2, 15, 5));
 		JPanel panelL = new JPanel(new GridLayout(2, 2, 5, 15));
-		panelL.add(btnTimKiem = createButton("Tìm kiếm"));
-		btnTimKiem.setIcon(new ImageIcon(this.getClass().getResource("/search.png")));
+		panelL.add(new JLabel("Tìm kiếm", new ImageIcon(this.getClass().getResource("/search.png")), JLabel.CENTER));
 		panelL.add(timKiemCB = new JComboBox<>(timKiemVal));
 		panelL.add(btnThongKe = createButton("Thống kê"));
 		btnThongKe.setIcon(new ImageIcon(this.getClass().getResource("/tk.png")));
 		panelL.add(thongKeCB = new JComboBox<>(thongKeVal));
-		btnTimKiem.setToolTipText("Tìm kiếm");
 		btnThongKe.setToolTipText("Thống kê");
 		
-		JPanel panelR = new JPanel(new GridLayout(1, 1));
+		JPanel panelR = new JPanel(new GridLayout(2, 1, 5, 15));
 		panelR.add(tfTimKiem = new JTextField());
-		panelR.setBorder(new EmptyBorder(0, 0, 52, 0));
 		panel.add(panelL);
 		panel.add(panelR);
 		
@@ -81,10 +79,6 @@ public class ButtonNhanVienView extends JPanel{
 
 	public JButton getBtnXoa() {
 		return btnXoa;
-	}
-
-	public JButton getBtnTimKiem() {
-		return btnTimKiem;
 	}
 
 	public JButton getBtnThongKe() {

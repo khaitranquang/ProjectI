@@ -180,7 +180,7 @@ public class EditRentController {
 			muonXeDB.editMuonXe(muonXe, maKHMoi, maNVMoi, ngayHenTraMoi, tienCocMoi);
 			tableMuonTraView.updateTable(muonXeDB.getAllMuonXe());
 			
-			this.editRentView.setVisible(false);
+			this.editRentView.dispose();
 		}
 		else {
 			System.out.println("Edit Fail !!!");
@@ -188,7 +188,7 @@ public class EditRentController {
 	}
 	
 	private void huy() {
-		this.editRentView.setVisible(false);
+		this.editRentView.dispose();
 	}
 	
 	private boolean checkInfor(EditRentView editRentView) {

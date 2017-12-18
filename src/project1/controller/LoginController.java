@@ -140,10 +140,8 @@ public class LoginController {
 					
 //					mainUI.getMainPanel().setVisible(false);
 //					mainUI.getMenuView().setVisible(false);
-					mainUI.setVisible(false);
-					mainUI = null;
-					loginView.setVisible(false);
-					loginView = null;
+					mainUI.dispose();
+					loginView.dispose();
 					MainUI mainUI2 = new MainUI();
 					LoginController newLogin = new LoginController(mainUI2);
 					
@@ -241,23 +239,4 @@ public class LoginController {
 			accountDB.changePassEmplFromDB(account, newPass);
 		}
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 }

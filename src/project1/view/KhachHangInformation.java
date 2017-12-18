@@ -1,10 +1,13 @@
 package project1.view;
 
 import java.awt.BorderLayout;
+import java.awt.FlowLayout;
 import java.awt.GridLayout;
 
+import javax.swing.ButtonGroup;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
@@ -15,13 +18,17 @@ public class KhachHangInformation  extends JPanel{
 	private JTextField tfSoCMND   = new JTextField(30);
 	private JTextField tfNgaySinh = new JTextField(30);
 	private JTextField tfDiaChi   = new JTextField(30);
-	private JTextField tfGioiTinh = new JTextField(30);
+	private JRadioButton radNam = new JRadioButton("Nam");
+	private JRadioButton radNu = new JRadioButton("Nữ");
+	private ButtonGroup bg = new ButtonGroup();
 	private JTextField tfSDT      = new JTextField(30);
 	private JTextField tfEmail    = new JTextField(30);
 	
 	public KhachHangInformation() {
 		setLayout(new BorderLayout());
 		setBorder(new TitledBorder("Thông tin"));
+		bg.add(radNam);
+		bg.add(radNu);
 		add(createPanelLabel(), BorderLayout.WEST);
 		add(createPanelTF(), BorderLayout.CENTER);
 	}
@@ -41,9 +48,19 @@ public class KhachHangInformation  extends JPanel{
 	public JTextField getTfDiaChi() {
 		return tfDiaChi;
 	}
-	public JTextField getTfGioiTinh() {
-		return tfGioiTinh;
+	
+	public JRadioButton getRadNam() {
+		return radNam;
 	}
+
+	public JRadioButton getRadNu() {
+		return radNu;
+	}
+
+	public ButtonGroup getBg() {
+		return bg;
+	}
+
 	public JTextField getTfSDT() {
 		return tfSDT;
 	}
@@ -73,9 +90,22 @@ public class KhachHangInformation  extends JPanel{
 		panel.add(tfSoCMND);
 		panel.add(tfNgaySinh);
 		panel.add(tfDiaChi);
-		panel.add(tfGioiTinh);
+		panel.add(createPanelGT());
 		panel.add(tfSDT);
 		panel.add(tfEmail);
+		
+		return panel;
+	}
+	private JPanel createPanelGT() {
+		radNam = new JRadioButton("Nam");
+		radNu = new JRadioButton("Nữ");
+		bg = new ButtonGroup();
+		bg.add(radNam);
+		bg.add(radNu);
+		JPanel panel = new JPanel();
+		((FlowLayout) panel.getLayout()).setAlignment(FlowLayout.LEFT);
+		panel.add(radNam, JPanel.LEFT_ALIGNMENT);
+		panel.add(radNu, JPanel.LEFT_ALIGNMENT);
 		
 		return panel;
 	}

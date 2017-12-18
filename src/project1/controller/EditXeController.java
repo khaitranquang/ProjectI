@@ -229,7 +229,7 @@ public class EditXeController {
 			xeDB.updateUrl(maXeMoi, url);
 			tableXeView.updateTable(xeDB.getAllXe());
 			
-			this.editXeView.setVisible(false);
+			this.editXeView.dispose();
 		}
 		else {
 			System.out.println("Edit fail !!!");
@@ -237,6 +237,6 @@ public class EditXeController {
 	}
 	
 	private void huy() {
-		this.editXeView.setVisible(false);
+		this.editXeView.dispose();
 	}	
 }
