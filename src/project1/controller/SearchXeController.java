@@ -18,14 +18,12 @@ import project1.view.TableXeView;
 
 public class SearchXeController {
 	private MainUI mainUI;
-	private Xe xe;
 	private XeDAO xeDB;
 	
 	private ArrayList<Xe> resultSearch = new ArrayList<Xe>();
 	
 	private JTextField tfSearch;
 	private JComboBox<String> cbSearchType;
-	
 	private TableXeView tableXeView;
 	private int typeSearch;
 	
@@ -215,28 +213,4 @@ public class SearchXeController {
 			tableXeView.updateTable(xeDB.getAllXe());
 		}
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 }

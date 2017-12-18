@@ -26,8 +26,6 @@ public class TableMuonTraView extends JPanel{
 	public void setTable(JTable table) {
 		this.table = table;
 	}
-
-	
 	
 	public TableMuonTraView() {
 		setLayout(new BorderLayout());

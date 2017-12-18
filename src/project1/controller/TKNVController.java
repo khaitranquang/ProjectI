@@ -6,7 +6,6 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
@@ -27,15 +26,15 @@ import org.apache.poi.xssf.usermodel.XSSFFont;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
+import project1.model.NhanVienDAO;
 import project1.model.NhanVienDB;
 import project1.view.MainUI;
-import project1.view.TKKHView;
 import project1.view.TKNVInformation;
 import project1.view.TKNVView;
 
 public class TKNVController {
 	private MainUI mainUI;
-	private NhanVienDB nhanVienDB;
+	private NhanVienDAO nhanVienDB;
 	
 	private TKNVView tknvView;
 	private TKNVInformation tknvInformation;
@@ -65,7 +64,6 @@ public class TKNVController {
 					tknvInformation = tknvView.getTknvInformation();
 					tknvView.setVisible(true);
 					
-					DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");
 					LocalDate localDate   = LocalDate.now();
 					String ngayHT     = Integer.toString(localDate.getDayOfMonth());
 					String thangHT    = Integer.toString(localDate.getMonthValue());
@@ -190,7 +188,6 @@ public class TKNVController {
 			cell.setCellValue("Nhóm 14");
 			cell.setCellStyle(createStyleDefault(workbook));
 			
-			DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");
 			LocalDate localDate   = LocalDate.now();
 			String ngayHT     = Integer.toString(localDate.getDayOfMonth());
 			String thangHT    = Integer.toString(localDate.getMonthValue());

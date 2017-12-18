@@ -29,12 +29,6 @@ public class ShowAvatarController {
 		
 		setAction();
 	}
-	
-	// Find index
-	private int findIndexOfData(){
-		int index = tableXeView.getTable().getSelectedRow();
-		return index;
-	}
 		
 	private String getID(int indexRow, int indexCol) {
 		JTable table = tableXeView.getTable();

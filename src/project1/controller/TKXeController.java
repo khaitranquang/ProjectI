@@ -6,7 +6,6 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
@@ -27,6 +26,7 @@ import org.apache.poi.xssf.usermodel.XSSFFont;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
+import project1.model.XeDAO;
 import project1.model.XeDB;
 import project1.view.MainUI;
 import project1.view.TKXeInformation;
@@ -34,7 +34,7 @@ import project1.view.TKXeView;
 
 public class TKXeController {
 	private MainUI mainUI;
-	private XeDB xeDB;
+	private XeDAO xeDB;
 	
 	private TKXeView tkXeView;
 	private TKXeInformation tkXeInformation;
@@ -64,7 +64,6 @@ public class TKXeController {
 					tkXeInformation = tkXeView.getTkXeInformation();
 					tkXeView.setVisible(true);
 					
-					DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");
 					LocalDate localDate   = LocalDate.now();
 					String ngayHT     = Integer.toString(localDate.getDayOfMonth());
 					String thangHT    = Integer.toString(localDate.getMonthValue());
@@ -75,13 +74,8 @@ public class TKXeController {
 					int indexOfCombo = cbTKXe.getSelectedIndex();
 					String title = cbTKXe.getSelectedItem().toString();
 					tkXeInformation.getLbTitle().setText("THỐNG KÊ XE THEO " + title);
-					
-					
-					//System.out.println("Index cb: " + indexOfCombo);
 					String data[][] = getDataTKXeFromDB(indexOfCombo);
-
 					tkXeInformation.getTableTKXeView().updateTable(data, indexOfCombo);
-					//loadDataForTKTable(indexOfCombo);
 					
 					setActionForThongKeXeView(data);
 				}
@@ -200,7 +194,6 @@ public class TKXeController {
 			cell.setCellValue("Nhóm 14");
 			cell.setCellStyle(createStyleDefault(workbook));
 			
-			DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");
 			LocalDate localDate   = LocalDate.now();
 			String ngayHT     = Integer.toString(localDate.getDayOfMonth());
 			String thangHT    = Integer.toString(localDate.getMonthValue());

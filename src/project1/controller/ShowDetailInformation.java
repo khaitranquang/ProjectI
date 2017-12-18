@@ -11,7 +11,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -43,9 +42,11 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import project1.model.ChiTiet;
+import project1.model.ChiTietDAO;
 import project1.model.ChiTietDB;
 import project1.model.KhachHangDB;
 import project1.model.MuonXe;
+import project1.model.MuonXeDAO;
 import project1.model.MuonXeDB;
 import project1.model.NhanVienDB;
 import project1.model.Xe;
@@ -53,7 +54,6 @@ import project1.model.XeDB;
 import project1.view.ChiTietInformation;
 import project1.view.ChiTietView;
 import project1.view.MainUI;
-import project1.view.TableChiTietView;
 import project1.view.TableMuonTraView;
 
 
@@ -62,16 +62,13 @@ public class ShowDetailInformation {
 	private static final double PHAN_TRAM_KHUYEN_MAI = 0.1;
 	
 	private MainUI mainUI;
-	private ChiTiet chiTiet;
-	private MuonXe muonXe;
-	private ChiTietDB chiTietDB;
-	private MuonXeDB muonXeDB;
+	private ChiTietDAO chiTietDB;
+	private MuonXeDAO muonXeDB;
 	
 	private ChiTietView chiTietView;
 	private JButton btnShowDetail;
 	
 	private ChiTietInformation chiTietInformation;
-	private TableChiTietView tableChiTietView;
 	private TableMuonTraView tableMuonTraView;
 	
 	/* Initialize */
@@ -122,7 +119,7 @@ public class ShowDetailInformation {
 	
 	/* Load detail information */
 	private void loadInfor(String maMT) {
-		muonXe = muonXeDB.getMuonXe(maMT);
+		MuonXe muonXe = muonXeDB.getMuonXe(maMT);
 		ArrayList<ChiTiet> listDetail = chiTietDB.getAllChiTietWithID(maMT);
 		
 		chiTietInformation.getLbMaMT().setText(maMT);
@@ -196,9 +193,7 @@ public class ShowDetailInformation {
 				int indexOfRow = tableDetail.getSelectedRow();
 				String maMT = chiTietInformation.getLbMaMT().getText().trim().toString();
 				String maXeMuon = tableDetail.getModel().getValueAt(indexOfRow, 0).toString();
-				int tienThue = Integer.parseInt(tableDetail.getModel().getValueAt(indexOfRow, 2).toString());
 				
-				DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");
 				LocalDate localDate   = LocalDate.now();
 				String ngayTraHT      = Integer.toString(localDate.getDayOfMonth());
 				String thangTraHT     = Integer.toString(localDate.getMonthValue());
@@ -247,9 +242,7 @@ public class ShowDetailInformation {
 					if (aDetail.getNgayTra().equals("") == false) continue;
 					else {
 						String maXeMuon = aDetail.getMaXe();
-						int giaThue   = aDetail.getTienThue();
 						
-						DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");
 						LocalDate localDate   = LocalDate.now();
 						String ngayTraHT      = Integer.toString(localDate.getDayOfMonth());
 						String thangTraHT     = Integer.toString(localDate.getMonthValue());
@@ -447,11 +440,8 @@ public class ShowDetailInformation {
 			cell.setCellStyle(createStyleDefault(workbook));
 			sheet.addMergedRegion(new CellRangeAddress(2, 2, 0, 1));
 			
-			
 			printImage(workbook, sheet);
 			
-			
-			DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");
 			LocalDate localDate   = LocalDate.now();
 			String ngayHT         = Integer.toString(localDate.getDayOfMonth());
 			String thangHT        = Integer.toString(localDate.getMonthValue());
@@ -691,7 +681,6 @@ public class ShowDetailInformation {
 
 			   //Creates a picture
 			   Picture pict = drawing.createPicture(anchor, pictureIdx);
-			   //Reset the image to the original size
 			   pict.resize();
 			   
 			  }
@@ -699,11 +688,5 @@ public class ShowDetailInformation {
 			   System.out.println(e);
 			  }
 	}
-	
-	
-	
-	
-	
-	
-	
+
 }

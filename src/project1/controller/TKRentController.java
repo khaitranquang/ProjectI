@@ -7,7 +7,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -30,8 +29,10 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import project1.model.ChiTiet;
+import project1.model.ChiTietDAO;
 import project1.model.ChiTietDB;
 import project1.model.MuonXe;
+import project1.model.MuonXeDAO;
 import project1.model.MuonXeDB;
 import project1.view.MainUI;
 import project1.view.TKRentInformation;
@@ -39,8 +40,8 @@ import project1.view.TKRentView;
 
 public class TKRentController {
 	private MainUI mainUI;
-	private MuonXeDB muonXeDB;
-	private ChiTietDB chiTietDB;
+	private MuonXeDAO muonXeDB;
+	private ChiTietDAO chiTietDB;
 	
 	private TKRentView tkRentView;
 	private TKRentInformation tkRentInformation;
@@ -71,7 +72,6 @@ public class TKRentController {
 					tkRentInformation = tkRentView.getTkRentInformation();
 					tkRentView.setVisible(true);
 					
-					DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");
 					LocalDate localDate   = LocalDate.now();
 					String ngayHT     = Integer.toString(localDate.getDayOfMonth());
 					String thangHT    = Integer.toString(localDate.getMonthValue());
@@ -172,7 +172,6 @@ public class TKRentController {
 		return arrResult;
 	}
 	
-	
 	/* Calculating rent free */
 	public int tienThue (String ngayTra, String ngayMuon, int tienThueMotNgay) {
 		int tongTienThue = 0;
@@ -212,11 +211,6 @@ public class TKRentController {
 		}
 		return tongTienThue;
 	}
-	
-	
-	
-	
-	
 	
 	/* Set Action for thongKeSachView - Print & Cancel */
 	private void setActionForThongKeMTView(String[][] data) {
@@ -289,7 +283,6 @@ public class TKRentController {
 			cell.setCellValue("Nhóm 14");
 			cell.setCellStyle(createStyleDefault(workbook));
 			
-			DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");
 			LocalDate localDate   = LocalDate.now();
 			String ngayHT     = Integer.toString(localDate.getDayOfMonth());
 			String thangHT    = Integer.toString(localDate.getMonthValue());
@@ -405,13 +398,4 @@ public class TKRentController {
 	private void huy() {
 		this.tkRentView.setVisible(false);
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
 }

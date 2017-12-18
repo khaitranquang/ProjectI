@@ -133,7 +133,6 @@ public class SearchDetailController {
 			}
 		}
 		
-		
 		// Set color
 		if (resultSearch.size() == 0) {
 			tfSearch.setBackground(COLOR_NOT_FOUND);

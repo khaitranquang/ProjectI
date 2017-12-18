@@ -14,8 +14,6 @@ public class TableTKXeView extends JPanel{
 	public static final int TABLE_TK_WIDTH = 500;
 	public static final int TABLE_TK_HEIGHT = 250;
 	private JTable table;
-	//private String valThongKe = "";
-	//private String titleCols[] = {"TT", valThongKe, "Số lượng"};
 	private String[] titleItem = {"STT", "THUỘC TÍNH", "SỐ LƯỢNG"};
 	private String[] title1 = {"STT", "LOẠI XE", "SỐ LƯỢNG"};
 	private String[] title2 = {"STT", "HÃNG SẢN XUẤT", "SỐ LƯỢNG"};

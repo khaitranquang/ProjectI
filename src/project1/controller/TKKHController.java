@@ -27,15 +27,15 @@ import org.apache.poi.xssf.usermodel.XSSFFont;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
+import project1.model.KhachHangDAO;
 import project1.model.KhachHangDB;
 import project1.view.MainUI;
 import project1.view.TKKHInformation;
 import project1.view.TKKHView;
-import project1.view.TKXeView;
 
 public class TKKHController {
 	private MainUI mainUI;
-	private KhachHangDB khachHangDB;
+	private KhachHangDAO khachHangDB;
 	
 	private TKKHView tkkhView;
 	private TKKHInformation tkkhInformation;
@@ -190,7 +190,6 @@ public class TKKHController {
 			cell.setCellValue("Nhóm 14");
 			cell.setCellStyle(createStyleDefault(workbook));
 			
-			DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");
 			LocalDate localDate   = LocalDate.now();
 			String ngayHT     = Integer.toString(localDate.getDayOfMonth());
 			String thangHT    = Integer.toString(localDate.getMonthValue());

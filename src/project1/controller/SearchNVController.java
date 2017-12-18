@@ -10,17 +10,15 @@ import java.util.ArrayList;
 import javax.swing.JComboBox;
 import javax.swing.JTextField;
 
-import project1.model.KhachHang;
-import project1.model.KhachHangDB;
 import project1.model.NhanVien;
+import project1.model.NhanVienDAO;
 import project1.model.NhanVienDB;
 import project1.view.MainUI;
 import project1.view.TableNhanVienView;
 
 public class SearchNVController {
 	private MainUI mainUI;
-	private NhanVien nv;
-	private NhanVienDB nhanVienDB;
+	private NhanVienDAO nhanVienDB;
 	
 	private ArrayList<NhanVien> resultSearch = new ArrayList<NhanVien>();
 	

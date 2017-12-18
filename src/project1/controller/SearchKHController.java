@@ -11,15 +11,14 @@ import javax.swing.JComboBox;
 import javax.swing.JTextField;
 
 import project1.model.KhachHang;
+import project1.model.KhachHangDAO;
 import project1.model.KhachHangDB;
-import project1.model.XeDB;
 import project1.view.MainUI;
 import project1.view.TableKhachHangView;
 
 public class SearchKHController {
 	private MainUI mainUI;
-	private KhachHang kh;
-	private KhachHangDB khachHangDB;
+	private KhachHangDAO khachHangDB;
 	
 	private ArrayList<KhachHang> resultSearch = new ArrayList<KhachHang>();
 	

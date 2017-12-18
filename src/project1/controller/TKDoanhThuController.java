@@ -11,7 +11,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -40,9 +39,12 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import project1.model.ChiTiet;
+import project1.model.ChiTietDAO;
 import project1.model.ChiTietDB;
 import project1.model.MuonXe;
+import project1.model.MuonXeDAO;
 import project1.model.MuonXeDB;
+import project1.model.NhanVienDAO;
 import project1.model.NhanVienDB;
 import project1.view.MainUI;
 import project1.view.PanelTKDoanhThu;
@@ -50,9 +52,9 @@ import project1.view.PanelTKDoanhThu;
 public class TKDoanhThuController {
 	public static final int PHAT_MOT_NGAY_MUON = 50000;
 	private MainUI mainUI;
-	private ChiTietDB chiTietDB;
-	private MuonXeDB muonXeDB;
-	private NhanVienDB nhanVienDB;
+	private ChiTietDAO chiTietDB;
+	private MuonXeDAO muonXeDB;
+	private NhanVienDAO nhanVienDB;
 	private PanelTKDoanhThu panelTKDoanhThu;
 	
 	private JButton btnTkNgay;
@@ -328,29 +330,6 @@ public class TKDoanhThuController {
 		}
 	}
 	
-	/* -------------------- */
-	private int tinhTienPhat (String ngayTra, String ngayHenTra) {
-		int tienPhat = 0;
-		SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
-		try{
-			Date dateStart = format.parse(ngayHenTra);
-			Date dateEnd   = format.parse(ngayTra);
-			long diffDay = (dateEnd.getTime() - dateStart.getTime()) / (24 * 60 * 60 * 1000);
-			System.out.println("diffDay: " + diffDay);
-			if (diffDay > 0) {
-				tienPhat =(int)(diffDay * PHAT_MOT_NGAY_MUON);
-			}
-			else {
-				tienPhat = 0;
-			}
-		}
-		catch (Exception e){
-			e.printStackTrace();
-			System.out.println("Loi dinh dang ngay");
-		}
-		return tienPhat;
-	}
-	
 	/* Calculating rent free */
 	private int tienThue (String ngayTra, String ngayMuon, int tienThueMotNgay) {
 		int tongTienThue = 0;
@@ -372,22 +351,6 @@ public class TKDoanhThuController {
 			System.out.println("Loi dinh dang ngay");
 		}
 		
-		return tongTienThue;
-	}
-	
-	private int tinhTongTienThue (String maMT) {
-		ArrayList<ChiTiet> listChiTiet = chiTietDB.getAllChiTietWithID(maMT);
-		MuonXe muonXe = muonXeDB.getMuonXe(maMT);
-		String ngayMuon = muonXe.getNgayMuon();
-		int tongTienThue = 0;		
-		for (int i = 0; i < listChiTiet.size(); i++) {
-			if (listChiTiet.get(i).getNgayTra().equals("")) continue;
-			else {
-				String ngayTra = listChiTiet.get(i).getNgayTra();
-				int tienThueMotNgay = listChiTiet.get(i).getTienThue();
-				tongTienThue += tienThue(ngayTra, ngayMuon, tienThueMotNgay);
-			}
-		}
 		return tongTienThue;
 	}
 	
@@ -469,7 +432,6 @@ public class TKDoanhThuController {
 			
 			printImage(workbook, sheet);
 			
-			DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");
 			LocalDate localDate   = LocalDate.now();
 			String ngayHT         = Integer.toString(localDate.getDayOfMonth());
 			String thangHT        = Integer.toString(localDate.getMonthValue());
@@ -670,7 +632,6 @@ public class TKDoanhThuController {
 			cell.setCellValue("Nhóm 14");
 			cell.setCellStyle(createStyleDefault(workbook));
 			
-			DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");
 			LocalDate localDate   = LocalDate.now();
 			String ngayHT         = Integer.toString(localDate.getDayOfMonth());
 			String thangHT        = Integer.toString(localDate.getMonthValue());
@@ -754,7 +715,7 @@ public class TKDoanhThuController {
 			
 			row = sheet.createRow(16);
 			cell = row.createCell(0, CellType.STRING);
-			cell.setCellValue("Doanh số dự tính");
+			cell.setCellValue("Lợi nhuận dự tính");
 			cell.setCellStyle(createStyleDefault(workbook));
 			cell = row.createCell(1, CellType.STRING);
 			cell.setCellValue(panelTKDoanhThu.getTfDoanhSo().getText().toString());
