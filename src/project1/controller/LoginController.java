@@ -51,29 +51,34 @@ public class LoginController {
 	
 	private void createController() {
 		new AddXeController(mainUI);
-		new ShowAvatarController(mainUI);
 		new EditXeController(mainUI);
 		new DeleteXeController(mainUI);
+		new SearchXeController(mainUI);
+		new TKXeController(mainUI);
+		new ShowAvatarController(mainUI);
+		
+		
 		new AddNhanVienController(mainUI);
 		new EditNhanVienController(mainUI);
 		new DeleteNhanVienController(mainUI);
+		new SearchNVController(mainUI);
+		new TKNVController(mainUI);
+		
 		new AddKhachHangController(mainUI);
 		new EditKhachHangController(mainUI);
 		new DeleteKhachHangController(mainUI);
-		new SearchXeController(mainUI);
-		new TKXeController(mainUI);
-		new DeleteRentController(mainUI);
 		new SearchKHController(mainUI);
 		new TKKHController(mainUI);
-		new SearchNVController(mainUI);
-		new TKNVController(mainUI);
+		
 		new AddThueXeController(mainUI);
 		new EditRentController(mainUI);
+		new DeleteRentController(mainUI);
+		new SearchDetailController(mainUI);
 		new ShowDetailInformation(mainUI);
 		new TKRentController(mainUI);
-		new SearchDetailController(mainUI);
-		new PrintSearchController(mainUI);
 		new TKDoanhThuController(mainUI);
+
+		new PrintSearchController(mainUI);	
 	}
 	
 	private void setActions() {

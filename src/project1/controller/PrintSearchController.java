@@ -10,7 +10,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
@@ -40,21 +39,13 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import project1.model.KhachHang;
-import project1.model.KhachHangDB;
 import project1.model.MuonXe;
-import project1.model.MuonXeDB;
 import project1.model.NhanVien;
-import project1.model.NhanVienDB;
 import project1.model.Xe;
-import project1.model.XeDB;
 import project1.view.MainUI;
 
 public class PrintSearchController {
 	private MainUI mainUI;
-	private XeDB xeDB;
-	private NhanVienDB nhanVienDB;
-	private KhachHangDB khachHangDB;
-	private MuonXeDB muonXeDB;
 	
 	private ArrayList<Xe> resultSearchXe;
 	private ArrayList<KhachHang> resultSearchKH;
@@ -73,11 +64,6 @@ public class PrintSearchController {
 	
 	public PrintSearchController(MainUI mainUI) {
 		this.mainUI = mainUI;
-		xeDB = new XeDB();
-		nhanVienDB = new NhanVienDB();
-		khachHangDB = new KhachHangDB();
-		muonXeDB = new MuonXeDB();
-		
 		resultSearchXe = new SearchXeController(mainUI).getResultSearch();
 		resultSearchKH = new SearchKHController(mainUI).getResultSearch();
 		resultSearchNV = new SearchNVController(mainUI).getResultSearch();
@@ -266,7 +252,6 @@ public class PrintSearchController {
 				
 				printImage(workbook, sheet);
 				
-				DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");
 				LocalDate localDate   = LocalDate.now();
 				String ngayHT         = Integer.toString(localDate.getDayOfMonth());
 				String thangHT        = Integer.toString(localDate.getMonthValue());
@@ -384,7 +369,6 @@ public class PrintSearchController {
 				
 				printImage(workbook, sheet);
 				
-				DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");
 				LocalDate localDate   = LocalDate.now();
 				String ngayHT         = Integer.toString(localDate.getDayOfMonth());
 				String thangHT        = Integer.toString(localDate.getMonthValue());
@@ -467,7 +451,6 @@ public class PrintSearchController {
 				sheet.setColumnWidth(5, 4000);
 				sheet.setColumnWidth(6, 4000);
 				
-				
 				Row row = sheet.createRow(0);
 				Cell cell = row.createCell(0, CellType.STRING);
 				cell.setCellValue("TRƯỜNG ĐẠI HỌC BÁCH KHOA HÀ NỘI");
@@ -496,7 +479,6 @@ public class PrintSearchController {
 				
 				printImage(workbook, sheet);
 				
-				DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");
 				LocalDate localDate   = LocalDate.now();
 				String ngayHT         = Integer.toString(localDate.getDayOfMonth());
 				String thangHT        = Integer.toString(localDate.getMonthValue());
@@ -538,10 +520,7 @@ public class PrintSearchController {
 				cell = row.createCell(6, CellType.STRING);
 				cell.setCellValue("Số ĐT");
 				cell.setCellStyle(createStyleForTableTitle(workbook));
-//				cell = row.createCell(7, CellType.STRING);
-//				cell.setCellValue("Email");
-//				cell.setCellStyle(createStyleForTableTitle(workbook));
-			
+
 				int rowNum = 10;
 				for (int i = 0; i < data.length; i++) {
 					row = sheet.createRow(rowNum);
@@ -578,7 +557,6 @@ public class PrintSearchController {
 				sheet.setColumnWidth(4, 4000);
 				sheet.setColumnWidth(5, 4000);
 		
-				
 				Row row = sheet.createRow(0);
 				Cell cell = row.createCell(0, CellType.STRING);
 				cell.setCellValue("TRƯỜNG ĐẠI HỌC BÁCH KHOA HÀ NỘI");
@@ -607,7 +585,6 @@ public class PrintSearchController {
 				
 				printImage(workbook, sheet);
 				
-				DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");
 				LocalDate localDate   = LocalDate.now();
 				String ngayHT         = Integer.toString(localDate.getDayOfMonth());
 				String thangHT        = Integer.toString(localDate.getMonthValue());
@@ -685,7 +662,6 @@ public class PrintSearchController {
 			e.printStackTrace();
 		}
 	}
-	
 	
 	/* Style for date in excel file */
 	private XSSFCellStyle createStyleForDate (XSSFWorkbook workbook) {
@@ -773,12 +749,4 @@ public class PrintSearchController {
 			 System.out.println(e);
 		 }
 	}
-	
-	
-	
-	
-	
-	
-	
-	
 }

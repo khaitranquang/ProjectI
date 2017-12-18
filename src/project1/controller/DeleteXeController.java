@@ -11,6 +11,7 @@ import javax.swing.JTable;
 
 import project1.model.ChiTietDB;
 import project1.model.Xe;
+import project1.model.XeDAO;
 import project1.model.XeDB;
 import project1.view.ButtonXeView;
 import project1.view.MainUI;
@@ -20,7 +21,7 @@ import project1.view.TableXeView;
 public class DeleteXeController {
 	private MainUI mainUI;
 	private Xe xe;
-	private XeDB xeDB;
+	private XeDAO xeDB;
 	
 	private	PanelQuanLyXeView panelQuanLyXeView;
 	private ButtonXeView buttonXeView;

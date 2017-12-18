@@ -10,6 +10,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTable;
 
 import project1.model.KhachHang;
+import project1.model.KhachHangDAO;
 import project1.model.KhachHangDB;
 import project1.model.MuonXe;
 import project1.model.MuonXeDB;
@@ -21,7 +22,7 @@ import project1.view.TableKhachHangView;
 public class DeleteKhachHangController {
 	private MainUI mainUI;
 	private KhachHang khachHang;
-	private KhachHangDB khachHangDB;
+	private KhachHangDAO khachHangDB;
 	
 	private PanelQuanLyKhachHangView panelQuanLyKhachHangView;
 	private ButtonKhachHangView buttonKhachHangView;

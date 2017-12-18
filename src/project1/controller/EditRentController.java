@@ -13,6 +13,7 @@ import javax.swing.JTable;
 import project1.model.KhachHang;
 import project1.model.KhachHangDB;
 import project1.model.MuonXe;
+import project1.model.MuonXeDAO;
 import project1.model.MuonXeDB;
 import project1.model.NhanVien;
 import project1.model.NhanVienDB;
@@ -23,7 +24,7 @@ import project1.view.TableMuonTraView;
 public class EditRentController {
 	private MainUI mainUI;
 	private MuonXe muonXe;
-	private MuonXeDB muonXeDB;
+	private MuonXeDAO muonXeDB;
 	
 	private EditRentView editRentView;
 	private JButton btnEditRent;

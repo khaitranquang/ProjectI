@@ -8,6 +8,7 @@ public class ChiTiet {
 	private int tienPhat;
 	private int tienKhuyenMai;
 	private String trangThai;
+	
 	public String getMaMT() {
 		return maMT;
 	}

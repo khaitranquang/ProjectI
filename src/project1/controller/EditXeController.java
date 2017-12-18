@@ -12,6 +12,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTable;
 
 import project1.model.Xe;
+import project1.model.XeDAO;
 import project1.model.XeDB;
 import project1.view.EditXeView;
 import project1.view.MainUI;
@@ -26,14 +27,14 @@ public class EditXeController {
 			+ "[048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|"
 			+ "^(?:0?[1-9]|1\\d|2[0-8])(\\/|-|\\.)(?:(?:0?[1-9])|(?:1[0-2]))\\4("
 			+ "?:(?:1[6-9]|[2-9]\\d)?\\d{2})$");
+
 	private MainUI mainUI;
 	private Xe xe;
-	private XeDB xeDB;
+	private XeDAO xeDB;
 	private String oldID = "";
 	
-	private EditXeView editXeView;
 	private JButton btnEdit;
-	
+	private EditXeView editXeView;
 	private XeInformation xeInformation;
 	private TableXeView tableXeView;
 	
@@ -237,8 +238,5 @@ public class EditXeController {
 	
 	private void huy() {
 		this.editXeView.setVisible(false);
-	}
-	
+	}	
 }
-
-

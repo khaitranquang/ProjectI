@@ -10,6 +10,8 @@ public interface MuonXeDAO {
 	
 	public void editMuonXe(MuonXe muonXe, String maKHMoi, String maNVMoi, String ngayHenTraMoi, int tienCocMoi);
 	
+	public void deleteRentXe(String id);
+	
 	public ArrayList<String> getListIdKhachHang();
 	
 	// Thong ke thue xe

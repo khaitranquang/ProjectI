@@ -10,6 +10,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 
+import project1.model.XeDAO;
 import project1.model.XeDB;
 import project1.view.MainUI;
 import project1.view.TableXeView;
@@ -18,7 +19,7 @@ public class ShowAvatarController {
 	public static final int WIDTH_IMAGE = 450;
 	public static final int HEIGHT_IMAGE = 300;
 	private MainUI mainUI;
-	private XeDB xeDB;
+	private XeDAO xeDB;
 	private TableXeView tableXeView;
 	
 	public ShowAvatarController(MainUI mainUI) {

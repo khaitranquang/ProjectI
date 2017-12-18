@@ -2,7 +2,7 @@ package project1.model;
 
 import java.util.ArrayList;
 
-public interface ChitietDAO {
+public interface ChiTietDAO {
 	public ArrayList<ChiTiet> getAllChiTietWithID(String maMT);
 	public ArrayList<ChiTiet> getAllChiTiet();
 	

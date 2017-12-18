@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 
-public class ChiTietDB implements ChitietDAO{
+public class ChiTietDB implements ChiTietDAO{
 	private final String dbURL = "jdbc:mysql://localhost:3306/quanlythuexe";
 	private String user = "root";
 	private String password = "1234";

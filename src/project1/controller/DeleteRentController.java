@@ -10,18 +10,17 @@ import javax.swing.JOptionPane;
 import javax.swing.JTable;
 
 import project1.model.ChiTiet;
+import project1.model.ChiTietDAO;
 import project1.model.ChiTietDB;
-import project1.model.MuonXe;
+import project1.model.MuonXeDAO;
 import project1.model.MuonXeDB;
 import project1.view.MainUI;
 import project1.view.TableMuonTraView;
 
 public class DeleteRentController {
 	private MainUI mainUI;
-	private ChiTiet chiTiet;
-	private ChiTietDB chiTietDB;
-	private MuonXe muonXe;
-	private MuonXeDB muonXeDB;
+	private ChiTietDAO chiTietDB;
+	private MuonXeDAO muonXeDB;
 	
 	private JButton btnDelete;
 	private TableMuonTraView tableMuonTraView;
@@ -86,5 +85,4 @@ public class DeleteRentController {
 		}
 		return true;
 	}
-	
 }

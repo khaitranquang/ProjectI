@@ -25,8 +25,8 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import project1.model.KhachHang;
+import project1.model.KhachHangDAO;
 import project1.model.KhachHangDB;
-import project1.model.NhanVien;
 import project1.view.ButtonKhachHangView;
 import project1.view.InputKhachHangView;
 import project1.view.MainUI;
@@ -41,14 +41,12 @@ public class AddKhachHangController {
 			+ "[048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|"
 			+ "^(?:0?[1-9]|1\\d|2[0-8])(\\/|-|\\.)(?:(?:0?[1-9])|(?:1[0-2]))\\4("
 			+ "?:(?:1[6-9]|[2-9]\\d)?\\d{2})$");
-	
 	private static final Pattern VALID_EMAIL_ADDRESS_REGEX = Pattern.compile(
 			"^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
 
-	
 	private MainUI mainUI;
 	private KhachHang khachHang;
-	private KhachHangDB khachHangDB;
+	private KhachHangDAO khachHangDB;
 	
 	private PanelQuanLyKhachHangView panelQuanLyKhachHangView;
 	private ButtonKhachHangView buttonKhachHangView;
@@ -113,14 +111,12 @@ public class AddKhachHangController {
 			return false;
 		}
 		
-		
 		/* Check if maNV is exist*/
 		if (!checkID(inputKhachHangView.getTfIdKhachHang().getText().toString().trim())) {
 			JOptionPane.showMessageDialog(new JDialog(), "Mã nhân viên đã tồn tại - Hãy nhập lại");
 			return false;
 		}
-		
-		
+			
 		return true;
 	}
 	
@@ -225,8 +221,7 @@ public class AddKhachHangController {
 			System.out.println(openFilePath);
 			addKHFromExcelFile(openFilePath);
 			JOptionPane.showMessageDialog(this.mainUI, "Đã thêm từ Excel");
-		}
-		
+		}		
 	}
 	
 	/* Add data from excel */
@@ -341,12 +336,4 @@ public class AddKhachHangController {
 		
 		return true;
 	}
-	
-	
-	
-	
-	
-	
-	
-	
 }

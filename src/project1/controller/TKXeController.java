@@ -316,12 +316,4 @@ public class TKXeController {
 	private void huy() {
 		this.tkXeView.setVisible(false);
 	}
-	
-	
-	
-	
-	
-	
-	
-	
 }

@@ -25,8 +25,8 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import project1.model.AccountDB;
 import project1.model.NhanVien;
+import project1.model.NhanVienDAO;
 import project1.model.NhanVienDB;
-import project1.model.Xe;
 import project1.view.ButtonNhanVienView;
 import project1.view.InputNhanVienView;
 import project1.view.MainUI;
@@ -41,11 +41,10 @@ public class AddNhanVienController {
 			+ "[048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|"
 			+ "^(?:0?[1-9]|1\\d|2[0-8])(\\/|-|\\.)(?:(?:0?[1-9])|(?:1[0-2]))\\4("
 			+ "?:(?:1[6-9]|[2-9]\\d)?\\d{2})$");
-	
-	
+
 	private MainUI mainUI;
 	private NhanVien nhanVien;
-	private NhanVienDB nhanVienDB;
+	private NhanVienDAO nhanVienDB;
 	
 	private PanelQuanLyNhanVienView panelQuanLyNhanVienView;
 	private ButtonNhanVienView buttonNhanVienView;
@@ -321,6 +320,4 @@ public class AddNhanVienController {
 		
 		return true;
 	}
-	
-	
 }

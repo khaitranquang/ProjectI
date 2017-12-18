@@ -13,6 +13,7 @@ import project1.model.AccountDB;
 import project1.model.MuonXe;
 import project1.model.MuonXeDB;
 import project1.model.NhanVien;
+import project1.model.NhanVienDAO;
 import project1.model.NhanVienDB;
 import project1.view.ButtonNhanVienView;
 import project1.view.MainUI;
@@ -22,7 +23,7 @@ import project1.view.TableNhanVienView;
 public class DeleteNhanVienController {
 	private MainUI mainUI;
 	private NhanVien nhanVien;
-	private NhanVienDB nhanVienDB;
+	private NhanVienDAO nhanVienDB;
 	
 	private PanelQuanLyNhanVienView panelQuanLyNhanVienView;
 	private ButtonNhanVienView buttonNhanVienView;
@@ -94,6 +95,5 @@ public class DeleteNhanVienController {
 			if (listLoanXe.get(i).getMaNV().equals(id)) return false;
 		}
 		return true;
-	}
-	
+	}	
 }

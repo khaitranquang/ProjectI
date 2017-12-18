@@ -3,7 +3,6 @@ package project1.controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
@@ -19,6 +18,7 @@ import project1.model.ChiTietDB;
 import project1.model.KhachHang;
 import project1.model.KhachHangDB;
 import project1.model.MuonXe;
+import project1.model.MuonXeDAO;
 import project1.model.MuonXeDB;
 import project1.model.NhanVien;
 import project1.model.NhanVienDB;
@@ -32,11 +32,9 @@ import project1.view.ThueXeInformation;
 import project1.view.XeDuocMuonView;
 
 public class AddThueXeController {
-	private static final double PERCENT_KM = 0.5;
-	
 	private MainUI mainUI;
 	private MuonXe muonXe;
-	private MuonXeDB muonXeDB;
+	private MuonXeDAO muonXeDB;
 	
 	private AddRentView addRentView;
 	private ThueXeInformation thueXeInformation;
@@ -76,7 +74,6 @@ public class AddThueXeController {
 					thueXeInformation.getCbMaNV().addItem(listNV.get(i).getIdNhanVien());;
 				}
 				
-				DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");
 				LocalDate localDate   = LocalDate.now();
 				String ngayMuonHT     = Integer.toString(localDate.getDayOfMonth());
 				String thangMuonHT    = Integer.toString(localDate.getMonthValue());
@@ -349,9 +346,7 @@ public class AddThueXeController {
 			
 			for (int i = 0; i < arrXeDuocThueView.size(); i++) {
 				String maXe  = arrXeDuocThueView.get(i).getLbMaXe().getText().trim().toString();
-				String tenXe = arrXeDuocThueView.get(i).getLbTenXe().getText().trim().toString();
 				int tienThue   = Integer.parseInt(arrXeDuocThueView.get(i).getLbTienThue().getText().trim().toString());
-//				int tienKhuyenMai = (int) (tienThue * PERCENT_KM);
 				int tienKhuyenMai = 0;
 			
 				ChiTiet chiTiet = new ChiTiet(maMT, maXe, tienThue, "", 0, tienKhuyenMai);
@@ -378,14 +373,4 @@ public class AddThueXeController {
 			System.out.println("Insert rentCar is fail !!!");
 		}
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-
-
 }

@@ -10,22 +10,20 @@ import java.util.ArrayList;
 import javax.swing.JComboBox;
 import javax.swing.JTextField;
 
-import project1.model.KhachHang;
 import project1.model.MuonXe;
+import project1.model.MuonXeDAO;
 import project1.model.MuonXeDB;
 import project1.view.MainUI;
 import project1.view.TableMuonTraView;
 
 public class SearchDetailController {
 	private MainUI mainUI;
-	private MuonXe muonXe;
-	private MuonXeDB muonXeDB;
+	private MuonXeDAO muonXeDB;
 	
 	private ArrayList<MuonXe> resultSearch = new ArrayList<MuonXe>();
 	
 	private JTextField tfSearch;
 	private JComboBox<String> cbSearchType;
-	
 	private TableMuonTraView tableMuonTraView;
 	private int typeSearch;
 	
@@ -50,7 +48,6 @@ public class SearchDetailController {
 		tfSearch.addKeyListener(new KeyListener() {
 			@Override
 			public void keyTyped(KeyEvent arg0) {
-				// TODO Auto-generated method stub
 				
 			}
 			
@@ -62,7 +59,6 @@ public class SearchDetailController {
 			
 			@Override
 			public void keyPressed(KeyEvent arg0) {
-				// TODO Auto-generated method stub
 				
 			}
 		});
@@ -165,5 +161,4 @@ public class SearchDetailController {
 			tableMuonTraView.updateTable(muonXeDB.getAllMuonXe());
 		}
 	}
-	
 }

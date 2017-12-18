@@ -11,6 +11,7 @@ import javax.swing.JComboBox;
 import javax.swing.JTextField;
 
 import project1.model.Xe;
+import project1.model.XeDAO;
 import project1.model.XeDB;
 import project1.view.MainUI;
 import project1.view.TableXeView;
@@ -18,7 +19,7 @@ import project1.view.TableXeView;
 public class SearchXeController {
 	private MainUI mainUI;
 	private Xe xe;
-	private XeDB xeDB;
+	private XeDAO xeDB;
 	
 	private ArrayList<Xe> resultSearch = new ArrayList<Xe>();
 	

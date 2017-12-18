@@ -429,6 +429,7 @@ public class MuonXeDB implements MuonXeDAO{
 		return arrResult;
 	}
 	
+	@Override
 	public void deleteRentXe(String maMT) {
 		connection = getConnection();
 		PreparedStatement preStatement = null;

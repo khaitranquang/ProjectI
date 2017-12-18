@@ -12,13 +12,11 @@ import javax.swing.JOptionPane;
 import javax.swing.JTable;
 
 import project1.model.KhachHang;
+import project1.model.KhachHangDAO;
 import project1.model.KhachHangDB;
-import project1.model.NhanVien;
 import project1.view.EditKhachHangView;
-import project1.view.EditNhanVienView;
 import project1.view.KhachHangInformation;
 import project1.view.MainUI;
-import project1.view.NhanVienInformation;
 import project1.view.TableKhachHangView;
 
 public class EditKhachHangController {
@@ -35,7 +33,7 @@ public class EditKhachHangController {
 	
 	private MainUI mainUI;
 	private KhachHang khachHang;
-	private KhachHangDB khachHangDB;
+	private KhachHangDAO khachHangDB;
 	private String oldID = "" ;
 	
 	private EditKhachHangView editKhachHangView;

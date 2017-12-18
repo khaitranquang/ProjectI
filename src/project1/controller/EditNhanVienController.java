@@ -11,6 +11,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTable;
 
 import project1.model.NhanVien;
+import project1.model.NhanVienDAO;
 import project1.model.NhanVienDB;
 import project1.view.EditNhanVienView;
 import project1.view.MainUI;
@@ -28,7 +29,7 @@ public class EditNhanVienController {
 	
 	private MainUI mainUI;
 	private NhanVien nhanVien;
-	private NhanVienDB nhanVienDB;
+	private NhanVienDAO nhanVienDB;
 	private String oldID = "";
 	
 	private EditNhanVienView editNhanVienView;
